@@ -1,0 +1,40 @@
+$primaryColor: #5ec0ea;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+p,
+li {
+  font-size: 15px;
+  color: #777;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  font-size: inherit;
+}
+
+.btn {
+  border: none;
+  border-radius: 30px;
+  background-color: $primaryColor;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+}
+
+@import 'header';

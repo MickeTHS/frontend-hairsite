@@ -20,6 +20,11 @@ header {
       font-size: 18px;
       font-weight: 500;
       color: $primaryColor;
+      cursor: pointer;
+      a {
+        font-size: inherit;
+        color: inherit;
+      }
     }
 
     .top-menu {

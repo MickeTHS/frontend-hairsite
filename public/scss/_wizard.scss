@@ -1,0 +1,74 @@
+.wizard {
+  background-color: $primaryColor;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    .box {
+      h1 {
+        color: #fff;
+        text-align: center;
+        margin-bottom: 28px;
+      }
+
+      form {
+        label {
+          color: #fff;
+          margin: 20px;
+        }
+
+        .input-group {
+          width: 480px;
+          position: relative;
+          height: 44px;
+
+          input {
+            display: block;
+            margin: 15px 0;
+            width: 100%;
+            color: rgba(255, 255, 255, .7)
+          }
+
+          input::placeholder {
+            color: rgba(255, 255, 255, .7)
+          }
+
+          button {
+            background-color: #fff;
+            color: $primaryColor;
+            height: 30px;
+            width: 30px;
+            position: absolute;
+            right: 7px;
+            top: 7px;
+            border-radius: 50%;
+            padding: 0;
+            line-height: 32px;
+
+            span {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .wizard {
+    .container {
+      .box {
+        width: 100%;
+        form {
+          .input-group {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

@@ -34,6 +34,14 @@ header {
       }
     }
 
+    form {
+      .btn {
+        background-color: #fff;
+        border: 1px solid #42afde;
+        color: #42afde;
+      }
+    }
+
     .collapse {
       display: none;
       position: relative;
@@ -86,7 +94,9 @@ header {
         .btn {
           font-size: 17px;
           font-weight: 700;
-          margin-top: 20px;
+          display: block;
+          width: 140px;
+          margin: 20px auto 0;
         }
       }
     }

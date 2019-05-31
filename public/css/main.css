@@ -1,2 +1,291 @@
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Roboto', sans-serif}p,li{font-size:15px;color:#777}li{list-style-type:none}a{text-decoration:none;font-size:inherit}.btn{border:none;border-radius:30px;background-color:#5ec0ea;color:#fff;padding:10px 20px;font-size:15px;font-weight:500;cursor:pointer;outline:none}header nav{background-color:#fff;position:fixed;top:0;left:0;width:100%}header nav .container{display:flex;justify-content:space-between;align-items:center;min-height:54px}header nav .brand{display:flex;justify-content:center;align-items:center;font-size:18px;font-weight:500;color:#5ec0ea}header nav .top-menu li{display:inline-block;margin:18px 10px}header nav .top-menu li a{color:#999;font-weight:400}header nav .collapse{display:none;position:relative;width:20px;height:14px;cursor:pointer}header nav .collapse span{height:2px;width:20px;position:absolute;left:0;background-color:#5ec0ea}header nav .collapse span:first-child{top:0}header nav .collapse span:nth-child(2),header nav .collapse span:nth-child(3){top:6px}header nav .collapse span:last-child{top:12px}header .hero{background:url(../img/hero.jpg);background-size:cover}header .hero .container{height:100vh;display:flex;align-content:center;justify-content:center;flex-direction:column;text-align:center;padding-top:54px}header .hero .container .box{background-color:rgba(0,0,0,0.5);padding:60px 40px;max-width:720px;margin:0 auto}header .hero .container .box .btn{font-size:17px;font-weight:700;margin-top:20px}header .hero h1{color:#fff;font-size:50px}@media (max-width: 768px){header nav .top-menu,header nav form{display:none}header nav .collapse{display:block}}@media (max-width: 576px){header .hero .box{padding:20px}header .hero .box h1{font-size:40px}}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+p,
+li,
+label,
+a {
+  font-size: 15px;
+  color: #777;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+input {
+  outline: none;
+}
+
+input::placeholder {
+  color: #fff;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border: none;
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #fff;
+  font-size: 14px;
+  padding: 14px 28px;
+  border-radius: 25px;
+}
+
+.btn {
+  border: none;
+  border-radius: 30px;
+  background-color: #5ec0ea;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+}
+
+header nav {
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+header nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 54px;
+}
+header nav .brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #5ec0ea;
+}
+header nav .top-menu li {
+  display: inline-block;
+  margin: 18px 10px;
+}
+header nav .top-menu li a {
+  color: #999;
+  font-weight: 400;
+}
+header nav form .btn {
+  background-color: #fff;
+  border: 1px solid #42afde;
+  color: #42afde;
+}
+header nav .collapse {
+  display: none;
+  position: relative;
+  width: 20px;
+  height: 14px;
+  cursor: pointer;
+}
+header nav .collapse span {
+  height: 2px;
+  width: 20px;
+  position: absolute;
+  left: 0;
+  background-color: #5ec0ea;
+}
+header nav .collapse span:first-child {
+  top: 0;
+}
+header nav .collapse span:nth-child(2), header nav .collapse span:nth-child(3) {
+  top: 6px;
+}
+header nav .collapse span:last-child {
+  top: 12px;
+}
+header .hero {
+  background: url(../img/hero.jpg);
+  background-size: cover;
+}
+header .hero .container {
+  height: 100vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 54px;
+}
+header .hero .container .box {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 60px 40px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+header .hero .container .box .btn {
+  font-size: 17px;
+  font-weight: 700;
+  display: block;
+  width: 140px;
+  margin: 20px auto 0;
+}
+header .hero h1 {
+  color: #fff;
+  font-size: 50px;
+}
+
+@media (max-width: 768px) {
+  header nav .top-menu,
+  header nav form {
+    display: none;
+  }
+  header nav .collapse {
+    display: block;
+  }
+}
+@media (max-width: 576px) {
+  header .hero .box {
+    padding: 20px;
+  }
+  header .hero .box h1 {
+    font-size: 40px;
+  }
+}
+.login .hero {
+  background: #5ec0ea;
+}
+.login .hero p {
+  color: #fff;
+  margin: 15px 0;
+}
+.login .hero label {
+  color: #fff;
+}
+.login .hero a {
+  color: #2b7fa3;
+}
+.login .hero .login-area {
+  display: flex;
+  margin: 0 auto;
+}
+.login .hero .login-area .email-login {
+  position: relative;
+  padding-right: 30px;
+}
+.login .hero .login-area .email-login::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 1px;
+  height: 140px;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.login .hero .login-area > div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.login .hero .login-area input[type="email"],
+.login .hero .login-area input[type="password"] {
+  width: 360px;
+  display: block;
+  margin: 15px 0;
+}
+.login .hero .login-area .controls {
+  width: 360px;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+.login .hero .login-area .btn {
+  background-color: rgba(0, 0, 0, 0.24);
+  display: block;
+  width: 130px;
+  padding: 13px 20px;
+}
+.login .hero .login-area .social-button {
+  width: 260px;
+  height: 44px;
+  color: #fff;
+  font-size: 15px;
+  line-height: 44px;
+  display: block;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 15px;
+  margin-left: 30px;
+}
+.login .hero .login-area .social-button.facebook {
+  background-color: #3b5998;
+}
+.login .hero .login-area .social-button.facebook .icon img {
+  width: 11px;
+  margin-top: 11.75px;
+}
+.login .hero .login-area .social-button.google {
+  background-color: #4285f4;
+}
+.login .hero .login-area .social-button.google .icon img {
+  width: 20px;
+  margin-top: 12px;
+}
+.login .hero .login-area .social-button .icon {
+  width: 44px;
+  height: 44px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .login .hero .login-area {
+    display: block;
+  }
+  .login .hero .login-area .email-login {
+    padding-right: 0;
+  }
+  .login .hero .login-area .email-login::after {
+    display: none;
+  }
+  .login .hero .login-area .social-media-login {
+    margin-top: 30px;
+  }
+  .login .hero .login-area .social-media-login .social-button {
+    margin: 8px 0;
+  }
+}
+@media (max-width: 400px) {
+  .login .hero .login-area input[type="email"],
+  .login .hero .login-area input[type="password"] {
+    width: 100%;
+  }
+  .login .hero .login-area .controls,
+  .login .hero .login-area .social-button {
+    width: 100%;
+  }
+  .login .hero .login-area .controls {
+    display: block;
+    text-align: left;
+  }
+  .login .hero .login-area .controls .cbx {
+    margin-bottom: 10px;
+  }
+  .login .hero .login-area .btn {
+    width: 100%;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */

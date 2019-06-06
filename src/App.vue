@@ -82,4 +82,14 @@ input:-internal-autofill-selected {
 .container {
   padding: 0 80px;
 }
+@media (max-width: 768px){
+  .container {
+    padding: 0 40px;
+  }
+}
+@media (max-width: 450px){
+  .container {
+    padding: 0 30px;
+  }
+}
 </style>

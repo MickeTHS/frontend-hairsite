@@ -176,6 +176,7 @@
 
         .email-login {
           padding-right: 0;
+          display: block;
 
           &::after {
             display: none;
@@ -198,6 +199,7 @@
   .login {
     .container {
       .login-area {
+        width: 100%;
         input[type="email"],
         input[type="password"] {
           width: 100%;

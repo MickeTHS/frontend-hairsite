@@ -7,7 +7,7 @@
         <router-link to="/login" tag="a">Login</router-link>
       </p>
       <div class="signup-area">
-        <div class="email-login">
+        <div class="email-signup">
           <form action>
             <input type="email" placeholder="Enter Your Email">
             <input type="password" placeholder="Choose a Password">
@@ -21,18 +21,18 @@
             <button class="btn">Sign Up</button>
           </form>
         </div>
-        <div class="social-media-login">
+        <div class="social-media-signup">
           <div class="social-button facebook">
             <div class="icon">
               <img src="img/facebook.svg" alt>
             </div>
-            <span>Login with Facebook</span>
+            <span>signup with Facebook</span>
           </div>
           <div class="social-button google">
             <div class="icon">
               <img src="img/google.svg" alt>
             </div>
-            <span>Login with Google</span>
+            <span>signup with Google</span>
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
   </main>
 </template>
 <style lang="scss">
-@import '@/assets/scss/_variables.scss';
+@import "@/assets/scss/_variables.scss";
 .signup {
   background: $primaryColor;
   margin-top: 0;
@@ -73,7 +73,7 @@
       display: flex;
       margin: 0 auto;
 
-      .email-login {
+      .email-signup {
         position: relative;
         padding-right: 30px;
 
@@ -174,15 +174,16 @@
       .signup-area {
         display: block;
 
-        .email-login {
+        .email-signup {
           padding-right: 0;
+          flex-direction: unset;
 
           &::after {
             display: none;
           }
         }
 
-        .social-media-login {
+        .social-media-signup {
           margin-top: 30px;
 
           .social-button {
@@ -198,6 +199,10 @@
   .signup {
     .container {
       .signup-area {
+        width: 100%;
+        form {
+          width: 100%;
+        }
         input[type="email"],
         input[type="password"] {
           width: 100%;

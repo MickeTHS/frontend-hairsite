@@ -195,9 +195,9 @@
 }
 
 @media (max-width: 400px) {
-  .login {
+  .signup {
     .container {
-      .login-area {
+      .signup-area {
         input[type="email"],
         input[type="password"] {
           width: 100%;

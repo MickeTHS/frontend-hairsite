@@ -4,7 +4,7 @@
       <h1>Sign Up</h1>
       <p>
         Already have an account?
-        <a href="./login.html">Login</a>
+        <router-link to="/login" tag="a">Login</router-link>
       </p>
       <div class="signup-area">
         <div class="email-login">

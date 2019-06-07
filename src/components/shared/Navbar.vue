@@ -2,25 +2,15 @@
   <nav>
     <div class="container">
       <div class="brand">
-        <a href="./">HairPlace</a>
+        <router-link to="/" tag="a">HairPlace</router-link>
       </div>
       <ul class="top-menu">
-        <li>
-          <a href>Home</a>
-        </li>
-        <li>
-          <a href>About</a>
-        </li>
-        <li>
-          <a href>Services</a>
-        </li>
-        <li>
-          <a href>Contact</a>
-        </li>
+        <router-link to="/" tag="li">Home</router-link>
+        <router-link to="/about" tag="li">About</router-link>
+        <router-link to="/services" tag="li">Services</router-link>
+        <router-link to="/contact" tag="li">Contact</router-link>
       </ul>
-      <form action>
-        <button class="btn">Sign In</button>
-      </form>
+      <router-link to="/login" tag="a" class="btn">Sign In</router-link>
       <div class="collapse">
         <span></span>
         <span></span>
@@ -64,20 +54,17 @@ nav {
     li {
       display: inline-block;
       margin: 18px 10px;
-
-      a {
-        color: #999;
-        font-weight: 400;
-      }
+      color: #999;
+      font-weight: 400;
+      cursor: pointer;
     }
   }
 
-  form {
-    .btn {
-      background-color: #fff;
-      border: 1px solid #42afde;
-      color: #42afde;
-    }
+  .btn {
+    background-color: #fff;
+    border: 1px solid #42afde;
+    color: #42afde;
+    font-weight: normal;
   }
 
   .collapse {
@@ -113,7 +100,7 @@ nav {
 @media (max-width: 768px) {
   nav {
     .top-menu,
-    form {
+    .btn {
       display: none;
     }
 

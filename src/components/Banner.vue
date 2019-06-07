@@ -3,7 +3,7 @@
     <div class="container">
       <div class="box">
         <h1>The Best Place Where You Take Your Hair Business to the Next Level</h1>
-        <a class="btn" href="./signup.html">Get Started</a>
+        <router-link to="/signup" tag="a" class="btn">Get Started</router-link>
       </div>
     </div>
   </div>

@@ -40,7 +40,7 @@
   </main>
 </template>
 <style lang="scss">
-@import '@/assets/scss/_variables.scss';
+@import "@/assets/scss/_variables.scss";
 .login {
   background: $primaryColor;
   margin-top: 0;
@@ -50,7 +50,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
+    height: calc(100vh - 60px);
+    margin-top: 60px;
 
     h1 {
       color: #fff;

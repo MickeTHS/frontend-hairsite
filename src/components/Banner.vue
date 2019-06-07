@@ -45,11 +45,19 @@
 }
 @media (max-width: 576px) {
   .hero {
-    .box {
-      padding: 20px;
+    .container {
+      padding: 0;
+      .box {
+        padding: 20px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
-      h1 {
-        font-size: 40px;
+        h1 {
+          font-size: 40px;
+        }
       }
     }
   }

@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <Navbar/>
+    <Navbar v-if="this.$route.path !== '/landingpage'"/>
+    <LandingPageNavbar v-if="this.$route.path === '/landingpage'"/>
     <router-view/>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/shared/Navbar";
+import LandingPageNavbar from "@/components/landingpage/Navbar";
 export default {
   components: {
-    Navbar
-  }
+    Navbar,
+    LandingPageNavbar
+  },
 };
 </script>
 

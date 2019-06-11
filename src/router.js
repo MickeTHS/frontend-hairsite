@@ -5,12 +5,15 @@ import Login from './views/Login.vue'
 import Signup from './views/Signup.vue'
 import Wizard from './views/Wizard.vue'
 import Payment from './views/Payment.vue'
+import LandingPage from './views/LandingPage.vue'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+  linkExactActiveClass: 'active',
+  linkActiveClass: '',
   routes: [{
       path: '/',
       name: 'home',
@@ -35,6 +38,11 @@ export default new Router({
       path: '/wizard',
       name: 'wizard',
       component: Wizard
+    },
+    {
+      path: '/landingpage',
+      name: 'landingpage',
+      component: LandingPage
     },
     {
       path: '/about',

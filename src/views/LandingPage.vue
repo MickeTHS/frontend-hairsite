@@ -27,6 +27,11 @@
       <div class="container">
         <h2>Our Gallery</h2>
         <p>When it comes to hair, we work with, among other things, high quality products, a hair series that does not feel in the hair, but shapes and keeps the hair in place, while providing an incredibly nice shine and luster.</p>
+        <Waterfall :gutterWidth="10" :gutterHeight="10" :resizable="true">
+          <WaterfallItem v-for="(item, index) in gallery" :key="index" :width="278">
+            <img :src="item" alt>
+          </WaterfallItem>
+        </Waterfall>
       </div>
     </section>
     <section class="staff">
@@ -250,11 +255,7 @@
         </div>
       </div>
     </section>
-    <section class="map-s">
-      <div class="container">
-        <Map/>
-      </div>
-    </section>
+    <Map/>
     <footer>
       <div class="container">
         <p>© 2019 TechPalace Salon All Rights Reserved</p>
@@ -278,10 +279,11 @@
 </template>
 
 <script>
-import VueMasonryGallery from "@/components/VueMasonryGallery";
 import Banner from "@/components/landingpage/Banner";
 import Product from "@/components/landingpage/Product";
 import Map from "@/components/landingpage/Map";
+import { Waterfall, WaterfallItem } from "vue2-waterfall";
+
 export default {
   data() {
     return {
@@ -328,17 +330,24 @@ export default {
         }
       ],
       gallery: [
-        "/img/staff-1.jpg", 
-        "/img/staff-2.jpg",
-        "/img/staff-3.jpg",
-        "/img/staff-4.jpg"
+        "/img/gallery/img-1.jpg",
+        "/img/gallery/img-2.jpg",
+        "/img/gallery/img-3.jpg",
+        "/img/gallery/img-4.jpg",
+        "/img/gallery/img-5.jpg",
+        "/img/gallery/img-6.jpg",
+        "/img/gallery/img-7.jpg",
+        "/img/gallery/img-8.jpg",
+        "/img/gallery/img-9.jpg"
       ]
     };
   },
   components: {
     Banner,
     Product,
-    Map
+    Map,
+    Waterfall,
+    WaterfallItem
   }
 };
 </script>
@@ -396,6 +405,9 @@ section {
       width: 100%;
       max-width: 510px;
     }
+    img {
+      max-width: 100%;
+    }
   }
 }
 
@@ -404,7 +416,7 @@ section {
     width: 100%;
     max-width: 640px;
     text-align: center;
-    margin: 0 auto;
+    margin: 12px auto 24px;
   }
 }
 
@@ -534,10 +546,6 @@ section {
   }
 }
 
-.map-s {
-  padding: 0 0 50px 0;
-}
-
 footer {
   background-color: #222;
   padding: 20px 0;
@@ -551,6 +559,76 @@ footer {
     i {
       color: #fff;
       margin: 0 10px;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .staff,
+  .pricing {
+    .grid {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+  .staff {
+    .grid {
+      .col {
+        flex-grow: 0;
+      }
+    }
+  }
+  .pricing {
+    .grid {
+      .col {
+        width: 300px;
+        flex-grow: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .about {
+    .grid {
+      display: block;
+      .col {
+        &:first-child {
+          text-align: center;
+        }
+        p {
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .contact {
+    .grid {
+      display: block;
+    }
+  }
+}
+@media (max-width: 600px) {
+  footer {
+    .container {
+      display: block;
+      text-align: center;
+      p:first-child {
+        margin-bottom: 16px;
+      }
+    }
+  }
+}
+@media (max-width: 500px) {
+  .contact {
+    form {
+      input, textarea {
+        margin: 5px 0;
+        width: 100%;
+      }
     }
   }
 }

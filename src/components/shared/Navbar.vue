@@ -28,6 +28,8 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 999;
+  box-shadow: 0 5px 16px rgba(101, 101, 101, .04);
 
   .container {
     display: flex;

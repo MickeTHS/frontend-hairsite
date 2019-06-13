@@ -107,7 +107,7 @@ nav {
     }
 
     .collapse {
-      display: block;
+      display: block !important;
     }
   }
 }

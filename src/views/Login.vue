@@ -9,8 +9,8 @@
       <div class="login-area">
         <div class="email-login">
           <form action>
-            <input type="email" placeholder="Enter Your Email">
-            <input type="password" placeholder="Enter Your Password">
+            <input type="email" placeholder="Enter Your Email" v-model="email">
+            <input type="password" placeholder="Enter Your Password" v-model="password">
             <div class="controls">
               <div class="cbx">
                 <input type="checkbox" name id="remember-me">
@@ -18,7 +18,7 @@
               </div>
               <a href>Forgot Password?</a>
             </div>
-            <button class="btn">Login</button>
+            <button class="btn" @click.prevent="login">Login</button>
           </form>
         </div>
         <div class="social-media-login">
@@ -39,6 +39,29 @@
     </div>
   </main>
 </template>
+
+<script>
+import axios from 'axios'
+const URL = 'http://localhost:8081/api/user/login'
+export default {
+  data(){
+    return {
+      email: null,
+      password: null
+    }
+  },
+  methods: {
+    login(){
+      axios.post(URL, { email: this.email, password: this.password })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => console.log(err))
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 @import "@/assets/scss/_variables.scss";
 .login {

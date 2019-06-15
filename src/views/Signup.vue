@@ -9,8 +9,8 @@
       <div class="signup-area">
         <div class="email-signup">
           <form action>
-            <input type="email" placeholder="Enter Your Email">
-            <input type="password" placeholder="Choose a Password">
+            <input type="email" placeholder="Enter Your Email" v-model="email">
+            <input type="password" placeholder="Choose a Password" v-model="password">
             <input type="password" placeholder="Confirm Your Password">
             <div class="controls">
               <div class="cbx">
@@ -18,7 +18,7 @@
                 <label for="remember-me">I accept terms of use.</label>
               </div>
             </div>
-            <button class="btn">Sign Up</button>
+            <button class="btn" @click.prevent="signup">Sign Up</button>
           </form>
         </div>
         <div class="social-media-signup">
@@ -39,6 +39,29 @@
     </div>
   </main>
 </template>
+
+<script>
+import axios from 'axios'
+const URL = 'http://localhost:8081/api/user/create'
+export default {
+  data(){
+    return {
+      email: null,
+      password: null
+    }
+  },
+  methods: {
+    signup(){
+      axios.post(URL, { email: this.email, password: this.password })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => console.log(err))
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 @import "@/assets/scss/_variables.scss";
 .signup {

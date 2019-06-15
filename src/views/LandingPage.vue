@@ -34,196 +34,8 @@
         </Waterfall>
       </div>
     </section>
-    <section class="staff">
-      <div class="container">
-        <h2>Our Awesome Staff</h2>
-        <div class="grid">
-          <div class="col">
-            <div class="team-member" style="background: url(/img/staff-1.jpg)">
-              <div class="info">
-                <h4>Helena</h4>
-                <p>Hairdresser</p>
-              </div>
-              <div class="social">
-                <a href>
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href>
-                  <i class="fab fa-twitter"></i>
-                </a>
-                <a href>
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="team-member" style="background: url(/img/staff-2.jpg)">
-              <div class="info">
-                <h4>Micheal</h4>
-                <p>Makeup Artist</p>
-              </div>
-              <div class="social">
-                <a href>
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href>
-                  <i class="fab fa-twitter"></i>
-                </a>
-                <a href>
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="team-member" style="background: url(/img/staff-3.jpg)">
-              <div class="info">
-                <h4>Sarah</h4>
-                <p>Nail Expert</p>
-              </div>
-              <div class="social">
-                <a href>
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href>
-                  <i class="fab fa-twitter"></i>
-                </a>
-                <a href>
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="team-member" style="background: url(/img/staff-4.jpg)">
-              <div class="info">
-                <h4>Barbara</h4>
-                <p>Style Expert</p>
-              </div>
-              <div class="social">
-                <a href>
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href>
-                  <i class="fab fa-twitter"></i>
-                </a>
-                <a href>
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="pricing">
-      <div class="container">
-        <h2>Our Pricing</h2>
-        <div class="grid">
-          <div class="col">
-            <h3>Haircuts</h3>
-            <ul>
-              <li>
-                <span>Cut long hair</span>
-                <span>340 SEK</span>
-              </li>
-              <li>
-                <span>Cut short hair</span>
-                <span>310 SEK</span>
-              </li>
-              <li>
-                <span>Child cutting</span>
-                <span>220 SEK</span>
-              </li>
-              <li>
-                <span>Fade Cut</span>
-                <span>350 SEK</span>
-              </li>
-              <li>
-                <span>Fade Cut &amp; Beard</span>
-                <span>550 SEK</span>
-              </li>
-            </ul>
-          </div>
-          <div class="col">
-            <h3>Makeup</h3>
-            <ul>
-              <li>
-                <span>Eye Liner</span>
-                <span>340 SEK</span>
-              </li>
-              <li>
-                <span>Mascara</span>
-                <span>310 SEK</span>
-              </li>
-              <li>
-                <span>Facial</span>
-                <span>220 SEK</span>
-              </li>
-              <li>
-                <span>Lip Liner</span>
-                <span>120 SEK</span>
-              </li>
-              <li>
-                <span>Face Glow</span>
-                <span>220 SEK</span>
-              </li>
-            </ul>
-          </div>
-          <div class="col">
-            <h3>Nails Styling</h3>
-            <ul>
-              <li>
-                <span>Gel Nails</span>
-                <span>340 SEK</span>
-              </li>
-              <li>
-                <span>Glitter</span>
-                <span>310 SEK</span>
-              </li>
-              <li>
-                <span>Nail Buffing</span>
-                <span>220 SEK</span>
-              </li>
-              <li>
-                <span>Nail Polish</span>
-                <span>120 SEK</span>
-              </li>
-              <li>
-                <span>Nail Shape</span>
-                <span>220 SEK</span>
-              </li>
-            </ul>
-          </div>
-          <div class="col">
-            <h3>Cosmetics</h3>
-            <ul>
-              <li>
-                <span>Foundation</span>
-                <span>340 SEK</span>
-              </li>
-              <li>
-                <span>CC Cream</span>
-                <span>310 SEK</span>
-              </li>
-              <li>
-                <span>Cold Cream</span>
-                <span>220 SEK</span>
-              </li>
-              <li>
-                <span>Body Powder</span>
-                <span>120 SEK</span>
-              </li>
-              <li>
-                <span>Concealer</span>
-                <span>220 SEK</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+    <Staff :staff="staff"/>
+    <PricingList :pricingList="pricingList" />
     <section class="contact">
       <div class="container">
         <h2>Contact Us</h2>
@@ -242,20 +54,20 @@
             <p>Send us a message using this form! Or contact us directly using the following:</p>
             <ul class="contact-info">
               <li>
-                <i class="fas fa-location-arrow"></i> California, 16440 - USA
+                <i class="fas fa-location-arrow"></i> {{ salon.address }}
               </li>
               <li>
-                <i class="fas fa-phone-alt"></i> +160 8751 2345 0000
+                <i class="fas fa-phone-alt"></i> {{ salon.phone }}
               </li>
               <li>
-                <i class="fas fa-paper-plane"></i> hello@techpalace.com
+                <i class="fas fa-paper-plane"></i> {{ salon.email }}
               </li>
             </ul>
           </div>
         </div>
       </div>
     </section>
-    <Map/>
+    <Map :coord="salon.coord" />
     <footer>
       <div class="container">
         <p>© 2019 TechPalace Salon All Rights Reserved</p>
@@ -279,77 +91,11 @@
 </template>
 
 <script>
-import Banner from "@/components/landingpage/Banner";
-import Product from "@/components/landingpage/Product";
-import Map from "@/components/landingpage/Map";
-import { Waterfall, WaterfallItem } from "vue2-waterfall";
+import { landingPage } from '@/utils/landingPage.js'
 
 export default {
-  data() {
-    return {
-      products: [
-        {
-          id: 1,
-          name: "Färgningar",
-          imageUrl: "/img/products/product-1.jpg"
-        },
-        {
-          id: 2,
-          name: "Klippningar",
-          imageUrl: "/img/products/product-2.jpg"
-        },
-        {
-          id: 3,
-          name: "Flerfärg/Slingor",
-          imageUrl: "/img/products/product-3.jpg"
-        },
-        {
-          id: 4,
-          name: "Uppsättningar och Make-up",
-          imageUrl: "/img/products/product-4.jpg"
-        },
-        {
-          id: 5,
-          name: "Hårförlängningar och permanenter",
-          imageUrl: "/img/products/product-5.jpg"
-        },
-        {
-          id: 6,
-          name: "Hårvård",
-          imageUrl: "/img/products/product-6.jpg"
-        },
-        {
-          id: 7,
-          name: "Skägg",
-          imageUrl: "/img/products/product-7.jpg"
-        },
-        {
-          id: 8,
-          name: "Trådning/Färg/Öronhåltagning",
-          imageUrl: "/img/products/product-8.jpg"
-        }
-      ],
-      gallery: [
-        "/img/gallery/img-1.jpg",
-        "/img/gallery/img-2.jpg",
-        "/img/gallery/img-3.jpg",
-        "/img/gallery/img-4.jpg",
-        "/img/gallery/img-5.jpg",
-        "/img/gallery/img-6.jpg",
-        "/img/gallery/img-7.jpg",
-        "/img/gallery/img-8.jpg",
-        "/img/gallery/img-9.jpg"
-      ]
-    };
-  },
-  components: {
-    Banner,
-    Product,
-    Map,
-    Waterfall,
-    WaterfallItem
-  }
-};
+  mixins: [landingPage]
+}
 </script>
 
 <style lang="scss">
@@ -420,89 +166,10 @@ section {
   }
 }
 
-.staff {
-  .team-member {
-    width: 240px;
-    height: 350px;
-    background-size: cover !important;
-    position: relative;
-    .info {
-      background-color: rgba(192, 211, 84, 0.9);
-      color: #fff;
-      text-align: center;
-      height: 84px;
-      width: 100%;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding-top: 16px;
-      h4 {
-        font-style: italic;
-      }
-      p {
-        color: #fff;
-      }
-    }
-    .social {
-      position: absolute;
-      bottom: 67px;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      a {
-        background-color: #fff;
-        height: 36px;
-        width: 36px;
-        line-height: 36px;
-        border-radius: 50%;
-        text-align: center;
-        color: $theme1;
-        margin: 0 4px;
-      }
-    }
-  }
-}
-
 .book {
   .grid {
     flex-wrap: wrap;
     justify-content: center;
-  }
-}
-
-.pricing {
-  .grid {
-    .col {
-      h3 {
-        margin-bottom: 10px;
-        color: #444;
-        font-style: italic;
-      }
-      ul {
-        li {
-          overflow: hidden;
-          &:before {
-            content: ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ";
-            float: left;
-            width: 0;
-            white-space: nowrap;
-            color: #afafaf;
-          }
-          span {
-            background-color: #fff;
-            &:last-child {
-              float: right;
-              color: $theme1;
-            }
-          }
-        }
-      }
-    }
   }
 }
 
@@ -559,31 +226,6 @@ footer {
     i {
       color: #fff;
       margin: 0 10px;
-    }
-  }
-}
-
-@media (max-width: 1200px) {
-  .staff,
-  .pricing {
-    .grid {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  }
-  .staff {
-    .grid {
-      .col {
-        flex-grow: 0;
-      }
-    }
-  }
-  .pricing {
-    .grid {
-      .col {
-        width: 300px;
-        flex-grow: 0;
-      }
     }
   }
 }

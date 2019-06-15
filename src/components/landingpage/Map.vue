@@ -6,20 +6,15 @@ export default {};
 </script>
 <script>
 export default {
-  data() {
-    return {
-      lat: 27.1494174,
-      lng: -13.2006577
-    };
-  },
+  props: ['coord'],
   methods: {
     renderMap() {
       const map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: this.lat, lng: this.lng },
+        center: { lat: this.coord.lat, lng: this.coord.lng },
         zoom: 17
       });
       const marker = new google.maps.Marker({
-        position: {lat: this.lat, lng: this.lng},
+        position: {lat: this.coord.lat, lng: this.coord.lng},
         map
       })
     }

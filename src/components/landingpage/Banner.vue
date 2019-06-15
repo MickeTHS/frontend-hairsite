@@ -10,6 +10,7 @@
         <router-link to="/book" tag="a" class="btn">Book Now</router-link>
       </div>
     </div>
+    <div class="parallax"></div>
   </div>
 </template>
 
@@ -22,9 +23,7 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/_variables.scss";
 .hero {
-  background: url(/img/hero.jpg);
-  background-size: cover;
-
+  background: transparent;
   .container {
     height: 100vh;
     display: flex;
@@ -55,6 +54,16 @@ export default {
         background-color: $theme1;
       }
     }
+  }
+
+  .parallax {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: url(/img/hero.jpg);
+    background-size: cover;
   }
 
   h1 {

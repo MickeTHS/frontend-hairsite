@@ -63,6 +63,7 @@ h6 {
 
 section {
   padding: 60px 0;
+  background: #fff;
   h2 {
     text-align: center;
     font-size: 32px;

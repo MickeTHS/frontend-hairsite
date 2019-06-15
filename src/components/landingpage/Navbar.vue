@@ -12,6 +12,10 @@
         <li><a href="#pricing" v-smooth-scroll>Pricing</a></li>
         <li><a href="#contact" v-smooth-scroll>Contact</a></li>
       </ul>
+      <ul>
+        <router-link to="/login" tag="li">Login</router-link>
+        <li>Logout</li>
+      </ul>
       <div class="collapse">
         <span></span>
         <span></span>
@@ -53,7 +57,7 @@ nav.landing {
     }
   }
 
-  .top-menu {
+  ul {
     li {
       display: inline-block;
       margin: 18px 10px;

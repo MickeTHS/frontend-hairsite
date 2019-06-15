@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Banner/>
+    <Banner :salon="salon"/>
     <section class="about">
       <div class="container">
         <h2>Who We Are</h2>

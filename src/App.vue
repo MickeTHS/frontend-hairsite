@@ -27,6 +27,7 @@ $primaryColor: #5ec0ea;
 
 body {
   font-family: "Roboto", sans-serif;
+  overflow-x: hidden;
 }
 
 p,

@@ -1,7 +1,7 @@
 <template>
   <main>
     <Banner :salon="salon"/>
-    <section class="about">
+    <section class="about" id="about">
       <div class="container">
         <h2>Who We Are</h2>
         <div class="grid">
@@ -15,7 +15,7 @@
         </div>
       </div>
     </section>
-    <section class="book">
+    <section class="book" id="book">
       <div class="container">
         <h2>Book Now</h2>
         <div class="grid">
@@ -23,7 +23,7 @@
         </div>
       </div>
     </section>
-    <section class="gallery">
+    <section class="gallery" id="gallery">
       <div class="container">
         <h2>Our Gallery</h2>
         <p>When it comes to hair, we work with, among other things, high quality products, a hair series that does not feel in the hair, but shapes and keeps the hair in place, while providing an incredibly nice shine and luster.</p>

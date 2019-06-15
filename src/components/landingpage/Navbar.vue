@@ -5,12 +5,12 @@
         <router-link to="/" tag="a">TechPalace</router-link>
       </div>
       <ul class="top-menu">
-        <router-link to="/" tag="li">Home</router-link>
-        <router-link to="/about" tag="li">About</router-link>
-        <router-link to="/gallery" tag="li">Gallery</router-link>
-        <router-link to="/staff" tag="li">Staff</router-link>
-        <router-link to="/pricing" tag="li">Pricing</router-link>
-        <router-link to="/contact" tag="li">Contact</router-link>
+        <li><a href="#home" v-smooth-scroll>Home</a></li>
+        <li><a href="#about" v-smooth-scroll>About</a></li>
+        <li><a href="#gallery" v-smooth-scroll>Gallery</a></li>
+        <li><a href="#staff" v-smooth-scroll>Staff</a></li>
+        <li><a href="#pricing" v-smooth-scroll>Pricing</a></li>
+        <li><a href="#contact" v-smooth-scroll>Contact</a></li>
       </ul>
       <div class="collapse">
         <span></span>

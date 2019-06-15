@@ -1,5 +1,5 @@
 <template>
-  <div class="hero">
+  <div class="hero" id="home">
     <div class="container">
       <div class="box">
         <h1>Welcome to {{ salon.name }} Salon</h1>

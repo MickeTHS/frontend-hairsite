@@ -1,5 +1,5 @@
 <template>
-  <div class="hero" id="home">
+  <div class="hero landingpage-hero" id="home">
     <div class="container">
       <div class="box">
         <h1>Welcome to {{ salon.name }} Salon</h1>
@@ -23,7 +23,9 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/_variables.scss";
 .hero {
-  background: transparent;
+  &.landingpage-hero {
+    background: transparent;
+  }
   .container {
     height: 100vh;
     display: flex;
@@ -64,6 +66,7 @@ export default {
     width: 100%;
     background: url(/img/hero.jpg);
     background-size: cover;
+    z-index: -1;
   }
 
   h1 {

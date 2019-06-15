@@ -38,25 +38,7 @@
     <PricingList :pricingList="pricingList" />
     <Contact :salon="salon"/>
     <Map :coord="salon.coord" />
-    <footer>
-      <div class="container">
-        <p>© 2019 TechPalace Salon All Rights Reserved</p>
-        <p>
-          <a href>
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href>
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href>
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href>
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-        </p>
-      </div>
-    </footer>
+    <Footer :salon="salon"/>
   </main>
 </template>
 

@@ -242,7 +242,25 @@ export default new Vuex.Store({
         lng: -13.2006577
       },
       phone: '+1 8751 2345 000',
-      email: 'hello@techpalace.com'
+      email: 'hello@techpalace.com',
+      social: [
+        {
+          code: 'facebook-f',
+          url: 'https://facebook.com/'
+        },
+        {
+          code: 'twitter',
+          url: 'https://twitter.com/'
+        },
+        {
+          code: 'instagram',
+          url: 'https://instagram.com/'
+        },
+        {
+          code: 'linkedin-in',
+          url: 'https://linkedin.com/'
+        }
+      ]
     }
   },
   mutations: {

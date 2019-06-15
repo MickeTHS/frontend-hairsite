@@ -4,6 +4,7 @@ import PricingList from "@/components/landingpage/Pricing"
 import Staff from "@/components/landingpage/Staff"
 import Contact from "@/components/landingpage/Contact"
 import Map from "@/components/landingpage/Map"
+import Footer from "@/components/landingpage/Footer"
 import { Waterfall, WaterfallItem } from "vue2-waterfall"
 
 export const landingPage = {
@@ -14,6 +15,7 @@ export const landingPage = {
     Staff,
     Contact,
     Map,
+    Footer,
     Waterfall,
     WaterfallItem
   },

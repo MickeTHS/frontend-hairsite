@@ -44,7 +44,6 @@
 
 <script>
 import { landingPage } from '@/utils/landingPage.js'
-
 export default {
   mixins: [landingPage]
 }

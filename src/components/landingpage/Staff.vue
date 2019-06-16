@@ -1,30 +1,36 @@
 <template>
   <section class="staff" id="staff">
-    <div class="container">
+    <!-- <div class="container"> -->
       <h2>Our Awesome Staff</h2>
       <div class="grid">
-        <div class="col" v-for="(member, i) in staff" :key="i">
-          <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
-            <div class="info">
-              <h4>{{ member.name }}</h4>
-              <p>{{ member.title }}</p>
-            </div>
-            <div class="social">
-              <a :href="network.url" v-for="(network, j) in member.social" :key="j">
-                <i :class="`fab fa-${network.code}`"></i>
-              </a>
+        <Carousel>
+          <div class="col" v-for="(member, i) in staff" :key="i">
+            <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
+              <div class="info">
+                <h4>{{ member.name }}</h4>
+                <p>{{ member.title }}</p>
+              </div>
+              <div class="social">
+                <a :href="network.url" v-for="(network, j) in member.social" :key="j">
+                  <i :class="`fab fa-${network.code}`"></i>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        </Carousel>
       </div>
-    </div>
+    <!-- </div> -->
   </section>
 </template>
 
 <script>
+import Carousel from "@/components/Carousel";
 export default {
-  props: ['staff']
-}
+  props: ["staff"],
+  components: {
+    Carousel
+  }
+};
 </script>
 
 <style lang="scss">

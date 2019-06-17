@@ -13,11 +13,7 @@ export default {
   components: {
     Navbar,
     LandingPageNavbar
-  },
-  // mounted(){
-  //   console.log('app comp mounted!');
-  //   this.$store.dispatch('autoLogin')
-  // }
+  }
 }
 </script>
 

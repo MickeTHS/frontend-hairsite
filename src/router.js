@@ -54,7 +54,6 @@ export default new Router({
       name: 'admin',
       component: Dashboard,
       beforeEnter(to, from, next){
-        // console.log('admin page token :' + store.state.token);
         if(store.state.token) {
           next()
         } else {

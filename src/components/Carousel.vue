@@ -27,9 +27,9 @@ export default {
     }
   },
   mounted(){
-    this.windowSize = Math.floor((window.innerWidth - 100) / 260)
+    this.windowSize = Math.floor((window.innerWidth - 100) / this.paginationFactor)
     window.addEventListener('resize', () => {
-        this.windowSize = Math.floor((window.innerWidth - 100) / 260)
+        this.windowSize = Math.floor((window.innerWidth - 100) / this.paginationFactor)
     })
   },
   computed: {

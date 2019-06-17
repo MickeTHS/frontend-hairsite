@@ -13,8 +13,8 @@
         <li><a href="#contact" v-smooth-scroll>Contact</a></li>
       </ul>
       <ul>
-        <router-link to="/login" tag="li">Login</router-link>
-        <li>Logout</li>
+        <router-link to="/login" tag="li" v-if="!isAuth">Login</router-link>
+        <li v-if="isAuth" @click="logout">Logout</li>
       </ul>
       <div class="collapse">
         <span></span>
@@ -25,6 +25,22 @@
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  methods: {
+    logout(){
+      this.$store.dispatch('logout')
+    }
+  },
+  computed: {
+    isAuth(){
+      return this.$store.getters.isAuth
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 @import "@/assets/scss/_variables.scss";
 nav.landing {

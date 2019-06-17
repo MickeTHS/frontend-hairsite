@@ -6,8 +6,13 @@ import Signup from './views/Signup.vue'
 import Wizard from './views/Wizard.vue'
 import Payment from './views/Payment.vue'
 import LandingPage from './views/LandingPage.vue'
+import Dashboard from './views/Dashboard.vue'
+
+import store from './store'
 
 Vue.use(Router)
+
+store.dispatch('autoLogin')
 
 export default new Router({
   mode: 'history',
@@ -45,12 +50,17 @@ export default new Router({
       component: LandingPage
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
+      path: '/admin',
+      name: 'admin',
+      component: Dashboard,
+      beforeEnter(to, from, next){
+        // console.log('admin page token :' + store.state.token);
+        if(store.state.token) {
+          next()
+        } else {
+          next('/login')
+        }
+      }
     }
   ]
 })

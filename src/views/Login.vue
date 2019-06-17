@@ -41,8 +41,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-const URL = 'http://localhost:8081/api/user/login'
 export default {
   data(){
     return {
@@ -52,11 +50,7 @@ export default {
   },
   methods: {
     login(){
-      axios.post(URL, { email: this.email, password: this.password })
-        .then(res => {
-          console.log(res);
-        })
-        .catch(err => console.log(err))
+      this.$store.dispatch('login', {email: this.email, password: this.password})
     }
   }
 }
@@ -124,6 +118,14 @@ export default {
         width: 360px;
         display: block;
         margin: 15px 0;
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover, 
+        &:-webkit-autofill:focus, 
+        &:-webkit-autofill:active {
+          -webkit-box-shadow: 0 0 0 30px #57b1d8 inset !important;
+          box-shadow: 0 0 0 30px #57b1d8 inset !important;
+          -webkit-text-fill-color: #fff !important;
+        }
       }
 
       .controls {

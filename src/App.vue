@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navbar v-if="this.$route.path !== '/landingpage'"/>
-    <LandingPageNavbar v-if="this.$route.path === '/landingpage'"/>
+    <Navbar v-if="this.$route.path !== '/landingpage' && this.$route.path !== '/admin'"/>
+    <LandingPageNavbar v-if="this.$route.path === '/landingpage' || this.$route.path === '/admin'"/>
     <router-view/>
   </div>
 </template>
@@ -14,7 +14,11 @@ export default {
     Navbar,
     LandingPageNavbar
   },
-};
+  // mounted(){
+  //   console.log('app comp mounted!');
+  //   this.$store.dispatch('autoLogin')
+  // }
+}
 </script>
 
 <style lang="scss">

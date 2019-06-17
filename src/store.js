@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import axios from '@/axios'
+import router from './router'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isAuth: false,
+    token: null,
+    userId: null,
     products: [{
         id: 1,
         name: "Färgningar",
@@ -58,8 +62,7 @@ export default new Vuex.Store({
       "/img/gallery/img-8.jpg",
       "/img/gallery/img-9.jpg"
     ],
-    pricingList: [
-      {
+    pricingList: [{
         title: 'Haircuts',
         services: [{
             title: 'Cut long hair',
@@ -156,13 +159,11 @@ export default new Vuex.Store({
         ]
       }
     ],
-    staff: [
-      {
+    staff: [{
         name: 'Helena',
         title: 'Hairdresser',
         imageURL: '/img/staff-1.jpg',
-        social: [
-          {
+        social: [{
             code: 'facebook-f',
             url: 'https://facebook.com/'
           },
@@ -180,8 +181,7 @@ export default new Vuex.Store({
         name: 'Micheal',
         title: 'Makeup Artist',
         imageURL: '/img/staff-2.jpg',
-        social: [
-          {
+        social: [{
             code: 'facebook-f',
             url: 'https://facebook.com/'
           },
@@ -199,8 +199,7 @@ export default new Vuex.Store({
         name: 'Sarah',
         title: 'Nail Expert',
         imageURL: '/img/staff-3.jpg',
-        social: [
-          {
+        social: [{
             code: 'facebook-f',
             url: 'https://facebook.com/'
           },
@@ -218,8 +217,7 @@ export default new Vuex.Store({
         name: 'Barbara',
         title: 'Style Expert',
         imageURL: '/img/staff-4.jpg',
-        social: [
-          {
+        social: [{
             code: 'facebook-f',
             url: 'https://facebook.com/'
           },
@@ -243,8 +241,7 @@ export default new Vuex.Store({
       },
       phone: '+1 8751 2345 000',
       email: 'hello@techpalace.com',
-      social: [
-        {
+      social: [{
           code: 'facebook-f',
           url: 'https://facebook.com/'
         },
@@ -264,10 +261,63 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-
+    authUser(state, userData){
+      state.token = userData.token
+      state.userId = userData.userId
+    },
+    clearAuth(state){
+      state.token = null
+      state.userId = null
+    }
   },
   actions: {
-
+    signup({commit}, authData) {
+      axios.post('/user/create', {
+          email: authData.email,
+          password: authData.password
+        })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => console.log(err))
+    },
+    login({commit}, authData) {
+      axios.post('/user/login', { 
+        email: authData.email, 
+        password: authData.password 
+      })
+      .then(res => {
+        const token = res.data.token
+        const userId = res.data.id
+        commit('authUser', {token, userId})
+        localStorage.setItem('token', token)
+        localStorage.setItem('userId', userId)
+        router.push('/admin')
+        console.log(res)
+      })
+      .catch(err => console.log(err))
+    },
+    autoLogin({commit}){
+      const token = localStorage.getItem('token')
+      const userId = localStorage.getItem('userId')
+      if(!token) {
+        return
+      }
+      commit('authUser', {token, userId})
+    },
+    logout({commit}){
+      commit('clearAuth')
+      localStorage.removeItem('token')
+      localStorage.removeItem('userId')
+      router.replace('/login')
+    },
+    getUser({commit}){
+      axios.get('/user', {user_id: "67622d7f-572e-4665-bf19-5b5916e51461"}, {headers: { 'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc2MjJkN2YtNTcyZS00NjY1LWJmMTktNWI1OTE2ZTUxNDYxIiwiYWRtaW4iOmZhbHNlLCJzdXBlcmFkbWluIjpmYWxzZSwic2l0ZSI6IjY3ODJhYWRmLWZmZTQtNDJmMS1hMTE1LTkyNWQwYzU0YWM3NSIsImlhdCI6MTU2MDc3Mjg1MywiZXhwIjoxNTYwODU5MjUzfQ.lTlPmTeRv03qS1DMjm92xbMtt_hhNHQeJi_IITfb6O8" }})
+        .then( res => {
+          console.log(res)
+        })
+        .catch(err => console.log(err))
+    }
   },
   getters: {
     products(state) {
@@ -282,8 +332,11 @@ export default new Vuex.Store({
     staff(state) {
       return state.staff
     },
-    salon(state){
+    salon(state) {
       return state.salon
+    },
+    isAuth(state){
+      return state.token !== null
     }
   }
 })

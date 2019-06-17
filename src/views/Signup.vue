@@ -41,8 +41,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-const URL = 'http://localhost:8081/api/user/create'
 export default {
   data(){
     return {
@@ -52,11 +50,7 @@ export default {
   },
   methods: {
     signup(){
-      axios.post(URL, { email: this.email, password: this.password })
-        .then(res => {
-          console.log(res);
-        })
-        .catch(err => console.log(err))
+      this.$store.dispatch('signup', {email: this.email, password: this.password})
     }
   }
 }

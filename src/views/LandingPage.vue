@@ -45,7 +45,10 @@
 <script>
 import { landingPage } from '@/utils/landingPage.js'
 export default {
-  mixins: [landingPage]
+  mixins: [landingPage],
+  mounted(){
+    this.$store.dispatch('getUser')
+  }
 }
 </script>
 

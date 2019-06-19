@@ -12,10 +12,7 @@
             <input type="email" placeholder="Enter Your Email" v-model="email">
             <input type="password" placeholder="Enter Your Password" v-model="password">
             <div class="controls">
-              <div class="cbx">
-                <input type="checkbox" name id="remember-me">
-                <label for="remember-me">Remember me</label>
-              </div>
+              <Checkbox :label="'Remember me'" v-model="remember"/>
               <a href>Forgot Password?</a>
             </div>
             <button class="btn" @click.prevent="login">Login</button>
@@ -41,12 +38,17 @@
 </template>
 
 <script>
+import Checkbox from '@/components/Checkbox'
 export default {
   data(){
     return {
       email: null,
-      password: null
+      password: null,
+      remember: true
     }
+  },
+  components: {
+    Checkbox
   },
   methods: {
     login(){

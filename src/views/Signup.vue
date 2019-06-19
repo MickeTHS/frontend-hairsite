@@ -13,10 +13,7 @@
             <input type="password" placeholder="Choose a Password" v-model="password">
             <input type="password" placeholder="Confirm Your Password">
             <div class="controls">
-              <div class="cbx">
-                <input type="checkbox" name id="remember-me">
-                <label for="remember-me">I accept terms of use.</label>
-              </div>
+              <Checkbox :label="'I accept terms of use.'" v-model="acceptTermsOfUse"/>
             </div>
             <button class="btn" @click.prevent="signup">Sign Up</button>
           </form>
@@ -41,12 +38,17 @@
 </template>
 
 <script>
+import Checkbox from '@/components/Checkbox'
 export default {
   data(){
     return {
       email: null,
-      password: null
+      password: null,
+      acceptTermsOfUse: true
     }
+  },
+  components: {
+    Checkbox
   },
   methods: {
     signup(){

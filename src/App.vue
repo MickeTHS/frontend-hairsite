@@ -112,6 +112,8 @@ input:-internal-autofill-selected {
   padding: 0 80px;
   max-width: 1440px;
   margin: 0 auto;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 @media (max-width: 768px) {
   .container {

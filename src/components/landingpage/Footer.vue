@@ -10,8 +10,18 @@
     </div>
   </footer>
 </template>
+
 <script>
 export default {
   props: ['salon']
 }
 </script>
+
+<style lang="scss">
+footer {
+  p {
+    margin-bottom: 0;
+  }
+}
+</style>
+

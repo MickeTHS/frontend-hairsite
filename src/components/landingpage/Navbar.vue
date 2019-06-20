@@ -63,7 +63,6 @@ nav.landing {
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    font-weight: 600;
     color: $theme1;
     cursor: pointer;
     a {

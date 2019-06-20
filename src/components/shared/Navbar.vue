@@ -61,6 +61,9 @@ nav {
       color: #999;
       font-weight: 400;
       cursor: pointer;
+      a {
+        color: inherit;
+      }
     }
   }
 

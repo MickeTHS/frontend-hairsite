@@ -65,6 +65,7 @@ section {
     font-size: 32px;
     color: $theme1;
     margin-bottom: 40px;
+    font-weight: 500;
   }
   p {
     line-height: 1.8;

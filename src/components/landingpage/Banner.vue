@@ -34,7 +34,8 @@ export default {
     flex-direction: column;
     text-align: center;
     padding-top: 54px;
-
+    position: relative;
+    z-index: 1;
     .box {
       background-color: rgba(0, 0, 0, 0.5);
       padding: 60px 40px;
@@ -66,7 +67,7 @@ export default {
     width: 100%;
     background: url(/img/hero.jpg);
     background-size: cover;
-    z-index: -1;
+    z-index: 0;
   }
 
   h1 {

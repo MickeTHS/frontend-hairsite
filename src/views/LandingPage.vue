@@ -58,6 +58,8 @@ export default {
 section {
   padding: 60px 0;
   background: #fff;
+  position: relative;
+  z-index: 1;
   h2 {
     text-align: center;
     font-size: 32px;

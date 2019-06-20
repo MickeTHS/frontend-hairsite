@@ -284,7 +284,7 @@ export default new Vuex.Store({
           password: authData.password
         })
         .then(res => {
-          console.log(res);
+          console.log(res)
         })
         .catch(err => {
           if(err.response.status === 400 && err){

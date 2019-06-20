@@ -1,9 +1,5 @@
 <template>
   <main class="login">
-    <v-snackbar v-model="snackbar" color="error" :right="true" :top="true" :timeout="6000">
-      Email already registred! Please login!
-      <v-btn dark flat @click="toggleSnackbar">Close</v-btn>
-    </v-snackbar>
     <div class="container">
       <h1>Login</h1>
       <p>
@@ -42,7 +38,7 @@
 </template>
 
 <script>
-import Checkbox from "@/components/Checkbox";
+import Checkbox from "@/components/Checkbox"
 export default {
   data() {
     return {
@@ -60,17 +56,9 @@ export default {
         email: this.email,
         password: this.password
       });
-    },
-    toggleSnackbar(){
-      this.$store.dispatch('toggleSnackbar')
-    }
-  },
-  computed: {
-    snackbar(){
-      return this.$store.getters.snackbar
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

@@ -6,7 +6,7 @@
         <Carousel>
           <div class="col" v-for="(member, i) in staff" :key="i">
             <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
-              <div class="info">
+              <div class="infos">
                 <h4>{{ member.name }}</h4>
                 <p>{{ member.title }}</p>
               </div>
@@ -41,7 +41,7 @@ export default {
     height: 350px;
     background-size: cover !important;
     position: relative;
-    .info {
+    .infos {
       background-color: rgba(192, 211, 84, 0.9);
       color: #fff;
       text-align: center;

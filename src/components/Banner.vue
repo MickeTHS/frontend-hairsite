@@ -20,7 +20,7 @@
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    padding-top: 54px;
+    padding-top: 54px !important;
 
     .box {
       background-color: rgba(0, 0, 0, 0.5);

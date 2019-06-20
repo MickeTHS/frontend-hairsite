@@ -166,6 +166,8 @@ section {
 footer {
   background-color: #222;
   padding: 20px 0;
+  position: relative;
+  z-index: 1;
   .container {
     display: flex;
     justify-content: space-between;

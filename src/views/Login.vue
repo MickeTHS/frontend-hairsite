@@ -1,5 +1,9 @@
 <template>
   <main class="login">
+    <v-snackbar v-model="snackbar" color="error" :right="true" :top="true" :timeout="6000">
+      Email already registred! Please login!
+      <v-btn dark flat @click="toggleSnackbar">Close</v-btn>
+    </v-snackbar>
     <div class="container">
       <h1>Login</h1>
       <p>
@@ -38,24 +42,35 @@
 </template>
 
 <script>
-import Checkbox from '@/components/Checkbox'
+import Checkbox from "@/components/Checkbox";
 export default {
-  data(){
+  data() {
     return {
       email: null,
       password: null,
-      remember: true
-    }
+      remember: true,
+    };
   },
   components: {
     Checkbox
   },
   methods: {
-    login(){
-      this.$store.dispatch('login', {email: this.email, password: this.password})
+    login() {
+      this.$store.dispatch("login", {
+        email: this.email,
+        password: this.password
+      });
+    },
+    toggleSnackbar(){
+      this.$store.dispatch('toggleSnackbar')
+    }
+  },
+  computed: {
+    snackbar(){
+      return this.$store.getters.snackbar
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -69,8 +84,8 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: calc(100vh - 60px);
-    margin-top: 60px;
+    height: calc(100vh - 54px);
+    margin-top: 54px;
 
     h1 {
       color: #fff;
@@ -121,8 +136,8 @@ export default {
         display: block;
         margin: 15px 0;
         &:-webkit-autofill,
-        &:-webkit-autofill:hover, 
-        &:-webkit-autofill:focus, 
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
         &:-webkit-autofill:active {
           -webkit-box-shadow: 0 0 0 30px #57b1d8 inset !important;
           box-shadow: 0 0 0 30px #57b1d8 inset !important;

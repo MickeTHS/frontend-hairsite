@@ -62,7 +62,6 @@ nav.landing {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Playfair Display";
     font-size: 20px;
     font-weight: 600;
     color: $theme1;

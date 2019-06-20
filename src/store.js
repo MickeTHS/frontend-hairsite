@@ -258,7 +258,8 @@ export default new Vuex.Store({
           url: 'https://linkedin.com/'
         }
       ]
-    }
+    },
+    snackbar: false
   },
   mutations: {
     authUser(state, userData){
@@ -268,6 +269,12 @@ export default new Vuex.Store({
     clearAuth(state){
       state.token = null
       state.userId = null
+    },
+    showSnackbar(state){
+      state.snackbar = true
+    },
+    hideSnackbar(state){
+      state.snackbar = false
     }
   },
   actions: {
@@ -279,7 +286,12 @@ export default new Vuex.Store({
         .then(res => {
           console.log(res);
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          if(err.response.status === 400 && err){
+            commit('showSnackbar')
+            setTimeout(() => { commit('hideSnackbar') }, 6000)
+          }
+        })
     },
     login({commit}, authData) {
       axios.post('/user/login', { 
@@ -317,6 +329,12 @@ export default new Vuex.Store({
           console.log(res)
         })
         .catch(err => console.log(err))
+    },
+    showSnackbar({commit}){
+      commit('showSnackbar')
+    },
+    hideSnackbar({commit}){
+      commit('hideSnackbar')
     }
   },
   getters: {
@@ -337,6 +355,9 @@ export default new Vuex.Store({
     },
     isAuth(state){
       return state.token !== null
+    },
+    snackbar(state){
+      return state.snackbar
     }
   }
 })

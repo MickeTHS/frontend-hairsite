@@ -8,7 +8,7 @@
       </p>
       <div class="signup-area">
         <div class="email-signup">
-          <form action>
+          <form>
             <input type="email" placeholder="Enter Your Email" v-model="email">
             <input type="password" placeholder="Choose a Password" v-model="password">
             <input type="password" placeholder="Confirm Your Password">
@@ -38,24 +38,27 @@
 </template>
 
 <script>
-import Checkbox from '@/components/Checkbox'
+import Checkbox from "@/components/Checkbox";
 export default {
-  data(){
+  data() {
     return {
       email: null,
       password: null,
       acceptTermsOfUse: true
-    }
+    };
   },
   components: {
     Checkbox
   },
   methods: {
-    signup(){
-      this.$store.dispatch('signup', {email: this.email, password: this.password})
+    signup() {
+      this.$store.dispatch("signup", {
+        email: this.email,
+        password: this.password
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -69,8 +72,8 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: calc(100vh - 60px);
-    margin-top: 60px;
+    height: calc(100vh - 54px);
+    margin-top: 54px;
 
     h1 {
       color: #fff;
@@ -120,6 +123,14 @@ export default {
         width: 360px;
         display: block;
         margin: 15px 0;
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+          -webkit-box-shadow: 0 0 0 30px #57b1d8 inset !important;
+          box-shadow: 0 0 0 30px #57b1d8 inset !important;
+          -webkit-text-fill-color: #fff !important;
+        }
       }
 
       .controls {

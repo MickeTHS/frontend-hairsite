@@ -36,6 +36,8 @@ nav {
     justify-content: space-between;
     align-items: center;
     min-height: 54px;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .brand {

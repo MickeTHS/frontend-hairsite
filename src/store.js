@@ -262,79 +262,97 @@ export default new Vuex.Store({
     snackbar: false
   },
   mutations: {
-    authUser(state, userData){
+    authUser(state, userData) {
       state.token = userData.token
       state.userId = userData.userId
     },
-    clearAuth(state){
+    clearAuth(state) {
       state.token = null
       state.userId = null
     },
-    showSnackbar(state){
+    showSnackbar(state) {
       state.snackbar = true
     },
-    hideSnackbar(state){
+    hideSnackbar(state) {
       state.snackbar = false
     }
   },
   actions: {
     signup({commit}, authData) {
-      axios.post('/user/create', {
-          email: authData.email,
-          password: authData.password
-        })
+
+      const reqBody = {
+        email: authData.email,
+        password: authData.password
+      }
+
+      axios
+        .post('/user/create', reqBody)
         .then(res => {
-          // console.log(res)
           router.push('/login')
         })
         .catch(err => {
-          if(err.response.status === 400 && err){
+          if (err.response.status === 400 && err) {
             commit('showSnackbar')
-            setTimeout(() => { commit('hideSnackbar') }, 6000)
+            setTimeout(() => {
+              commit('hideSnackbar')
+            }, 6000)
           }
         })
     },
     login({commit}, authData) {
-      axios.post('/user/login', { 
-        email: authData.email, 
-        password: authData.password 
-      })
-      .then(res => {
-        const token = res.data.token
-        const userId = res.data.id
-        commit('authUser', {token, userId})
-        localStorage.setItem('token', token)
-        localStorage.setItem('userId', userId)
-        router.push('/admin')
-        console.log(res)
-      })
-      .catch(err => console.log(err))
-    },
-    autoLogin({commit}){
-      const token = localStorage.getItem('token')
-      const userId = localStorage.getItem('userId')
-      if(!token) {
-        return
+      const reqBody = {
+        email: authData.email,
+        password: authData.password
       }
-      commit('authUser', {token, userId})
-    },
-    logout({commit}){
-      commit('clearAuth')
-      localStorage.removeItem('token')
-      localStorage.removeItem('userId')
-      router.replace('/login')
-    },
-    getUser({commit}){
-      axios.get('/user', {user_id: "67622d7f-572e-4665-bf19-5b5916e51461"}, {headers: { 'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc2MjJkN2YtNTcyZS00NjY1LWJmMTktNWI1OTE2ZTUxNDYxIiwiYWRtaW4iOmZhbHNlLCJzdXBlcmFkbWluIjpmYWxzZSwic2l0ZSI6IjY3ODJhYWRmLWZmZTQtNDJmMS1hMTE1LTkyNWQwYzU0YWM3NSIsImlhdCI6MTU2MDc3Mjg1MywiZXhwIjoxNTYwODU5MjUzfQ.lTlPmTeRv03qS1DMjm92xbMtt_hhNHQeJi_IITfb6O8" }})
-        .then( res => {
+
+      axios
+        .post('/user/login', reqBody)
+        .then(res => {
+          const token = res.data.token
+          const userId = res.data.id
+
+          commit('authUser', {token, userId})
+
+          localStorage.setItem('token', token)
+          localStorage.setItem('userId', userId)
+          router.push('/admin')
+
           console.log(res)
         })
         .catch(err => console.log(err))
     },
-    showSnackbar({commit}){
+    autoLogin({commit}) {
+      const token = localStorage.getItem('token')
+      const userId = localStorage.getItem('userId')
+
+      if (!token) {
+        return
+      }
+      commit('authUser', {token,userId})
+    },
+    logout({ commit }) {
+      commit('clearAuth')
+
+      localStorage.removeItem('token')
+      localStorage.removeItem('userId')
+
+      router.replace('/login')
+    },
+    getUser({ commit, state }) {
+      const reqBody = {user_id: state.userId }
+      const config = { headers: {'Content-Type': 'application/x-www-form-urlencoded', 'x-access-token': state.token}
+      }
+      axios
+        .get('/user', reqBody, config)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => console.log(err))
+    },
+    showSnackbar({commit}) {
       commit('showSnackbar')
     },
-    hideSnackbar({commit}){
+    hideSnackbar({commit}) {
       commit('hideSnackbar')
     }
   },
@@ -354,10 +372,10 @@ export default new Vuex.Store({
     salon(state) {
       return state.salon
     },
-    isAuth(state){
+    isAuth(state) {
       return state.token !== null
     },
-    snackbar(state){
+    snackbar(state) {
       return state.snackbar
     }
   }

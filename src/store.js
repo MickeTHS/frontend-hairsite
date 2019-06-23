@@ -278,7 +278,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    signup({commit}, authData) {
+    signup({
+      commit
+    }, authData) {
 
       const reqBody = {
         email: authData.email,
@@ -299,7 +301,9 @@ export default new Vuex.Store({
           }
         })
     },
-    login({commit}, authData) {
+    login({
+      commit
+    }, authData) {
       const reqBody = {
         email: authData.email,
         password: authData.password
@@ -311,7 +315,10 @@ export default new Vuex.Store({
           const token = res.data.token
           const userId = res.data.id
 
-          commit('authUser', {token, userId})
+          commit('authUser', {
+            token,
+            userId
+          })
 
           localStorage.setItem('token', token)
           localStorage.setItem('userId', userId)
@@ -321,16 +328,23 @@ export default new Vuex.Store({
         })
         .catch(err => console.log(err))
     },
-    autoLogin({commit}) {
+    autoLogin({
+      commit
+    }) {
       const token = localStorage.getItem('token')
       const userId = localStorage.getItem('userId')
 
       if (!token) {
         return
       }
-      commit('authUser', {token,userId})
+      commit('authUser', {
+        token,
+        userId
+      })
     },
-    logout({ commit }) {
+    logout({
+      commit
+    }) {
       commit('clearAuth')
 
       localStorage.removeItem('token')
@@ -338,21 +352,29 @@ export default new Vuex.Store({
 
       router.replace('/login')
     },
-    getUser({ commit, state }) {
-      const reqBody = {user_id: state.userId }
-      const config = { headers: {'Content-Type': 'application/x-www-form-urlencoded', 'x-access-token': state.token}
+    getUser({commit, state}) {
+      const reqBody = {
+        user_id: state.userId,
+        headers: {
+          'x-access-token': state.token
+        }
       }
+
       axios
-        .get('/user', reqBody, config)
+        .get('/user', reqBody)
         .then(res => {
           console.log(res)
         })
         .catch(err => console.log(err))
     },
-    showSnackbar({commit}) {
+    showSnackbar({
+      commit
+    }) {
       commit('showSnackbar')
     },
-    hideSnackbar({commit}) {
+    hideSnackbar({
+      commit
+    }) {
       commit('hideSnackbar')
     }
   },

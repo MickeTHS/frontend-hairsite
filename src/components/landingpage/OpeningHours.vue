@@ -35,6 +35,7 @@ export default {
   ul {
     li {
       width: 800px;
+      margin: 0 auto;
       max-width: 100%;
       display: flex;
       justify-content: space-between;

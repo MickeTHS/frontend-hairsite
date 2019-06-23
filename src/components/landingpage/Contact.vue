@@ -34,8 +34,73 @@
     </div>
   </section>
 </template>
+
 <script>
 export default {
-  props: ['salon']
-}
+  props: ["salon"]
+};
 </script>
+
+<style lang="scss">
+@import "@/assets/scss/_variables.scss";
+.contact {
+  form {
+    input,
+    textarea {
+      border-radius: 4px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 12px 24px;
+      margin: 5px;
+      outline: none;
+      font-size: 14px;
+      &::placeholder {
+        color: #aaa;
+      }
+    }
+    input {
+      width: calc(50% - 10px);
+    }
+    textarea {
+      height: 100px;
+      resize: none;
+      font-family: "Roboto", sans-serif;
+      width: calc(100% - 10px);
+    }
+    button {
+      background-color: $theme1;
+      border-radius: 4px;
+      margin: 10px 5px;
+    }
+  }
+  .contact-info {
+    i {
+      color: $theme1;
+      width: 30px;
+      margin: 8px 0;
+      font-size: 18px;
+    }
+  }
+}
+@media (max-width: 900px) {
+  .contact {
+    .grid {
+      display: block;
+    }
+  }
+}
+@media (max-width: 500px) {
+  .contact {
+    form {
+      input,
+      textarea {
+        margin: 5px 0;
+        width: 100%;
+      }
+    }
+  }
+}
+</style>
+
+
+

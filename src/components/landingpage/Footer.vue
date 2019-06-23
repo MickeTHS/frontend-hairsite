@@ -19,8 +19,33 @@ export default {
 
 <style lang="scss">
 footer {
-  p {
-    margin-bottom: 0;
+  background-color: #222;
+  padding: 20px 0;
+  position: relative;
+  z-index: 1;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    p {
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+    i {
+      color: #fff;
+      margin: 0 10px;
+    }
+  }
+}
+@media (max-width: 600px) {
+  footer {
+    .container {
+      display: block;
+      text-align: center;
+      p:first-child {
+        margin-bottom: 16px;
+      }
+    }
   }
 }
 </style>

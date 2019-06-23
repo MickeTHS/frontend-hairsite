@@ -1,25 +1,26 @@
 import Banner from "@/components/landingpage/Banner"
+import About from "@/components/landingpage/About"
 import OpeningHours from "@/components/landingpage/OpeningHours"
-import Product from "@/components/landingpage/Product"
-import PricingList from "@/components/landingpage/Pricing"
+import Book from "@/components/landingpage/Book"
+import Gallery from "@/components/landingpage/Gallery"
 import Staff from "@/components/landingpage/Staff"
+import PricingList from "@/components/landingpage/Pricing"
 import Contact from "@/components/landingpage/Contact"
 import Map from "@/components/landingpage/Map"
 import Footer from "@/components/landingpage/Footer"
-import { Waterfall, WaterfallItem } from "vue2-waterfall"
 
 export const landingPage = {
   components: {
     Banner,
+    About,
     OpeningHours,
-    Product,
+    Book,
     PricingList,
+    Gallery,
     Staff,
     Contact,
     Map,
-    Footer,
-    Waterfall,
-    WaterfallItem
+    Footer
   },
   computed: {
     salon(){

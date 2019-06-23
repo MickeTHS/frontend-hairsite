@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss">
-$primaryColor: #5ec0ea;
+@import "@/assets/scss/_variables.scss";
 * {
   margin: 0;
   padding: 0;
@@ -62,6 +62,33 @@ body {
 }
 .application--wrap {
   display: block !important;
+}
+section {
+  padding: 60px 0;
+  background: #fff;
+  position: relative;
+  z-index: 1;
+  h2 {
+    text-align: center;
+    font-size: 32px;
+    color: $theme1;
+    margin-bottom: 40px;
+    font-weight: 500;
+  }
+  p {
+    line-height: 1.8;
+  }
+  li {
+    line-height: 1.5;
+  }
+  .grid {
+    display: flex;
+    justify-content: space-between;
+    .col {
+      padding: 10px;
+      flex-grow: 1;
+    }
+  }
 }
 p,
 li,

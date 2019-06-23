@@ -30,6 +30,7 @@ footer {
       color: #fff;
       font-size: 14px;
       margin-bottom: 0;
+      font-weight: 300;
     }
     i {
       color: #fff;

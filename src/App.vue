@@ -161,6 +161,7 @@ input:-internal-autofill-selected {
   line-height: 30px;
   text-align: center;
   border-radius: 50%;
+  cursor: pointer;
 }
 @media (min-width: 960px) {
   .container {

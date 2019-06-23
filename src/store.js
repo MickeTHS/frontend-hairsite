@@ -275,6 +275,9 @@ export default new Vuex.Store({
     },
     hideSnackbar(state) {
       state.snackbar = false
+    },
+    updateProducts(state, products){
+      state.products = products
     }
   },
   actions: {
@@ -376,6 +379,10 @@ export default new Vuex.Store({
       commit
     }) {
       commit('hideSnackbar')
+    },
+    updateProducts({commit, state}, id){
+      const products = state.products.filter(product => product.id !== id)
+      commit('updateProducts', products)
     }
   },
   getters: {

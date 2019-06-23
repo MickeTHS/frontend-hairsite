@@ -79,7 +79,7 @@ export default {
   position: fixed;
   top: calc(50% - 44px);
   left: 0;
-  background-color: #fff;
+  background-color: #8BC34A;
   height: 32px;
   width: 32px;
   z-index: 3;

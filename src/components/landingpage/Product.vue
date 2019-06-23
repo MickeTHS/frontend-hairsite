@@ -1,6 +1,6 @@
 <template>
   <div class="product">
-    <i class="fas fa-times" v-if="allowEdit"></i>
+    <i class="fas fa-times" v-if="allowEdit" @click="deleteProduct(product.id)"></i>
     <div class="product-img" :style="{background: 'url(' + product.imageUrl + ')'}"></div>
     <p>{{ product.name }}</p>
   </div>
@@ -8,7 +8,12 @@
 
 <script>
 export default {
-  props: ["product", "allowEdit"]
+  props: ["product", "allowEdit"],
+  methods: {
+    deleteProduct(id){
+      this.$store.dispatch('updateProducts', id)
+    }
+  }
 };
 </script>
 

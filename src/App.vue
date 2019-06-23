@@ -70,6 +70,10 @@ a {
   font-size: 15px;
   color: #777;
 }
+ol,
+ul {
+  padding-left: 0 !important;
+}
 li {
   list-style-type: none;
 }
@@ -109,7 +113,7 @@ input:-internal-autofill-selected {
   outline: none;
 }
 .container {
-  padding: 0 80px;
+  padding: 0 80px !important;
   max-width: 1440px;
   margin: 0 auto;
   padding-top: 0 !important;
@@ -117,12 +121,12 @@ input:-internal-autofill-selected {
 }
 @media (max-width: 768px) {
   .container {
-    padding: 0 40px;
+    padding: 0 40px !important;
   }
 }
 @media (max-width: 450px) {
   .container {
-    padding: 0 30px;
+    padding: 0 30px !important;
   }
 }
 </style>

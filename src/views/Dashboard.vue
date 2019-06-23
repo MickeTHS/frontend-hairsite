@@ -15,6 +15,7 @@
         </div>
       </div>
     </section>
+    <OpeningHours/>
     <section class="book" id="book">
       <div class="container">
         <h2>Book Now</h2>

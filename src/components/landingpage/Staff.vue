@@ -9,6 +9,7 @@
           <Carousel>
             <div class="col" v-for="(member, i) in staff" :key="i">
               <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
+                <i class="fas fa-times" v-if="allowEdit"></i>
                 <div class="infos">
                   <h4>{{ member.name }}</h4>
                   <p>{{ member.title }}</p>

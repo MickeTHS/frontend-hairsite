@@ -5,7 +5,7 @@
       <div class="products">
         <div class="grid">
           <i class="fas fa-plus" v-if="allowEdit"></i>
-          <Product v-for="product in products" :product="product" :key="product.id"/>
+          <Product v-for="product in products" :product="product" :key="product.id" :allowEdit="allowEdit"/>
         </div>
       </div>
     </div>

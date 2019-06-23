@@ -149,19 +149,32 @@ input:-internal-autofill-selected {
 .v-dialog .v-list {
   padding: 24px;
 }
-.fa-edit, .fa-plus {
+.fa-edit,
+.fa-plus,
+.fa-times {
+  text-align: center;
+  border-radius: 50%;
   position: absolute;
   top: 10px;
   right: 10px;
+  cursor: pointer;
+}
+.fa-edit,
+.fa-plus {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
-  background: #8bc34a;
   height: 30px;
   width: 30px;
   line-height: 30px;
-  text-align: center;
-  border-radius: 50%;
-  cursor: pointer;
+  color: rgba(255, 255, 255, 0.9);
+  background: #8bc34a;
+}
+.fa-times {
+  color: #f44336;
+  background: rgba(244, 67, 54, 0.2);
+  height: 22px;
+  width: 22px;
+  line-height: 22px;
+  font-size: 12px;
 }
 @media (min-width: 960px) {
   .container {

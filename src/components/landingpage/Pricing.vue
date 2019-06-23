@@ -5,6 +5,7 @@
       <div class="grid">
         <i class="fas fa-plus" v-if="allowEdit"></i>
         <div class="col" v-for="(block, i) in pricingList" :key="i">
+          <i class="fas fa-times" v-if="allowEdit"></i>
           <h3>{{ block.title }}</h3>
           <ul>
             <li v-for="(service, j) in block.services" :key="j">
@@ -30,6 +31,7 @@ export default {
   .grid {
     position: relative;
     .col {
+      position: relative;
       h3 {
         margin-bottom: 10px;
         color: #444;

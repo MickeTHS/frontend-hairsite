@@ -1,5 +1,6 @@
 <template>
   <div class="product">
+    <i class="fas fa-times" v-if="allowEdit"></i>
     <div class="product-img" :style="{background: 'url(' + product.imageUrl + ')'}"></div>
     <p>{{ product.name }}</p>
   </div>
@@ -7,7 +8,7 @@
 
 <script>
 export default {
-  props: ["product"]
+  props: ["product", "allowEdit"]
 };
 </script>
 
@@ -15,6 +16,7 @@ export default {
 .product {
   width: 120px;
   margin: 5px;
+  position: relative;
   .product-img {
     width: 100%;
     height: 120px;

@@ -166,8 +166,6 @@ export default {
         width: 480px;
 
         .step {
-          // display: none;
-
           &:nth-child(3),
           &:nth-child(5),
           &:last-child {

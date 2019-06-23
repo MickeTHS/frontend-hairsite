@@ -146,6 +146,9 @@ input:-internal-autofill-selected {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+.v-dialog .v-list {
+  padding: 24px;
+}
 @media (min-width: 960px) {
   .container {
     max-width: unset !important;

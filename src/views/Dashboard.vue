@@ -1,5 +1,6 @@
 <template>
   <main>
+    <ColorBox/>
     <Banner :salon="salon"/>
     <About/>
     <OpeningHours/>
@@ -15,8 +16,12 @@
 
 <script>
 import { landingPage } from '@/utils/landingPage.js'
+import ColorBox from '@/components/landingpage/ColorBox'
 export default {
   mixins: [landingPage],
+  components: {
+    ColorBox
+  },
   mounted(){
     this.$store.dispatch('getUser')
   }

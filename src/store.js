@@ -62,7 +62,9 @@ export default new Vuex.Store({
       "/img/gallery/img-8.jpg",
       "/img/gallery/img-9.jpg"
     ],
-    pricingList: [{
+    pricingList: [
+      {
+        id: 1,
         title: 'Haircuts',
         services: [{
             title: 'Cut long hair',
@@ -87,6 +89,7 @@ export default new Vuex.Store({
         ]
       },
       {
+        id: 2,
         title: 'Makeup',
         services: [{
             title: 'Eye Liner',
@@ -111,6 +114,7 @@ export default new Vuex.Store({
         ]
       },
       {
+        id: 3,
         title: 'Nails Styling',
         services: [{
             title: 'Gel Nails',
@@ -135,6 +139,7 @@ export default new Vuex.Store({
         ]
       },
       {
+        id: 4,
         title: 'Cosmetics',
         services: [{
             title: 'Foundation',
@@ -286,6 +291,9 @@ export default new Vuex.Store({
     },
     updateStaff(state, staff) {
       state.staff = staff
+    },
+    updatePricingList(state, list) {
+      state.pricingList = list
     }
   },
   actions: {
@@ -404,6 +412,13 @@ export default new Vuex.Store({
     }, id) {
       const staff = state.staff.filter(member => member.id !== id)
       commit('updateStaff', staff)
+    },
+    updatePricingList({
+      commit,
+      state
+    }, id) {
+      const pricingList = state.pricingList.filter( block => block.id !== id)
+      commit('updatePricingList', pricingList)
     }
   },
   getters: {

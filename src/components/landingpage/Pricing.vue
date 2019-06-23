@@ -5,7 +5,7 @@
       <div class="grid">
         <i class="fas fa-plus" v-if="allowEdit"></i>
         <div class="col" v-for="(block, i) in pricingList" :key="i">
-          <i class="fas fa-times" v-if="allowEdit"></i>
+          <i class="fas fa-times" v-if="allowEdit" @click="deleteBlock(block.id)"></i>
           <h3>{{ block.title }}</h3>
           <ul>
             <li v-for="(service, j) in block.services" :key="j">
@@ -21,7 +21,12 @@
 
 <script>
 export default {
-  props: ["pricingList", "allowEdit"]
+  props: ["pricingList", "allowEdit"],
+  methods: {
+    deleteBlock(id){
+      this.$store.dispatch('updatePricingList', id)
+    }
+  }
 }
 </script>
 

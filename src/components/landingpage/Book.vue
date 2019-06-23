@@ -4,7 +4,7 @@
       <h2>Book Now</h2>
       <div class="products">
         <div class="grid">
-          <i class="fas fa-plus"></i>
+          <i class="fas fa-plus" v-if="allowEdit"></i>
           <Product v-for="product in products" :product="product" :key="product.id"/>
         </div>
       </div>
@@ -15,7 +15,7 @@
 <script>
 import Product from "@/components/landingpage/Product";
 export default {
-  props: ["products"],
+  props: ["products", 'allowEdit'],
   components: {
     Product
   }

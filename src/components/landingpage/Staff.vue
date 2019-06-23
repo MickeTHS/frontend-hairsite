@@ -5,7 +5,7 @@
     <div class="grid">
       <div class="container">
         <div class="members">
-          <i class="fas fa-plus"></i>
+          <i class="fas fa-plus" v-if="allowEdit"></i>
           <Carousel>
             <div class="col" v-for="(member, i) in staff" :key="i">
               <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
@@ -31,7 +31,7 @@
 <script>
 import Carousel from "@/components/Carousel";
 export default {
-  props: ["staff"],
+  props: ["staff", "allowEdit"],
   components: {
     Carousel
   }

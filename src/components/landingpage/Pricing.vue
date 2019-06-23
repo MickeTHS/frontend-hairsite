@@ -3,7 +3,7 @@
     <div class="container">
       <h2>Our Pricing</h2>
       <div class="grid">
-        <i class="fas fa-plus"></i>
+        <i class="fas fa-plus" v-if="allowEdit"></i>
         <div class="col" v-for="(block, i) in pricingList" :key="i">
           <h3>{{ block.title }}</h3>
           <ul>
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  props: ['pricingList']
+  props: ["pricingList", "allowEdit"]
 }
 </script>
 

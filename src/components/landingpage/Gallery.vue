@@ -4,7 +4,7 @@
       <h2>Our Gallery</h2>
       <p>When it comes to hair, we work with, among other things, high quality products, a hair series that does not feel in the hair, but shapes and keeps the hair in place, while providing an incredibly nice shine and luster.</p>
       <div class="images">
-        <i class="fas fa-plus"></i>
+        <i class="fas fa-plus" v-if="allowEdit"></i>
         <Waterfall :gutterWidth="10" :gutterHeight="10" :resizable="true">
           <WaterfallItem v-for="(item, index) in gallery" :key="index" :width="278">
             <img :src="item" alt>
@@ -18,7 +18,7 @@
 <script>
 import { Waterfall, WaterfallItem } from "vue2-waterfall";
 export default {
-  props: ["gallery"],
+  props: ["gallery", "allowEdit"],
   components: {
     Waterfall,
     WaterfallItem

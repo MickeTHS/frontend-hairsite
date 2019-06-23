@@ -3,6 +3,7 @@
     <div class="container">
       <h2>Our Pricing</h2>
       <div class="grid">
+        <i class="fas fa-plus"></i>
         <div class="col" v-for="(block, i) in pricingList" :key="i">
           <h3>{{ block.title }}</h3>
           <ul>
@@ -27,6 +28,7 @@ export default {
 @import "@/assets/scss/_variables.scss";
 .pricing {
   .grid {
+    position: relative;
     .col {
       h3 {
         margin-bottom: 10px;

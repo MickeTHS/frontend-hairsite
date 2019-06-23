@@ -149,7 +149,7 @@ input:-internal-autofill-selected {
 .v-dialog .v-list {
   padding: 24px;
 }
-.fa-edit {
+.fa-edit, .fa-plus {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -158,7 +158,7 @@ input:-internal-autofill-selected {
   background: #8bc34a;
   height: 30px;
   width: 30px;
-  line-height: 28px;
+  line-height: 30px;
   text-align: center;
   border-radius: 50%;
 }

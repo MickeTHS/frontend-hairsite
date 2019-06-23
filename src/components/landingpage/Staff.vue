@@ -1,24 +1,29 @@
 <template>
   <section class="staff" id="staff">
     <!-- <div class="container"> -->
-      <h2>Our Awesome Staff</h2>
-      <div class="grid">
-        <Carousel>
-          <div class="col" v-for="(member, i) in staff" :key="i">
-            <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
-              <div class="infos">
-                <h4>{{ member.name }}</h4>
-                <p>{{ member.title }}</p>
-              </div>
-              <div class="social">
-                <a :href="network.url" v-for="(network, j) in member.social" :key="j">
-                  <i :class="`fab fa-${network.code}`"></i>
-                </a>
+    <h2>Our Awesome Staff</h2>
+    <div class="grid">
+      <div class="container">
+        <div class="members">
+          <i class="fas fa-plus"></i>
+          <Carousel>
+            <div class="col" v-for="(member, i) in staff" :key="i">
+              <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
+                <div class="infos">
+                  <h4>{{ member.name }}</h4>
+                  <p>{{ member.title }}</p>
+                </div>
+                <div class="social">
+                  <a :href="network.url" v-for="(network, j) in member.social" :key="j">
+                    <i :class="`fab fa-${network.code}`"></i>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-        </Carousel>
+          </Carousel>
+        </div>
       </div>
+    </div>
     <!-- </div> -->
   </section>
 </template>
@@ -36,6 +41,9 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/_variables.scss";
 .staff {
+  .members {
+    position: relative;
+  }
   .team-member {
     width: 240px;
     height: 350px;

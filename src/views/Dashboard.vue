@@ -1,13 +1,13 @@
 <template>
   <main>
     <ColorBox/>
-    <Banner :salon="salon"/>
-    <About/>
-    <OpeningHours/>
-    <Book :products="products"/>
-    <Gallery :gallery="gallery"/>
-    <Staff :staff="staff"/>
-    <PricingList :pricingList="pricingList"/>
+    <Banner :salon="salon" :allowEdit="true"/>
+    <About :allowEdit="true"/>
+    <OpeningHours :allowEdit="true"/>
+    <Book :products="products" :allowEdit="true"/>
+    <Gallery :gallery="gallery" :allowEdit="true"/>
+    <Staff :staff="staff" :allowEdit="true"/>
+    <PricingList :pricingList="pricingList" :allowEdit="true"/>
     <Contact :salon="salon"/>
     <Map :coord="salon.coord"/>
     <Footer :salon="salon"/>

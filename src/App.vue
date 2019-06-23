@@ -149,6 +149,19 @@ input:-internal-autofill-selected {
 .v-dialog .v-list {
   padding: 24px;
 }
+.fa-edit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  background: #8bc34a;
+  height: 30px;
+  width: 30px;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 50%;
+}
 @media (min-width: 960px) {
   .container {
     max-width: unset !important;

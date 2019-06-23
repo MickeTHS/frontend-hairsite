@@ -2,8 +2,12 @@
   <div class="hero landingpage-hero" id="home">
     <div class="container">
       <div class="box">
-        <h1>Welcome to {{ salon.name }} Salon</h1>
+        <h1>
+          <i class="far fa-edit" v-if="allowEdit"></i>
+          Welcome to {{ salon.name }} Salon
+        </h1>
         <p>
+          <i class="far fa-edit" v-if="allowEdit"></i>
           A unique hairdressing salon &amp; barber TechPalace Salon. With us, we have the most sought after, experienced hairdressers and barbers. We focus on the latest in color, hair care and beard care.
           Our vision is to always make you as a customer satisfied after your visit.
         </p>
@@ -16,8 +20,8 @@
 
 <script>
 export default {
-  props: ['salon']
-}
+  props: ["salon", "allowEdit"]
+};
 </script>
 
 <style lang="scss">
@@ -42,10 +46,17 @@ export default {
       max-width: 720px;
       margin: 0 auto;
 
+      h1 {
+        color: #fff;
+        font-size: 50px;
+        position: relative;
+      }
+
       p {
         color: #fff;
         line-height: 1.8;
         margin-top: 16px;
+        position: relative;
       }
 
       .btn {
@@ -68,11 +79,6 @@ export default {
     background: url(/img/hero.jpg);
     background-size: cover;
     z-index: 0;
-  }
-
-  h1 {
-    color: #fff;
-    font-size: 50px;
   }
 }
 @media (max-width: 576px) {

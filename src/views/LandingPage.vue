@@ -1,12 +1,12 @@
 <template>
   <main>
-    <Banner :salon="salon"/>
-    <About/>
-    <OpeningHours/>
-    <Book :products="products"/>
-    <Gallery :gallery="gallery"/>
-    <Staff :staff="staff"/>
-    <PricingList :pricingList="pricingList"/>
+    <Banner :salon="salon" :allowEdit="false"/>
+    <About :allowEdit="false"/>
+    <OpeningHours :allowEdit="false"/>
+    <Book :products="products" :allowEdit="false"/>
+    <Gallery :gallery="gallery" :allowEdit="false"/>
+    <Staff :staff="staff" :allowEdit="false"/>
+    <PricingList :pricingList="pricingList" :allowEdit="false"/>
     <Contact :salon="salon"/>
     <Map :coord="salon.coord"/>
     <Footer :salon="salon"/>

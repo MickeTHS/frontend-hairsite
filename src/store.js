@@ -159,7 +159,9 @@ export default new Vuex.Store({
         ]
       }
     ],
-    staff: [{
+    staff: [
+      {
+        id: 1,
         name: 'Helena',
         title: 'Hairdresser',
         imageURL: '/img/staff-1.jpg',
@@ -177,7 +179,8 @@ export default new Vuex.Store({
           }
         ]
       },
-      {
+      { 
+        id: 2,
         name: 'Micheal',
         title: 'Makeup Artist',
         imageURL: '/img/staff-2.jpg',
@@ -196,6 +199,7 @@ export default new Vuex.Store({
         ]
       },
       {
+        id: 3,
         name: 'Sarah',
         title: 'Nail Expert',
         imageURL: '/img/staff-3.jpg',
@@ -214,6 +218,7 @@ export default new Vuex.Store({
         ]
       },
       {
+        id: 4,
         name: 'Barbara',
         title: 'Style Expert',
         imageURL: '/img/staff-4.jpg',
@@ -276,8 +281,11 @@ export default new Vuex.Store({
     hideSnackbar(state) {
       state.snackbar = false
     },
-    updateProducts(state, products){
+    updateProducts(state, products) {
       state.products = products
+    },
+    updateStaff(state, staff) {
+      state.staff = staff
     }
   },
   actions: {
@@ -355,7 +363,10 @@ export default new Vuex.Store({
 
       router.replace('/login')
     },
-    getUser({commit, state}) {
+    getUser({
+      commit,
+      state
+    }) {
       const reqBody = {
         user_id: state.userId,
         headers: {
@@ -380,9 +391,19 @@ export default new Vuex.Store({
     }) {
       commit('hideSnackbar')
     },
-    updateProducts({commit, state}, id){
+    updateProducts({
+      commit,
+      state
+    }, id) {
       const products = state.products.filter(product => product.id !== id)
       commit('updateProducts', products)
+    },
+    updateStaff({
+      commit,
+      state
+    }, id) {
+      const staff = state.staff.filter(member => member.id !== id)
+      commit('updateStaff', staff)
     }
   },
   getters: {

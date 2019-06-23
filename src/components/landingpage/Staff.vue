@@ -9,7 +9,7 @@
           <Carousel>
             <div class="col" v-for="(member, i) in staff" :key="i">
               <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
-                <i class="fas fa-times" v-if="allowEdit"></i>
+                <i class="fas fa-times" v-if="allowEdit" @click="deleteStaff(member.id)"></i>
                 <div class="infos">
                   <h4>{{ member.name }}</h4>
                   <p>{{ member.title }}</p>
@@ -35,6 +35,11 @@ export default {
   props: ["staff", "allowEdit"],
   components: {
     Carousel
+  },
+  methods: {
+    deleteStaff(id){
+      this.$store.dispatch('updateStaff', id)
+    }
   }
 };
 </script>

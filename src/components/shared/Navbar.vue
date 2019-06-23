@@ -27,8 +27,8 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  z-index: 999;
+  width: 100vw;
+  z-index: 99;
   box-shadow: 0 5px 16px rgba(101, 101, 101, .04);
 
   .container {

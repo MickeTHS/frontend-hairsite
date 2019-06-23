@@ -146,6 +146,12 @@ input:-internal-autofill-selected {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+@media (min-width: 960px) {
+  .container {
+    max-width: unset !important;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 0 40px !important;

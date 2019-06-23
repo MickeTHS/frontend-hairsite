@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss">
-
+@import "@/assets/scss/_variables.scss";
 .card-carousel-wrapper {
   display: flex;
   align-items: center;
@@ -75,12 +75,12 @@ export default {
   &-nav-left,
   &-nav-right {
     display: inline-block;
-    width: 15px;
-    height: 15px;
-    padding: 10px;
+    width: 7px;
+    height: 7px;
+    padding: 7px;
     box-sizing: border-box;
-    border-top: 2px solid #42b883;
-    border-right: 2px solid #42b883;
+    border-top: 2px solid $theme1;
+    border-right: 2px solid $theme1;
     cursor: pointer;
     margin: 0 10px;
     transition: transform 150ms linear;

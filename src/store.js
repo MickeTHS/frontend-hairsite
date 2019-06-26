@@ -391,6 +391,7 @@ export default new Vuex.Store({
     },
     createSalon({commit, state}, salon){
       axios.post('/salon',{
+        salon_name : salon.name, // should be added
         org_number: salon.orgNumber,
         street: salon.street,
         street_no: salon.streetNumber,
@@ -414,6 +415,7 @@ export default new Vuex.Store({
     updateSalon({commit, state}, salon){
       axios.post('/salon',{
         salon_id : salon.id,
+        salon_name : salon.name,
         org_number: salon.orgNumber,
         street: salon.street,
         street_no: salon.streetNumber,

@@ -390,6 +390,7 @@ export default new Vuex.Store({
         .catch(err => console.log(err))
     },
     createSalon({commit, state}, salon){
+      console.log('user_id: ', state.userId)
       axios.post('/salon',{
         salon_name : salon.name, // should be added
         org_number: salon.orgNumber,
@@ -405,7 +406,11 @@ export default new Vuex.Store({
         opening_hours: salon.openingHhours,
         prices: salon.prices,
         gallery: salon.gallery,
-        staff: salon.staff
+        staff: salon.staff,
+        user_id: state.userId,
+        headers: {
+          'x-access-token': state.token
+        }
       })
       .then(res => {
         console.log(res)

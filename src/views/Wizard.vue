@@ -16,9 +16,13 @@
           <div class="step" v-if="currentStep === 2">
             <label for>Where is your salon located?</label>
             <div class="input-group">
+              <!-- 
+                this need to be updated later 
+                to get all location data 
+              -->
               <input
                 type="text"
-                v-model="salon.location"
+                v-model="salon.postalAddress"
                 placeholder="e.g 213, Tree Top Lane Paoli PA"
               >
               <button class="btn btn-circle" @click.prevent="nextStep">
@@ -47,6 +51,10 @@
             </button>
           </div>
           <div class="step" v-if="currentStep === 4">
+            <!-- 
+              this step is ignored for the moment
+              as the backend doesn't except features param
+            -->
             <label for>Add features</label>
             <input
               type="text"
@@ -62,6 +70,10 @@
           <div class="step" v-if="currentStep === 5">
             <label for="theme">Color theme:</label>
             <div class="theme" id="theme">
+              <!-- 
+                This needs a more elegant solution
+                like a custom input radio group
+              -->
               <span id="theme-1"></span>
               <span id="theme-2"></span>
               <span id="theme-3"></span>
@@ -73,6 +85,10 @@
             </div>
             <label for="logo">Business logo:</label>
             <input type="file" id="logo" name="logo" placeholder="Logo">
+            <!-- 
+              this need to be adjusted
+              to work with formData
+            -->
             <button class="btn" @click.prevent="nextStep">
               Submit
               <span class="icon icon-arrow-right2"></span>
@@ -81,25 +97,31 @@
           <div class="step" v-if="currentStep === 6">
             <div class="input-group">
               <label class="switch">
-                <input type="checkbox" v-model="salon.hasDomain">
+                <input type="checkbox" v-model="salon.opt.hasDomain">
                 <span class="slider"></span>
               </label>
               <p>Does your salon have a domain name?</p>
             </div>
-            <div class="input-group" v-if="!salon.hasDomain">
+            <div class="input-group" v-if="!salon.opt.hasDomain">
               <label class="switch">
-                <input type="checkbox" v-model="salon.createDomain">
+                <input type="checkbox" v-model="salon.opt.createDomain">
                 <span class="slider"></span>
               </label>
               <p>Would you like to create a domain?</p>
             </div>
-            <div class="form-control" v-if="salon.hasDomain">
+            <div class="form-control" v-if="salon.opt.hasDomain">
               <label for>What's the address to your salon website</label>
-              <input type="text" placeholder="e.g https://www.awesomesalon.com/">
+              <input 
+                type="text"
+                v-model="salon.opt.existingDomain" 
+                placeholder="e.g https://www.awesomesalon.com/">
             </div>
-            <div class="form-control" v-if="salon.createDomain && !salon.hasDomain">
+            <div class="form-control" v-if="salon.opt.createDomain && !salon.opt.hasDomain">
               <label for>Enter desired domain name</label>
-              <input type="text" placeholder="e.g awesomesalon.com">
+              <input 
+                type="text" 
+                v-model="salon.opt.desiredDomain"
+                placeholder="e.g awesomesalon.com">
             </div>
             <button class="btn" @click.prevent="submit">
               Submit
@@ -120,15 +142,29 @@ export default {
       currentStep: 1,
       salon: {
         name: null,
-        location: null,
-        email: null,
+        orgNumber: null,
+        street: null,
+        streetNumber: null,
+        postalCode: null,
+        postalAddress: null,
+        city: null,
+        coord: {lat: null, lng: null},
         phone: null,
-        features: [],
-        theme: null,
-        logo: null,
-        hasDomain: false,
-        createDomain: false,
-        domain: null
+        email: null,
+        opt: {
+          theme: null,
+          logo: null,
+          hasDomain: false,
+          createDomain: false,
+          existingDomain: null,
+          desiredDomain: null
+        },
+        openingHhours: [],
+        prices: [],
+        gallery: [],
+        staff: [],
+        // ...options
+        // features are not captured!
       }
     };
   },

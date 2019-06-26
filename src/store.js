@@ -392,7 +392,7 @@ export default new Vuex.Store({
     createSalon({commit, state}, salon){
       console.log('user_id: ', state.userId)
       axios.post('/salon',{
-        salon_name : salon.name, // should be added
+        // salon_name : salon.name, // should be added
         org_number: salon.orgNumber,
         street: salon.street,
         street_no: salon.streetNumber,

@@ -166,17 +166,17 @@ export default {
         // ...options
         // features are not captured!
       }
-    };
+    }
   },
   methods: {
     nextStep() {
-      this.currentStep++;
+      this.currentStep++
     },
     submit() {
-      this.$store.dispatch('createSalon', this.salon)
+      this.$store.dispatch('createSalon', )
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -221,6 +221,7 @@ export default {
               p {
                 color: #fff;
                 margin-left: 16px;
+                margin-bottom: 0;
               }
             }
           }

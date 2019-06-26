@@ -2,10 +2,6 @@
   <div class="colorbox">
     <div class="colorbox-toggle" @click="dialog = !dialog">
       <i class="fas fa-cogs"></i>
-      <!-- <label for="theme">Color theme:</label>
-    <ul>
-      <li v-for="(theme, index) in themes" :key="index" :style="{background: theme.color}"></li>
-      </ul>-->
     </div>
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
       <template v-slot:activator="{ on }">
@@ -87,15 +83,6 @@ export default {
   line-height: 32px;
   color: #607d8b;
   cursor: pointer;
-  // label {
-  //   margin-bottom: 10px;
-  //   display: block;
-  //   text-transform: uppercase;
-  //   font-size: 13px;
-  //   font-weight: 700;
-  //   letter-spacing: 0.5px;
-  //   color: rgba(0, 0, 0, 0.6);
-  // }
 }
 .themes {
   margin-bottom: 20px;

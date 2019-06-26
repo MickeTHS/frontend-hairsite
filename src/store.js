@@ -389,6 +389,65 @@ export default new Vuex.Store({
         })
         .catch(err => console.log(err))
     },
+    createSalon({commit, state}, salon){
+      axios.post('/salon',{
+        org_number: salon.orgNumber,
+        street: salon.street,
+        street_no: salon.streetNumber,
+        postal_code: salon.postalCode,
+        postal_address: salon.postalAddress,
+        city: salon.city,
+        google_maps: salon.coord,
+        phone_numbers: salon.phone,
+        emails: salon.email,
+        frontend_opts: salon.opt,
+        opening_hours: salon.openingHhours,
+        prices: salon.prices,
+        gallery: salon.gallery,
+        staff: salon.staff
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log(err))
+    },
+    updateSalon({commit, state}, salon){
+      axios.post('/salon',{
+        salon_id : salon.id,
+        org_number: salon.orgNumber,
+        street: salon.street,
+        street_no: salon.streetNumber,
+        postal_code: salon.postalCode,
+        postal_address: salon.postalAddress,
+        city: salon.city,
+        google_maps: salon.coord,
+        phone_numbers: salon.phone,
+        emails: salon.email,
+        frontend_opts: salon.opt,
+        opening_hours: salon.openingHhours,
+        prices: salon.prices,
+        gallery: salon.gallery,
+        staff: salon.staff
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log(err))
+    },
+    getSalonPublic({state, commit}){
+      axios.get('/salon/public', {salon_id: state.salon.id})
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => console.log(err))
+    },
+    getSalon({state, commit}){
+      axios.get('/salon', {salon_id: state.salon.id})
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => console.log(err))
+    },
     showSnackbar({
       commit
     }) {

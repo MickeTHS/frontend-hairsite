@@ -62,8 +62,7 @@ export default new Vuex.Store({
       "/img/gallery/img-8.jpg",
       "/img/gallery/img-9.jpg"
     ],
-    pricingList: [
-      {
+    pricingList: [{
         id: 1,
         title: 'Haircuts',
         services: [{
@@ -164,8 +163,7 @@ export default new Vuex.Store({
         ]
       }
     ],
-    staff: [
-      {
+    staff: [{
         id: 1,
         name: 'Helena',
         title: 'Hairdresser',
@@ -184,7 +182,7 @@ export default new Vuex.Store({
           }
         ]
       },
-      { 
+      {
         id: 2,
         name: 'Micheal',
         title: 'Makeup Artist',
@@ -309,14 +307,30 @@ export default new Vuex.Store({
       axios
         .post('/user/create', reqBody)
         .then(res => {
-          router.push('/login')
+          const token = res.data.token
+          const userId = res.data.id
+
+          console.log(res)
+
+          console.log(token)
+
+          commit('authUser', {
+            token,
+            userId
+          })
+
+          localStorage.setItem('token', token)
+          localStorage.setItem('userId', userId)
+          router.push('/wizard')
         })
         .catch(err => {
-          if (err.response.status === 400 && err) {
+          if (err.response && err.response.status === 400) {
             commit('showSnackbar')
             setTimeout(() => {
               commit('hideSnackbar')
             }, 6000)
+          } else {
+            console.log(err)
           }
         })
     },
@@ -341,7 +355,7 @@ export default new Vuex.Store({
 
           localStorage.setItem('token', token)
           localStorage.setItem('userId', userId)
-          router.push('/admin')
+          router.push('/wizard')
 
           console.log(res)
         })
@@ -389,9 +403,12 @@ export default new Vuex.Store({
         })
         .catch(err => console.log(err))
     },
-    createSalon({commit, state}, salon){
-      console.log('user_id: ', state.userId)
-      axios.post('/salon',{
+    createSalon({
+      commit,
+      state
+    }, salon) {
+      console.log('token:: ', state.token)
+      const data = {
         // salon_name : salon.name, // should be added
         org_number: salon.orgNumber,
         street: salon.street,
@@ -408,48 +425,64 @@ export default new Vuex.Store({
         gallery: salon.gallery,
         staff: salon.staff,
         user_id: state.userId,
+      }
+      const config = {
         headers: {
           'x-access-token': state.token
         }
-      })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => console.log(err))
+      }
+      axios.post('/salon', data, config)
+        .then(res => {
+          router.push('/admin')
+        })
+        .catch(err => console.log(err))
     },
-    updateSalon({commit, state}, salon){
-      axios.post('/salon',{
-        salon_id : salon.id,
-        salon_name : salon.name,
-        org_number: salon.orgNumber,
-        street: salon.street,
-        street_no: salon.streetNumber,
-        postal_code: salon.postalCode,
-        postal_address: salon.postalAddress,
-        city: salon.city,
-        google_maps: salon.coord,
-        phone_numbers: salon.phone,
-        emails: salon.email,
-        frontend_opts: salon.opt,
-        opening_hours: salon.openingHhours,
-        prices: salon.prices,
-        gallery: salon.gallery,
-        staff: salon.staff
-      })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => console.log(err))
-    },
-    getSalonPublic({state, commit}){
-      axios.get('/salon/public', {salon_id: state.salon.id})
+    updateSalon({
+      commit,
+      state
+    }, salon) {
+      axios.post('/salon', {
+          salon_id: salon.id,
+          salon_name: salon.name,
+          org_number: salon.orgNumber,
+          street: salon.street,
+          street_no: salon.streetNumber,
+          postal_code: salon.postalCode,
+          postal_address: salon.postalAddress,
+          city: salon.city,
+          google_maps: salon.coord,
+          phone_numbers: salon.phone,
+          emails: salon.email,
+          frontend_opts: salon.opt,
+          opening_hours: salon.openingHhours,
+          prices: salon.prices,
+          gallery: salon.gallery,
+          staff: salon.staff
+        })
         .then(res => {
           console.log(res)
         })
         .catch(err => console.log(err))
     },
-    getSalon({state, commit}){
-      axios.get('/salon', {salon_id: state.salon.id})
+    getSalonPublic({
+      state,
+      commit
+    }) {
+      axios.get('/salon/public', {
+          salon_id: state.salon.id
+        })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => console.log(err))
+    },
+    getSalon({
+      state,
+      commit
+    }) {
+      axios.get('/salon', {
+          salon_id: state.salon.id
+        })
         .then(res => {
           console.log(res)
         })
@@ -483,7 +516,7 @@ export default new Vuex.Store({
       commit,
       state
     }, id) {
-      const pricingList = state.pricingList.filter( block => block.id !== id)
+      const pricingList = state.pricingList.filter(block => block.id !== id)
       commit('updatePricingList', pricingList)
     }
   },

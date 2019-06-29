@@ -173,7 +173,7 @@ export default {
       this.currentStep++
     },
     submit() {
-      this.$store.dispatch('createSalon', )
+      this.$store.dispatch('createSalon', this.salon)
     }
   }
 }

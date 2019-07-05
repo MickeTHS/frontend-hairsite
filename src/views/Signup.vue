@@ -52,10 +52,8 @@ export default {
   },
   methods: {
     signup() {
-      this.$store.dispatch("signup", {
-        email: this.email,
-        password: this.password
-      });
+      const authData = { email: this.email, password: this.password }
+      this.$store.dispatch("signup", authData);
     }
   }
 };

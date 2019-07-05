@@ -68,6 +68,10 @@ nav.landing {
     }
   }
 
+  li {
+    cursor: pointer;
+  }
+
   .collapse {
     span {
       background-color: $theme1;

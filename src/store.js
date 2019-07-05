@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     token: null,
     userId: null,
+    salon: null,
     products: [{
         id: 1,
         name: "Färgningar",
@@ -240,33 +241,33 @@ export default new Vuex.Store({
         ]
       },
     ],
-    salon: {
-      name: 'Tech Palace',
-      address: 'California, 16440 - USA',
-      coord: {
-        lat: 27.1494174,
-        lng: -13.2006577
-      },
-      phone: '+1 8751 2345 000',
-      email: 'hello@techpalace.com',
-      social: [{
-          code: 'facebook-f',
-          url: 'https://facebook.com/'
-        },
-        {
-          code: 'twitter',
-          url: 'https://twitter.com/'
-        },
-        {
-          code: 'instagram',
-          url: 'https://instagram.com/'
-        },
-        {
-          code: 'linkedin-in',
-          url: 'https://linkedin.com/'
-        }
-      ]
-    },
+    // salon: {
+    //   name: 'Tech Palace',
+    //   address: 'California, 16440 - USA',
+    //   coord: {
+    //     lat: 27.1494174,
+    //     lng: -13.2006577
+    //   },
+    //   phone: '+1 8751 2345 000',
+    //   email: 'hello@techpalace.com',
+    //   social: [{
+    //       code: 'facebook-f',
+    //       url: 'https://facebook.com/'
+    //     },
+    //     {
+    //       code: 'twitter',
+    //       url: 'https://twitter.com/'
+    //     },
+    //     {
+    //       code: 'instagram',
+    //       url: 'https://instagram.com/'
+    //     },
+    //     {
+    //       code: 'linkedin-in',
+    //       url: 'https://linkedin.com/'
+    //     }
+    //   ]
+    // },
     snackbar: false
   },
   mutations: {
@@ -277,6 +278,9 @@ export default new Vuex.Store({
     clearAuth(state) {
       state.token = null
       state.userId = null
+    },
+    updateSalon(state, salon){
+      state.salon = salon
     },
     showSnackbar(state) {
       state.snackbar = true
@@ -295,89 +299,52 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    signup({
-      commit
-    }, authData) {
+    async signup({commit}, authData) {
+      try {
+        const res = await axios.post('/user/create', authData)
+        const token = res.data.token
+        const userId = res.data.id
 
-      const reqBody = {
-        email: authData.email,
-        password: authData.password
-      }
+        commit('authUser', {token, userId})
 
-      axios
-        .post('/user/create', reqBody)
-        .then(res => {
-          const token = res.data.token
-          const userId = res.data.id
-
-          console.log(res)
-
-          console.log(token)
-
-          commit('authUser', {
-            token,
-            userId
-          })
-
-          localStorage.setItem('token', token)
-          localStorage.setItem('userId', userId)
-          router.push('/wizard')
-        })
-        .catch(err => {
-          if (err.response && err.response.status === 400) {
+        localStorage.setItem('token', token)
+        localStorage.setItem('userId', userId)
+        router.push('/wizard')
+      } catch(e) {
+          if (e.response && err.response.status === 400) {
             commit('showSnackbar')
             setTimeout(() => {
               commit('hideSnackbar')
             }, 6000)
           } else {
-            console.log(err)
+            console.log(e)
           }
-        })
+        }
     },
-    login({
-      commit
-    }, authData) {
-      const reqBody = {
-        email: authData.email,
-        password: authData.password
+    async login({commit}, authData) {
+      const res = await axios.post('/user/login', authData)
+      const token = res.data.token
+      const userId = res.data.id
+
+      commit('authUser', {token, userId})
+
+      localStorage.setItem('token', token)
+      localStorage.setItem('userId', userId)
+
+      if(res.data.currentSalon === 'none'){
+        router.push('/wizard')
+      } else {
+        router.push('/admin')
       }
-
-      axios
-        .post('/user/login', reqBody)
-        .then(res => {
-          const token = res.data.token
-          const userId = res.data.id
-
-          commit('authUser', {
-            token,
-            userId
-          })
-
-          localStorage.setItem('token', token)
-          localStorage.setItem('userId', userId)
-          router.push('/wizard')
-
-          console.log(res)
-        })
-        .catch(err => console.log(err))
     },
-    autoLogin({
-      commit
-    }) {
+    autoLogin({commit}) {
       const token = localStorage.getItem('token')
       const userId = localStorage.getItem('userId')
 
-      if (!token) {
-        return
-      }
-      commit('authUser', {
-        token,
-        userId
-      })
+      if (!token) return
+      commit('authUser', { token, userId})
     },
-    logout({
-      commit
-    }) {
+    logout({ commit }) {
       commit('clearAuth')
 
       localStorage.removeItem('token')
@@ -385,29 +352,12 @@ export default new Vuex.Store({
 
       router.replace('/login')
     },
-    getUser({
-      commit,
-      state
-    }) {
-      const reqBody = {
-        user_id: state.userId,
-        headers: {
-          'x-access-token': state.token
-        }
-      }
-
-      axios
-        .get('/user', reqBody)
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => console.log(err))
+    async getUser({commit, state}) {
+      const data = { user_id: state.userId, headers: { 'x-access-token': state.token}}
+      const res = await axios.get('/user', data)
+      console.log(res)
     },
-    createSalon({
-      commit,
-      state
-    }, salon) {
-      console.log('token:: ', state.token)
+    async createSalon({ commit, dispatch, state}, salon) {
       const data = {
         // salon_name : salon.name, // should be added
         org_number: salon.orgNumber,
@@ -426,96 +376,43 @@ export default new Vuex.Store({
         staff: salon.staff,
         user_id: state.userId,
       }
-      const config = {
-        headers: {
-          'x-access-token': state.token
-        }
-      }
-      axios.post('/salon', data, config)
-        .then(res => {
-          router.push('/admin')
-        })
-        .catch(err => console.log(err))
+      const config = {headers: {'x-access-token': state.token}}
+
+      const res = await axios.post('/salon', data, config)
+      const salon = res.data.salon
+      localStorage.setItem('salon', salon)
+      commit('updateSalon', salon)
+      dispatch('getSalonPublic', salon.salon_id)
     },
-    updateSalon({
-      commit,
-      state
-    }, salon) {
-      axios.post('/salon', {
-          salon_id: salon.id,
-          salon_name: salon.name,
-          org_number: salon.orgNumber,
-          street: salon.street,
-          street_no: salon.streetNumber,
-          postal_code: salon.postalCode,
-          postal_address: salon.postalAddress,
-          city: salon.city,
-          google_maps: salon.coord,
-          phone_numbers: salon.phone,
-          emails: salon.email,
-          frontend_opts: salon.opt,
-          opening_hours: salon.openingHhours,
-          prices: salon.prices,
-          gallery: salon.gallery,
-          staff: salon.staff
-        })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => console.log(err))
+    async updateSalon({ commit, state }, salon) {
+      const config = { headers: { 'x-access-token': state.token }}
+      await axios.put('/salon', salon, config)
     },
-    getSalonPublic({
-      state,
-      commit
-    }) {
-      axios.get('/salon/public', {
-          salon_id: state.salon.id
-        })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => console.log(err))
+    async getSalonPublic({ state, commit }, id) {
+      const data = {salon_id: id}
+      await axios.get('/salon/public', data)
     },
-    getSalon({
-      state,
-      commit
-    }) {
-      axios.get('/salon', {
-          salon_id: state.salon.id
-        })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => console.log(err))
+    async getSalon({ commit, state}, id) {
+      const data = {salon_id: id}
+      const config = { headers: { 'x-access-token': state.token }}
+      await axios.get('/salon', data, config)
+      router.push('/admin')
     },
-    showSnackbar({
-      commit
-    }) {
+    showSnackbar({ commit}) {
       commit('showSnackbar')
     },
-    hideSnackbar({
-      commit
-    }) {
+    hideSnackbar({commit}) {
       commit('hideSnackbar')
     },
-    updateProducts({
-      commit,
-      state
-    }, id) {
+    updateProducts({commit, state}, id) {
       const products = state.products.filter(product => product.id !== id)
       commit('updateProducts', products)
     },
-    updateStaff({
-      commit,
-      state
-    }, id) {
+    updateStaff({commit, state}, id) {
       const staff = state.staff.filter(member => member.id !== id)
       commit('updateStaff', staff)
     },
-    updatePricingList({
-      commit,
-      state
-    }, id) {
+    updatePricingList({commit, state}, id) {
       const pricingList = state.pricingList.filter(block => block.id !== id)
       commit('updatePricingList', pricingList)
     }

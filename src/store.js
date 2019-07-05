@@ -383,21 +383,20 @@ export default new Vuex.Store({
       console.log(createdSalon)
       localStorage.setItem('salon', createdSalon)
       commit('updateSalon', createdSalon)
-      console.log('salond id: ', createdSalon.salon_id)
-      dispatch('getSalonPublic', createdSalon.salon_id)
+      dispatch('getSalon', createdSalon.salon_id)
     },
     async updateSalon({ commit, state }, salon) {
       const config = { headers: { 'x-access-token': state.token }}
       await axios.put('/salon', salon, config)
     },
     async getSalonPublic({ state, commit }, id) {
-      const data = {salon_id: id}
-      await axios.get('/salon/public', data)
+      const res = await axios.get(`/salon/public?salon_id=${id}`)
+      console.log(res)
     },
     async getSalon({ commit, state}, id) {
-      const data = {salon_id: id}
       const config = { headers: { 'x-access-token': state.token }}
-      await axios.get('/salon', data, config)
+      const res = await axios.get(`/salon?salon_id=${id}`, config)
+      console.log(res)
       router.push('/admin')
     },
     showSnackbar({ commit}) {

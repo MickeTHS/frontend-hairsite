@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav v-if="this.$route.path !== '/wizard'">
     <div class="container">
       <div class="brand">
         <router-link to="/" tag="a">HairPlace</router-link>

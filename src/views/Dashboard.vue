@@ -9,7 +9,7 @@
     <Staff :staff="staff" :allowEdit="true"/>
     <PricingList :pricingList="pricingList" :allowEdit="true"/>
     <Contact :salon="salon"/>
-    <Map :coord="salon.coord"/>
+    <!-- <Map :coord="salon.google_maps"/> -->
     <Footer :salon="salon"/>
   </main>
 </template>
@@ -19,10 +19,6 @@ import { landingPage } from '@/utils/landingPage.js'
 import ColorBox from '@/components/landingpage/ColorBox'
 export default {
   mixins: [landingPage],
-  data(){
-    return {
-    }
-  },
   components: {
     ColorBox
   },

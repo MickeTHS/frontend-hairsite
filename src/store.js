@@ -374,8 +374,9 @@ export default new Vuex.Store({
         prices: salon.prices,
         gallery: salon.gallery,
         staff: salon.staff,
-        user_id: state.userId,
+        user_id: state.userId
       }
+
       const config = {headers: {'x-access-token': state.token}}
 
       const res = await axios.post('/salon', data, config)
@@ -396,6 +397,7 @@ export default new Vuex.Store({
     async getSalon({ commit, state}, id) {
       const config = { headers: { 'x-access-token': state.token }}
       const res = await axios.get(`/salon?salon_id=${id}`, config)
+      const salon = res.data.salon
       console.log(res)
       router.push('/admin')
     },

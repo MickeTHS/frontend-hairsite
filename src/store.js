@@ -379,10 +379,12 @@ export default new Vuex.Store({
       const config = {headers: {'x-access-token': state.token}}
 
       const res = await axios.post('/salon', data, config)
-      const salon = res.data.salon
-      localStorage.setItem('salon', salon)
-      commit('updateSalon', salon)
-      dispatch('getSalonPublic', salon.salon_id)
+      const createdSalon = res.data.salon
+      console.log(createdSalon)
+      localStorage.setItem('salon', createdSalon)
+      commit('updateSalon', createdSalon)
+      console.log('salond id: ', createdSalon.salon_id)
+      dispatch('getSalonPublic', createdSalon.salon_id)
     },
     async updateSalon({ commit, state }, salon) {
       const config = { headers: { 'x-access-token': state.token }}

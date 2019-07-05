@@ -42,7 +42,14 @@ export default new Router({
     {
       path: '/wizard',
       name: 'wizard',
-      component: Wizard
+      component: Wizard,
+      beforeEnter(to, from, next){
+        if(store.state.token) {
+          next()
+        } else {
+          next('/login')
+        }
+      }
     },
     {
       path: '/landingpage',

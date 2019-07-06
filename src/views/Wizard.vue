@@ -154,7 +154,7 @@ export default {
   data() {
     return {
       totalSteps: 6,
-      currentStep: 5,
+      currentStep: 1,
       salon: {
         salon_name: null,
         org_number: null,

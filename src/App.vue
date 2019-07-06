@@ -167,6 +167,7 @@ input:-internal-autofill-selected {
   line-height: 30px;
   color: rgba(255, 255, 255, 0.9);
   background: #8bc34a;
+  right: -10px;
 }
 .fa-times {
   color: #f44336;

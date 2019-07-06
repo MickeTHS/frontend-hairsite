@@ -2,10 +2,10 @@
   <main>
     <ColorBox/>
     <Banner :salon="salon" :allowEdit="true"/>
-    <About :allowEdit="true"/>
+    <About :allowEdit="true" :salon="salon"/>
     <OpeningHours :allowEdit="true"/>
     <Book :products="products" :allowEdit="true"/>
-    <Gallery :gallery="gallery" :allowEdit="true"/>
+    <Gallery :salon="salon" :gallery="gallery" :allowEdit="true"/>
     <Staff :staff="staff" :allowEdit="true"/>
     <PricingList :pricingList="pricingList" :allowEdit="true"/>
     <Contact :salon="salon"/>

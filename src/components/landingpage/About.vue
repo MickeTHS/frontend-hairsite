@@ -6,8 +6,7 @@
         <div class="col" style="background: url(/img/img-1.jpg)"></div>
         <div class="col">
           <i class="far fa-edit" v-if="allowEdit"></i>
-          <p>Welcome to TechPlalace Salon! We believe in creativity, to see who you are and listen to who you want to be. From that we create your look. We are a strong team in constant development working towards one and the same goal; to give you a personalized overall experience!</p>
-          <p>We take time for our customers, offer careful consultations and tailor-made treatments. Getting to us should at the same time feel relaxing and exclusive. exclusive product line that takes care of the quality of the hair through high quality raw materials and gives expressive style through its exceptional styling ability.</p>
+          <p>{{ salon.frontend_opts.about }}</p>
         </div>
       </div>
     </div>
@@ -16,7 +15,7 @@
 
 <script>
 export default {
-  props: ['allowEdit']
+  props: ['allowEdit', 'salon']
 }
 </script>
 

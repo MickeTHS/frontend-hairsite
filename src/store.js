@@ -337,6 +337,8 @@ export default new Vuex.Store({
       localStorage.setItem('token', token)
       localStorage.setItem('userId', userId)
 
+      console.log('user:: ', res.data)
+
       if(res.data.currentSalon === 'none'){
         router.push('/wizard')
       } else {
@@ -369,8 +371,14 @@ export default new Vuex.Store({
       salon.user_id = state.userId
       salon.postal_address = state.location.address
       salon.google_maps = state.location.coord
-      const config = {headers: {'x-access-token': state.token}}
 
+      salon.frontend_opts.heading = `Welcome to ${salon.salon_name} Salon`
+      salon.frontend_opts.sub_heading = 'A unique hairdressing salon & barber Salon. With us, we have the most sought after, experienced hairdressers and barbers. We focus on the latest in color, hair care and beard care. Our vision is to always make you as a customer satisfied after your visit.'
+      salon.frontend_opts.about = 'Welcome to TechPlalace Salon! We believe in creativity, to see who you are and listen to who you want to be. From that we create your look. We are a strong team in constant development working towards one and the same goal; to give you a personalized overall experience! We take time for our customers, offer careful consultations and tailor-made treatments. Getting to us should at the same time feel relaxing and exclusive. exclusive product line that takes care of the quality of the hair through high quality raw materials and gives expressive style through its exceptional styling ability.'
+      salon.frontend_opts.gallery_description = 'When it comes to hair, we work with, among other things, high quality products, a hair series that does not feel in the hair, but shapes and keeps the hair in place, while providing an incredibly nice shine and luster.'
+      
+      const config = {headers: {'x-access-token': state.token}}
+      console.log('salon to create: ', salon)
       const res = await axios.post('/salon', salon, config)
       const createdSalon = res.data.salon
 

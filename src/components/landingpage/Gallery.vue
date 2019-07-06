@@ -2,7 +2,7 @@
   <section class="gallery" id="gallery">
     <div class="container">
       <h2>Our Gallery</h2>
-      <p>When it comes to hair, we work with, among other things, high quality products, a hair series that does not feel in the hair, but shapes and keeps the hair in place, while providing an incredibly nice shine and luster.</p>
+      <p><i class="far fa-edit" v-if="allowEdit"></i> {{ salon.frontend_opts.gallery_description }}</p>
       <div class="images">
         <i class="fas fa-plus" v-if="allowEdit"></i>
         <Waterfall :gutterWidth="10" :gutterHeight="10" :resizable="true">
@@ -18,7 +18,7 @@
 <script>
 import { Waterfall, WaterfallItem } from "vue2-waterfall";
 export default {
-  props: ["gallery", "allowEdit"],
+  props: ["salon", "gallery", "allowEdit"],
   components: {
     Waterfall,
     WaterfallItem
@@ -33,6 +33,7 @@ export default {
     max-width: 640px;
     text-align: center;
     margin: 12px auto 24px;
+    position: relative;
   }
   .images {
     padding-top: 20px;

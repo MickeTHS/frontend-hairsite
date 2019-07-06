@@ -185,8 +185,6 @@ export default {
           email_alert: false,
           customer_reviews: false
         }
-        // ...options
-        // features are not captured!
       }
     };
   },

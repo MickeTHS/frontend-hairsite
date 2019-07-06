@@ -367,11 +367,13 @@ export default new Vuex.Store({
     async createSalon({ commit, dispatch, state}, salon) {
 
       salon.user_id = state.userId
+      salon.postal_address = state.location.address
+      salon.google_maps = state.location.coord
       const config = {headers: {'x-access-token': state.token}}
 
       const res = await axios.post('/salon', salon, config)
       const createdSalon = res.data.salon
-      
+
       console.log(createdSalon)
       localStorage.setItem('salon', createdSalon)
       commit('updateSalon', createdSalon)

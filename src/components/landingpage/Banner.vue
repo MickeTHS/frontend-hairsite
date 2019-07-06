@@ -4,11 +4,11 @@
       <div class="box">
         <h1>
           <i class="far fa-edit" v-if="allowEdit"></i>
-          Welcome to {{ salon.name }} Salon
+          Welcome to {{ salon.salon_name }} Salon
         </h1>
         <p>
           <i class="far fa-edit" v-if="allowEdit"></i>
-          A unique hairdressing salon &amp; barber TechPalace Salon. With us, we have the most sought after, experienced hairdressers and barbers. We focus on the latest in color, hair care and beard care.
+          A unique hairdressing salon &amp; barber {{ salon.salon_name }} Salon. With us, we have the most sought after, experienced hairdressers and barbers. We focus on the latest in color, hair care and beard care.
           Our vision is to always make you as a customer satisfied after your visit.
         </p>
         <router-link to="/book" tag="a" class="btn">Book Now</router-link>

@@ -18,15 +18,15 @@
           <ul class="contact-info">
             <li>
               <i class="fas fa-location-arrow"></i>
-              {{ salon.address }}
+              {{ salon.postal_address }}
             </li>
             <li>
-              <i class="fas fa-phone-alt"></i>
-              {{ salon.phone }}
+              <i class="fas fa-phone"></i>
+              {{ salon.phone_numbers }}
             </li>
             <li>
               <i class="fas fa-paper-plane"></i>
-              {{ salon.email }}
+              {{ salon.emails }}
             </li>
           </ul>
         </div>

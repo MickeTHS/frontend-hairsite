@@ -7,7 +7,7 @@
           <div class="step" v-if="currentStep === 1">
             <label for>What is your salon name?</label>
             <div class="input-group">
-              <input type="text" v-model="salon.name" placeholder="e.g Tech Palace Salon">
+              <input type="text" v-model="salon.salon_name" placeholder="e.g Tech Palace Salon" />
               <button class="btn btn-circle" @click.prevent="nextStep">
                 <span class="icon icon-arrow-right2"></span>
               </button>
@@ -22,9 +22,9 @@
               -->
               <input
                 type="text"
-                v-model="salon.postalAddress"
+                v-model="salon.address"
                 placeholder="e.g 213, Tree Top Lane Paoli PA"
-              >
+              />
               <button class="btn btn-circle" @click.prevent="nextStep">
                 <span class="icon icon-arrow-right2"></span>
               </button>
@@ -34,34 +34,52 @@
             <label for>Email Address</label>
             <input
               type="email"
-              v-model="salon.email"
+              v-model="salon.emails"
               placeholder="e.g contact@domain.com"
               autocomplete="nope"
-            >
+            />
             <label for>Phone Number</label>
             <input
               type="tel"
-              v-model="salon.phone"
+              v-model="salon.phone_numbers"
               placeholder="e.g +1845 1451 125"
               autocomplete="nope"
-            >
+            />
             <button class="btn" @click.prevent="nextStep">
               Next
               <span class="icon icon-arrow-right2"></span>
             </button>
           </div>
           <div class="step" v-if="currentStep === 4">
-            <!-- 
-              this step is ignored for the moment
-              as the backend doesn't except features param
-            -->
             <label for>Add features</label>
-            <input
-              type="text"
-              v-model="salon.features"
-              placeholder="e.g Booking feature on your website, SMS email alert..."
-              autocomplete="nope"
-            >
+            <div class="input-group">
+              <label class="switch">
+                <input type="checkbox" v-model="salon.features.online_booking" />
+                <span class="slider"></span>
+              </label>
+              <p>Enable Online Booking</p>
+            </div>
+            <div class="input-group">
+              <label class="switch">
+                <input type="checkbox" v-model="salon.features.sms_alert" />
+                <span class="slider"></span>
+              </label>
+              <p>Enable SMS Alert</p>
+            </div>
+            <div class="input-group">
+              <label class="switch">
+                <input type="checkbox" v-model="salon.features.email_alert" />
+                <span class="slider"></span>
+              </label>
+              <p>Enable Email alert</p>
+            </div>
+            <div class="input-group">
+              <label class="switch">
+                <input type="checkbox" v-model="salon.features.customer_reviews" />
+                <span class="slider"></span>
+              </label>
+              <p>Enable Customer Reviews</p>
+            </div>
             <button class="btn" @click.prevent="nextStep">
               Next
               <span class="icon icon-arrow-right2"></span>
@@ -70,21 +88,16 @@
           <div class="step" v-if="currentStep === 5">
             <label for="theme">Color theme:</label>
             <div class="theme" id="theme">
-              <!-- 
-                This needs a more elegant solution
-                like a custom input radio group
-              -->
-              <span id="theme-1"></span>
-              <span id="theme-2"></span>
-              <span id="theme-3"></span>
-              <span id="theme-4" class="active"></span>
-              <span id="theme-5"></span>
-              <span id="theme-6"></span>
-              <span id="theme-7"></span>
-              <span id="theme-8"></span>
+              <label 
+                class="theme-item" 
+                :class="salon.frontend_opts.theme === index + 1 ? 'active': ''" 
+                v-for="(theme, index) in 8" 
+                :key="index">
+                  <input type="radio" name="theme" :value="index + 1" v-model="salon.frontend_opts.theme">
+              </label>
             </div>
             <label for="logo">Business logo:</label>
-            <input type="file" id="logo" name="logo" placeholder="Logo">
+            <input type="file" id="logo" name="logo" placeholder="Logo" />
             <!-- 
               this need to be adjusted
               to work with formData
@@ -97,31 +110,33 @@
           <div class="step" v-if="currentStep === 6">
             <div class="input-group">
               <label class="switch">
-                <input type="checkbox" v-model="salon.opt.hasDomain">
+                <input type="checkbox" v-model="salon.frontend_opts.hasDomain" />
                 <span class="slider"></span>
               </label>
               <p>Does your salon have a domain name?</p>
             </div>
-            <div class="input-group" v-if="!salon.opt.hasDomain">
+            <div class="input-group" v-if="!salon.frontend_opts.hasDomain">
               <label class="switch">
-                <input type="checkbox" v-model="salon.opt.createDomain">
+                <input type="checkbox" v-model="salon.frontend_opts.createDomain" />
                 <span class="slider"></span>
               </label>
               <p>Would you like to create a domain?</p>
             </div>
-            <div class="form-control" v-if="salon.opt.hasDomain">
+            <div class="form-control" v-if="salon.frontend_opts.hasDomain">
               <label for>What's the address to your salon website</label>
-              <input 
+              <input
                 type="text"
-                v-model="salon.opt.existingDomain" 
-                placeholder="e.g https://www.awesomesalon.com/">
+                v-model="salon.frontend_opts.existingDomain"
+                placeholder="e.g https://www.awesomesalon.com/"
+              />
             </div>
-            <div class="form-control" v-if="salon.opt.createDomain && !salon.opt.hasDomain">
+            <div class="form-control" v-if="salon.frontend_opts.createDomain && !salon.frontend_opts.hasDomain">
               <label for>Enter desired domain name</label>
-              <input 
-                type="text" 
-                v-model="salon.opt.desiredDomain"
-                placeholder="e.g awesomesalon.com">
+              <input
+                type="text"
+                v-model="salon.frontend_opts.desiredDomain"
+                placeholder="e.g awesomesalon.com"
+              />
             </div>
             <button class="btn" @click.prevent="submit">
               Submit
@@ -139,44 +154,55 @@ export default {
   data() {
     return {
       totalSteps: 6,
-      currentStep: 1,
+      currentStep: 5,
       salon: {
-        name: null,
-        orgNumber: null,
+        salon_name: null,
+        org_number: null,
+        address: null, // test
         street: null,
-        streetNumber: null,
-        postalCode: null,
-        postalAddress: null,
+        street_no: null,
+        postal_code: null,
+        postal_address: null,
         city: null,
-        coord: {lat: null, lng: null},
-        phone: null,
-        email: null,
-        opt: {
-          theme: null,
+        google_maps: null,
+        phone_numbers: null,
+        emails: null,
+        frontend_opts: {
+          theme: 1,
           logo: null,
           hasDomain: false,
           createDomain: false,
           existingDomain: null,
           desiredDomain: null
         },
-        openingHhours: [],
+        opening_hours: [],
         prices: [],
         gallery: [],
         staff: [],
+        features: {
+          online_booking: false,
+          sms_alert: false,
+          email_alert: false,
+          customer_reviews: false
+        }
         // ...options
         // features are not captured!
       }
-    }
+    };
   },
   methods: {
     nextStep() {
-      this.currentStep++
+      this.currentStep++;
+      if (this.currentStep === 3) this.getLocation();
+    },
+    getLocation() {
+      this.$store.dispatch("getLocation", this.salon.address);
     },
     submit() {
-      this.$store.dispatch('createSalon', this.salon)
+      this.$store.dispatch("createSalon", this.salon);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -229,13 +255,18 @@ export default {
           .theme {
             background-color: #fff;
             padding: 10px;
-            span {
+            line-height: 0;
+            .theme-item {
               display: inline-block;
               height: 25px;
               width: 25px;
+              margin: 5px;
               cursor: pointer;
+              input {
+                display: none;
+              }
               &.active {
-                transform: translateY(-3px);
+                transform: translateY(-4px);
                 box-shadow: 0 5px 5px rgba(105, 105, 105, 0.2);
               }
               &:not(:last-child) {

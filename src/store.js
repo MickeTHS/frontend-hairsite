@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Axios from 'axios'
 
 import axios from '@/axios'
 import router from './router'
@@ -11,6 +12,7 @@ export default new Vuex.Store({
     token: null,
     userId: null,
     salon: null,
+    location: null,
     products: [{
         id: 1,
         name: "Färgningar",
@@ -164,7 +166,8 @@ export default new Vuex.Store({
         ]
       }
     ],
-    staff: [{
+    staff: [
+      {
         id: 1,
         name: 'Helena',
         title: 'Hairdresser',
@@ -288,6 +291,9 @@ export default new Vuex.Store({
     hideSnackbar(state) {
       state.snackbar = false
     },
+    updateLocation(state, location) {
+      state.location = location
+    },
     updateProducts(state, products) {
       state.products = products
     },
@@ -349,6 +355,7 @@ export default new Vuex.Store({
 
       localStorage.removeItem('token')
       localStorage.removeItem('userId')
+      localStorage.removeItem('salon')
 
       router.replace('/login')
     },
@@ -358,29 +365,13 @@ export default new Vuex.Store({
       console.log(res)
     },
     async createSalon({ commit, dispatch, state}, salon) {
-      const data = {
-        // salon_name : salon.name, // should be added
-        org_number: salon.orgNumber,
-        street: salon.street,
-        street_no: salon.streetNumber,
-        postal_code: salon.postalCode,
-        postal_address: salon.postalAddress,
-        city: salon.city,
-        google_maps: salon.coord,
-        phone_numbers: salon.phone,
-        emails: salon.email,
-        frontend_opts: salon.opt,
-        opening_hours: salon.openingHhours,
-        prices: salon.prices,
-        gallery: salon.gallery,
-        staff: salon.staff,
-        user_id: state.userId
-      }
 
+      salon.user_id = state.userId
       const config = {headers: {'x-access-token': state.token}}
 
-      const res = await axios.post('/salon', data, config)
+      const res = await axios.post('/salon', salon, config)
       const createdSalon = res.data.salon
+      
       console.log(createdSalon)
       localStorage.setItem('salon', createdSalon)
       commit('updateSalon', createdSalon)
@@ -398,8 +389,15 @@ export default new Vuex.Store({
       const config = { headers: { 'x-access-token': state.token }}
       const res = await axios.get(`/salon?salon_id=${id}`, config)
       const salon = res.data.salon
+      localStorage.setItem('salon', JSON.stringify(salon))
+      commit('updateSalon', salon)
       console.log(res)
       router.push('/admin')
+    },
+    autoLoadSalon({commit, state}){
+      const salon = JSON.parse(localStorage.getItem('salon'))
+      if(!salon) return
+      commit('updateSalon', salon)
     },
     showSnackbar({ commit}) {
       commit('showSnackbar')
@@ -418,6 +416,23 @@ export default new Vuex.Store({
     updatePricingList({commit, state}, id) {
       const pricingList = state.pricingList.filter(block => block.id !== id)
       commit('updatePricingList', pricingList)
+    },
+    async getLocation({commit}, address){
+      const URL = 'https://maps.googleapis.com/maps/api/geocode/json'
+      const data = {
+        params: {
+          address: address,
+          key: 'AIzaSyAKgPPQa5-U3QXlCEhJjCRP39Ri0RdKMEo'
+        }
+      }
+      const res = await Axios.get(URL, data)
+
+      const location = {
+        address: res.data.results[0].formatted_address,
+        coord: res.data.results[0].geometry.location // lat & lng
+      }
+
+      commit('updateLocation', location)
     }
   },
   getters: {

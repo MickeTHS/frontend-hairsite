@@ -9,7 +9,7 @@
     <Staff :staff="staff" :allowEdit="true"/>
     <PricingList :pricingList="pricingList" :allowEdit="true"/>
     <Contact :salon="salon"/>
-    <!-- <Map :coord="salon.google_maps"/> -->
+    <Map :coord="salon.google_maps"/>
     <Footer :salon="salon"/>
   </main>
 </template>

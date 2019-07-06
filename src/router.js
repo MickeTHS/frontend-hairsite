@@ -13,6 +13,7 @@ import store from './store'
 Vue.use(Router)
 
 store.dispatch('autoLogin')
+store.dispatch('autoLoadSalon')
 
 export default new Router({
   mode: 'history',

@@ -88,6 +88,7 @@ export default {
 
     a {
       color: #2b7fa3;
+      font-weight: normal;
     }
 
     .signup-area {

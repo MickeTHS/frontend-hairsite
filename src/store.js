@@ -357,7 +357,7 @@ export default new Vuex.Store({
         {name: 'linkedin', url: 'https://linkedin.com/'}
       ]
 
-      salon.frontend_opts.heading = `Welcome to ${salon.salon_name} Salon`
+      salon.frontend_opts.heading = `Welcome to ${salon.name} Salon`
       salon.frontend_opts.sub_heading = 'A unique hairdressing salon & barber Salon. With us, we have the most sought after, experienced hairdressers and barbers. We focus on the latest in color, hair care and beard care. Our vision is to always make you as a customer satisfied after your visit.'
       salon.frontend_opts.about = 'Welcome to TechPlalace Salon! We believe in creativity, to see who you are and listen to who you want to be. From that we create your look. We are a strong team in constant development working towards one and the same goal; to give you a personalized overall experience! We take time for our customers, offer careful consultations and tailor-made treatments. Getting to us should at the same time feel relaxing and exclusive. exclusive product line that takes care of the quality of the hair through high quality raw materials and gives expressive style through its exceptional styling ability.'
       salon.frontend_opts.gallery_description = 'When it comes to hair, we work with, among other things, high quality products, a hair series that does not feel in the hair, but shapes and keeps the hair in place, while providing an incredibly nice shine and luster.'
@@ -366,21 +366,26 @@ export default new Vuex.Store({
 
       const res = await axios.post('/salon', salon, config)
       const createdSalon = res.data.salon
+      const salonId = createdSalon.salon_id
 
-      console.log(createdSalon)
-      localStorage.setItem('salon', createdSalon)
-      commit('updateSalon', createdSalon)
-      dispatch('getSalon', createdSalon.salon_id)
+      // console.log(createdSalon)
+
+      const updatedSalon = await axios.put('/salon', {lookup_latlng: true, salon_id: salonId}, config)
+      console.log('salon: ', updatedSalon.data.salon)
+      localStorage.setItem('salon', JSON.stringify(updatedSalon))
+      commit('updateSalon', updatedSalon)
+      dispatch('getSalon', salonId)
     },
     async updateSalon({commit, state}, salon) {
       const config = {headers: {'x-access-token': state.token}}
-      await axios.put('/salon', salon, config)
+      await axios.post('/salon', salon, config)
     },
     async getSalonPublic({state, commit}, id) {
       const res = await axios.get(`/salon/public?salon_id=${id}`)
       console.log(res)
     },
     async getSalon({commit, state}, id) {
+      console.log('id:: ', id)
       const config = {headers: {'x-access-token': state.token}}
       const res = await axios.get(`/salon?salon_id=${id}`, config)
       const salon = res.data.salon

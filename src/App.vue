@@ -101,9 +101,11 @@ a {
   color: #777;
 }
 p,
-li,
-a {
+li {
   font-weight: 300;
+}
+a {
+  font-weight: normal;
 }
 ol,
 ul {

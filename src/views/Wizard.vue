@@ -14,17 +14,48 @@
             </div>
           </div>
           <div class="step" v-if="currentStep === 2">
-            <label for>Where is your salon located?</label>
-            <div class="input-group">
-              <input
-                type="text"
-                v-model="salon.postal_address"
-                placeholder="e.g 213, Tree Top Lane Paoli PA"
-              />
-              <button class="btn btn-circle" @click.prevent="nextStep">
-                <i class="material-icons arrow">arrow_forward</i>
-              </button>
+            <label>Where is your salon located?</label>
+            <div class="grid">
+              <div class="col">
+                <input
+                  type="text"
+                  v-model="salon.street"
+                  placeholder="Street Name"
+                  autocomplete="nope"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  v-model="salon.street_no"
+                  placeholder="Street No"
+                  autocomplete="nope"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  v-model="salon.postal_code"
+                  placeholder="ZIP Code"
+                  autocomplete="nope"
+                />
+              </div>
+              <div class="col">
+                <input
+                  type="text"
+                  v-model="salon.postal_address"
+                  placeholder="Postal Address"
+                  autocomplete="nope"
+                />
+              </div>
+              <div class="col">
+                <input type="text" v-model="salon.city" placeholder="City" autocomplete="nope" />
+              </div>
             </div>
+            <button class="btn" @click.prevent="nextStep">
+              Next
+              <i class="material-icons arrow">arrow_forward</i>
+            </button>
           </div>
           <div class="step" v-if="currentStep === 3">
             <label for>Email Address</label>
@@ -220,13 +251,18 @@ export default {
 
     .box {
       h1 {
-        color: #fff;
         text-align: center;
         margin-bottom: 28px;
       }
 
+      h1,
+      h2,
+      h3 {
+        color: #fff;
+      }
+
       form {
-        width: 480px;
+        width: 500px;
 
         .step {
           &:nth-child(3),
@@ -249,6 +285,19 @@ export default {
                 color: #fff;
                 margin-left: 16px;
                 margin-bottom: 0;
+              }
+            }
+          }
+
+          .grid {
+            display: flex;
+            flex-wrap: wrap;
+            .col {
+              flex-basis: 50%;
+              padding-right: 10px;
+              &:nth-child(2),
+              &:nth-child(3) {
+                flex-basis: 25%;
               }
             }
           }
@@ -308,7 +357,7 @@ export default {
 
           input {
             display: block;
-            margin: 15px 0;
+            margin: 8px 0 16px;
             width: 100%;
             color: rgba(255, 255, 255, 0.7);
             &[type="file"] {
@@ -326,6 +375,7 @@ export default {
             width: 100%;
             position: relative;
             height: 44px;
+            margin-top: 16px;
 
             .btn {
               background-color: rgba(255, 255, 255, 0.15);
@@ -338,7 +388,7 @@ export default {
               width: 30px;
               position: absolute;
               right: 7px;
-              top: 7px;
+              top: 3px;
               border-radius: 50%;
               padding: 0;
               display: flex;
@@ -415,6 +465,17 @@ export default {
           width: 100%;
           .input-group {
             width: 100%;
+          }
+          .step {
+            .grid {
+              .col {
+                flex-basis: 100%;
+                &:nth-child(2),
+                &:nth-child(3) {
+                  flex-basis: 50%;
+                }
+              }
+            }
           }
         }
       }

@@ -18,7 +18,7 @@
             <div class="input-group">
               <input
                 type="text"
-                v-model="salon.address"
+                v-model="salon.postal_address"
                 placeholder="e.g 213, Tree Top Lane Paoli PA"
               />
               <button class="btn btn-circle" @click.prevent="nextStep">
@@ -163,7 +163,6 @@ export default {
       salon: {
         name: null,
         org_number: null,
-        address: null, // test
         street: null,
         street_no: null,
         postal_code: null,

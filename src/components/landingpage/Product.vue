@@ -1,6 +1,6 @@
 <template>
   <div class="product">
-    <i class="fas fa-times" v-if="allowEdit" @click="deleteProduct(product.id)"></i>
+    <i class="material-icons delete" v-if="allowEdit" @click="deleteProduct(product.id)">delete</i>
     <div class="product-img" :style="{background: 'url(' + product.imageUrl + ')'}"></div>
     <p>{{ product.name }}</p>
   </div>

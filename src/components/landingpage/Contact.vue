@@ -5,10 +5,10 @@
       <div class="grid">
         <div class="col">
           <form action>
-            <input type="text" placeholder="Enter Your Name">
-            <input type="email" placeholder="Enter Your Email">
-            <input type="tel" placeholder="Enter Your Phone">
-            <input type="text" placeholder="Title">
+            <input type="text" placeholder="Enter Your Name" />
+            <input type="email" placeholder="Enter Your Email" />
+            <input type="tel" placeholder="Enter Your Phone" />
+            <input type="text" placeholder="Title" />
             <textarea name="message" placeholder="Message"></textarea>
             <button class="btn">Submit</button>
           </form>
@@ -17,15 +17,15 @@
           <p>Send us a message using this form! Or contact us directly using the following:</p>
           <ul class="contact-info">
             <li>
-              <i class="fas fa-location-arrow"></i>
+              <i class="material-icons">location_on</i>
               {{ salon.postal_address }}
             </li>
             <li>
-              <i class="fas fa-phone"></i>
+              <i class="material-icons">phone_in_talk</i>
               {{ salon.phone_numbers }}
             </li>
             <li>
-              <i class="fas fa-paper-plane"></i>
+              <i class="material-icons">message</i>
               {{ salon.emails }}
             </li>
           </ul>
@@ -54,6 +54,7 @@ export default {
       margin: 4px;
       outline: none;
       font-size: 14px;
+      font-weight: 300;
       &::placeholder {
         color: #aaa;
       }
@@ -74,11 +75,12 @@ export default {
     }
   }
   .contact-info {
-    i {
+    .material-icons {
       color: $theme1;
       width: 30px;
       margin: 8px 0;
-      font-size: 18px;
+      font-size: 24px;
+      vertical-align: middle;
     }
   }
 }

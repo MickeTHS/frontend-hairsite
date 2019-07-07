@@ -3,9 +3,9 @@
     <div class="container">
       <h2>Our Pricing</h2>
       <div class="grid">
-        <i class="fas fa-plus" v-if="allowEdit"></i>
+        <i class="material-icons add" v-if="allowEdit">add</i>
         <div class="col" v-for="(block, i) in pricingList" :key="i">
-          <i class="fas fa-times" v-if="allowEdit" @click="deleteBlock(block.id)"></i>
+          <i class="material-icons delete" v-if="allowEdit" @click="deleteBlock(block.id)">delete</i>
           <h3>{{ block.title }}</h3>
           <ul>
             <li v-for="(service, j) in block.services" :key="j">

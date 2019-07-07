@@ -1,7 +1,7 @@
 <template>
   <div class="colorbox">
     <div class="colorbox-toggle" @click="dialog = !dialog">
-      <i class="fas fa-cogs"></i>
+      <i class="material-icons settings">settings</i>
     </div>
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
       <template v-slot:activator="{ on }">
@@ -92,10 +92,14 @@ export default {
   height: 32px;
   width: 32px;
   z-index: 3;
-  text-align: center;
-  line-height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #607d8b;
   cursor: pointer;
+  .settings {
+    font-size: 20px;
+  }
 }
 .themes {
   margin-bottom: 20px;

@@ -4,7 +4,7 @@
       <h2>Book Now</h2>
       <div class="products">
         <div class="grid">
-          <i class="fas fa-plus" v-if="allowEdit"></i>
+          <i class="material-icons add" v-if="allowEdit">add</i>
           <Product v-for="product in products" :product="product" :key="product.id" :allowEdit="allowEdit"/>
         </div>
       </div>

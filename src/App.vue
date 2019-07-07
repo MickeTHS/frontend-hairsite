@@ -153,37 +153,33 @@ input:-internal-autofill-selected {
 .v-dialog .v-list {
   padding: 24px;
 }
-.fa-edit,
-.fa-plus,
-.fa-times {
-  text-align: center;
+.material-icons.edit,
+.material-icons.add,
+.material-icons.delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   position: absolute;
+  font-size: 16px;
+  height: 30px;
+  width: 30px;
   top: 10px;
   right: 10px;
   cursor: pointer;
 }
-.fa-edit,
-.fa-plus {
-  font-size: 14px;
-  height: 30px;
-  width: 30px;
-  line-height: 30px;
+.material-icons.edit,
+.material-icons.add {
   color: rgba(255, 255, 255, 0.9);
   background: #8bc34a;
   right: -10px;
 }
-.fa-plus {
+.material-icons.add {
   top: -40px;
-  right: 5px;
 }
-.fa-times {
+.material-icons.delete {
   color: #f44336;
-  background: rgba(244, 67, 54, 0.2);
-  height: 22px;
-  width: 22px;
-  line-height: 22px;
-  font-size: 12px;
+  background: rgba(244, 67, 54, 0.3);
 }
 
 @media (min-width: 960px) {

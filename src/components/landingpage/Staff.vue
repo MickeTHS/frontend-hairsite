@@ -5,17 +5,17 @@
     <div class="grid">
       <div class="container">
         <div class="members">
-          <i class="fas fa-plus" v-if="allowEdit"></i>
+          <i class="material-icons add" v-if="allowEdit">add</i>
           <div class="col" v-for="(member, i) in staff" :key="i">
             <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
-              <i class="fas fa-times" v-if="allowEdit" @click="deleteStaff(member.id)"></i>
+              <i class="material-icons delete" v-if="allowEdit" @click="deleteStaff(member.id)">delete</i>
               <div class="infos">
                 <h4>{{ member.name }}</h4>
                 <p>{{ member.title }}</p>
               </div>
               <div class="social">
                 <a :href="network.url" v-for="(network, j) in member.social" :key="j">
-                  <i :class="`fab fa-${network.code}`"></i>
+                  <img :src="`/img/social/${network.name}.svg`" :alt="network.name">
                 </a>
               </div>
             </div>
@@ -87,15 +87,21 @@ export default {
       width: 100%;
       display: flex;
       justify-content: center;
+      img {
+        width: 20px;
+      }
       a {
-        background-color: #fff;
+        background-color: $theme1;
         height: 36px;
         width: 36px;
         line-height: 36px;
         border-radius: 50%;
         text-align: center;
-        color: $theme1;
+        color: #fff;
         margin: 0 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }

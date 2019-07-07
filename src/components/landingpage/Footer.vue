@@ -2,9 +2,14 @@
   <footer>
     <div class="container">
       <p>&copy; {{ new Date().getFullYear() }} {{ salon.name }} All Rights Reserved</p>
-      <p>
-        <a :href="network.url" v-for="(network, index) in salon.social" :key="index" target="_blank">
-          <i :class="`fab fa-${network.code}`"></i>
+      <p class="social">
+        <a
+          :href="network.url"
+          v-for="(network, index) in salon.social"
+          :key="index"
+          target="_blank"
+        >
+          <img :src="`/img/social/${network.name}.svg`" :alt="network.name" />
         </a>
       </p>
     </div>
@@ -13,8 +18,8 @@
 
 <script>
 export default {
-  props: ['salon']
-}
+  props: ["salon"]
+};
 </script>
 
 <style lang="scss">
@@ -33,9 +38,11 @@ footer {
       margin-bottom: 0;
       font-weight: 300;
     }
-    i {
-      color: #fff;
-      margin: 0 10px;
+    .social {
+      img {
+        width: 20px;
+        margin: 0 6px;
+      }
     }
   }
 }

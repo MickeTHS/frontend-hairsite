@@ -5,7 +5,7 @@
       <div class="grid">
         <div class="col" style="background: url(/img/img-1.jpg)"></div>
         <div class="col">
-          <i class="far fa-edit" v-if="allowEdit"></i>
+          <i class="material-icons edit" v-if="allowEdit">edit</i>
           <p>{{ salon.frontend_opts.about }}</p>
         </div>
       </div>

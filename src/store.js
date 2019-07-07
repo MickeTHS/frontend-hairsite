@@ -166,22 +166,21 @@ export default new Vuex.Store({
         ]
       }
     ],
-    staff: [
-      {
+    staff: [{
         id: 1,
         name: 'Helena',
         title: 'Hairdresser',
         imageURL: '/img/staff-1.jpg',
         social: [{
-            code: 'facebook-f',
+            name: 'facebook',
             url: 'https://facebook.com/'
           },
           {
-            code: 'twitter',
+            name: 'twitter',
             url: 'https://twitter.com/'
           },
           {
-            code: 'linkedin-in',
+            name: 'linkedin',
             url: 'https://linkedin.com/'
           }
         ]
@@ -192,15 +191,15 @@ export default new Vuex.Store({
         title: 'Makeup Artist',
         imageURL: '/img/staff-2.jpg',
         social: [{
-            code: 'facebook-f',
+            name: 'facebook',
             url: 'https://facebook.com/'
           },
           {
-            code: 'twitter',
+            name: 'twitter',
             url: 'https://twitter.com/'
           },
           {
-            code: 'linkedin-in',
+            name: 'linkedin',
             url: 'https://linkedin.com/'
           }
         ]
@@ -211,15 +210,15 @@ export default new Vuex.Store({
         title: 'Nail Expert',
         imageURL: '/img/staff-3.jpg',
         social: [{
-            code: 'facebook-f',
+            name: 'facebook',
             url: 'https://facebook.com/'
           },
           {
-            code: 'twitter',
+            name: 'twitter',
             url: 'https://twitter.com/'
           },
           {
-            code: 'linkedin-in',
+            name: 'linkedin',
             url: 'https://linkedin.com/'
           }
         ]
@@ -230,47 +229,20 @@ export default new Vuex.Store({
         title: 'Style Expert',
         imageURL: '/img/staff-4.jpg',
         social: [{
-            code: 'facebook-f',
+            name: 'facebook',
             url: 'https://facebook.com/'
           },
           {
-            code: 'twitter',
+            name: 'twitter',
             url: 'https://twitter.com/'
           },
           {
-            code: 'linkedin-in',
+            name: 'linkedin',
             url: 'https://linkedin.com/'
           }
         ]
       },
     ],
-    // salon: {
-    //   name: 'Tech Palace',
-    //   address: 'California, 16440 - USA',
-    //   coord: {
-    //     lat: 27.1494174,
-    //     lng: -13.2006577
-    //   },
-    //   phone: '+1 8751 2345 000',
-    //   email: 'hello@techpalace.com',
-      // social: [{
-      //     code: 'facebook-f',
-      //     url: 'https://facebook.com/'
-      //   },
-      //   {
-      //     code: 'twitter',
-      //     url: 'https://twitter.com/'
-      //   },
-      //   {
-      //     code: 'instagram',
-      //     url: 'https://instagram.com/'
-      //   },
-      //   {
-      //     code: 'linkedin-in',
-      //     url: 'https://linkedin.com/'
-      //   }
-      // ]
-    // },
     snackbar: false
   },
   mutations: {
@@ -282,7 +254,7 @@ export default new Vuex.Store({
       state.token = null
       state.userId = null
     },
-    updateSalon(state, salon){
+    updateSalon(state, salon) {
       state.salon = salon
     },
     showSnackbar(state) {
@@ -305,54 +277,71 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async signup({commit}, authData) {
+    async signup({
+      commit
+    }, authData) {
       try {
         const res = await axios.post('/user/create', authData)
         const token = res.data.token
         const userId = res.data.id
 
-        commit('authUser', {token, userId})
+        commit('authUser', {
+          token,
+          userId
+        })
 
         localStorage.setItem('token', token)
         localStorage.setItem('userId', userId)
         router.push('/wizard')
-      } catch(e) {
-          if (e.response && err.response.status === 400) {
-            commit('showSnackbar')
-            setTimeout(() => {
-              commit('hideSnackbar')
-            }, 6000)
-          } else {
-            console.log(e)
-          }
+      } catch (e) {
+        if (e.response && err.response.status === 400) {
+          commit('showSnackbar')
+          setTimeout(() => {
+            commit('hideSnackbar')
+          }, 6000)
+        } else {
+          console.log(e)
         }
+      }
     },
-    async login({commit}, authData) {
+    async login({
+      commit
+    }, authData) {
       const res = await axios.post('/user/login', authData)
       const token = res.data.token
       const userId = res.data.id
 
-      commit('authUser', {token, userId})
+      commit('authUser', {
+        token,
+        userId
+      })
 
       localStorage.setItem('token', token)
       localStorage.setItem('userId', userId)
 
       console.log('user:: ', res.data)
 
-      if(res.data.currentSalon === 'none'){
+      if (res.data.currentSalon === 'none') {
         router.push('/wizard')
       } else {
         router.push('/admin')
       }
     },
-    autoLogin({commit}) {
+    autoLogin({
+      commit
+    }) {
       const token = localStorage.getItem('token')
       const userId = localStorage.getItem('userId')
 
       if (!token) return
-      commit('authUser', { token, userId})
+      commit('authUser', {
+        token,
+        userId
+      })
     },
-    logout({ commit }) {
+    logout({
+      commit
+    }) {
       commit('clearAuth')
 
       localStorage.removeItem('token')
@@ -361,30 +350,57 @@ export default new Vuex.Store({
 
       router.replace('/login')
     },
-    async getUser({commit, state}) {
-      const data = { user_id: state.userId, headers: { 'x-access-token': state.token}}
+    async getUser({
+      commit,
+      state
+    }) {
+      const data = {
+        user_id: state.userId,
+        headers: {
+          'x-access-token': state.token
+        }
+      }
       const res = await axios.get('/user', data)
       console.log(res)
     },
-    async createSalon({ commit, dispatch, state}, salon) {
+    async createSalon({
+      commit,
+      dispatch,
+      state
+    }, salon) {
 
       salon.user_id = state.userId
       salon.postal_address = state.location.address
       salon.google_maps = state.location.coord
 
-      salon.social =  [
-        {code: 'facebook-f', url: 'https://facebook.com/'},
-        {code: 'twitter', url: 'https://twitter.com/'},
-        {code: 'instagram', url: 'https://instagram.com/'},
-        {code: 'linkedin-in', url: 'https://linkedin.com/'}
+      salon.social = [{
+          code: 'facebook-f',
+          url: 'https://facebook.com/'
+        },
+        {
+          code: 'twitter',
+          url: 'https://twitter.com/'
+        },
+        {
+          code: 'instagram',
+          url: 'https://instagram.com/'
+        },
+        {
+          code: 'linkedin-in',
+          url: 'https://linkedin.com/'
+        }
       ]
 
       salon.frontend_opts.heading = `Welcome to ${salon.salon_name} Salon`
       salon.frontend_opts.sub_heading = 'A unique hairdressing salon & barber Salon. With us, we have the most sought after, experienced hairdressers and barbers. We focus on the latest in color, hair care and beard care. Our vision is to always make you as a customer satisfied after your visit.'
       salon.frontend_opts.about = 'Welcome to TechPlalace Salon! We believe in creativity, to see who you are and listen to who you want to be. From that we create your look. We are a strong team in constant development working towards one and the same goal; to give you a personalized overall experience! We take time for our customers, offer careful consultations and tailor-made treatments. Getting to us should at the same time feel relaxing and exclusive. exclusive product line that takes care of the quality of the hair through high quality raw materials and gives expressive style through its exceptional styling ability.'
       salon.frontend_opts.gallery_description = 'When it comes to hair, we work with, among other things, high quality products, a hair series that does not feel in the hair, but shapes and keeps the hair in place, while providing an incredibly nice shine and luster.'
-      
-      const config = {headers: {'x-access-token': state.token}}
+
+      const config = {
+        headers: {
+          'x-access-token': state.token
+        }
+      }
       console.log('salon to create: ', salon)
       const res = await axios.post('/salon', salon, config)
       const createdSalon = res.data.salon
@@ -394,16 +410,33 @@ export default new Vuex.Store({
       commit('updateSalon', createdSalon)
       dispatch('getSalon', createdSalon.salon_id)
     },
-    async updateSalon({ commit, state }, salon) {
-      const config = { headers: { 'x-access-token': state.token }}
+    async updateSalon({
+      commit,
+      state
+    }, salon) {
+      const config = {
+        headers: {
+          'x-access-token': state.token
+        }
+      }
       await axios.put('/salon', salon, config)
     },
-    async getSalonPublic({ state, commit }, id) {
+    async getSalonPublic({
+      state,
+      commit
+    }, id) {
       const res = await axios.get(`/salon/public?salon_id=${id}`)
       console.log(res)
     },
-    async getSalon({ commit, state}, id) {
-      const config = { headers: { 'x-access-token': state.token }}
+    async getSalon({
+      commit,
+      state
+    }, id) {
+      const config = {
+        headers: {
+          'x-access-token': state.token
+        }
+      }
       const res = await axios.get(`/salon?salon_id=${id}`, config)
       const salon = res.data.salon
       localStorage.setItem('salon', JSON.stringify(salon))
@@ -411,30 +444,48 @@ export default new Vuex.Store({
       console.log(res)
       router.push('/admin')
     },
-    autoLoadSalon({commit, state}){
+    autoLoadSalon({
+      commit,
+      state
+    }) {
       const salon = JSON.parse(localStorage.getItem('salon'))
-      if(!salon) return
+      if (!salon) return
       commit('updateSalon', salon)
     },
-    showSnackbar({ commit}) {
+    showSnackbar({
+      commit
+    }) {
       commit('showSnackbar')
     },
-    hideSnackbar({commit}) {
+    hideSnackbar({
+      commit
+    }) {
       commit('hideSnackbar')
     },
-    updateProducts({commit, state}, id) {
+    updateProducts({
+      commit,
+      state
+    }, id) {
       const products = state.products.filter(product => product.id !== id)
       commit('updateProducts', products)
     },
-    updateStaff({commit, state}, id) {
+    updateStaff({
+      commit,
+      state
+    }, id) {
       const staff = state.staff.filter(member => member.id !== id)
       commit('updateStaff', staff)
     },
-    updatePricingList({commit, state}, id) {
+    updatePricingList({
+      commit,
+      state
+    }, id) {
       const pricingList = state.pricingList.filter(block => block.id !== id)
       commit('updatePricingList', pricingList)
     },
-    async getLocation({commit}, address){
+    async getLocation({
+      commit
+    }, address) {
       const URL = 'https://maps.googleapis.com/maps/api/geocode/json'
       const data = {
         params: {

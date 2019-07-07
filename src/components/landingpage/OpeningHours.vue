@@ -3,7 +3,7 @@
     <div class="container">
       <h2>Opening Hours</h2>
       <ul>
-        <i class="far fa-edit" v-if="allowEdit"></i>
+        <i class="material-icons edit" v-if="allowEdit">edit</i>
         <li v-for="(item, index) in openingHours" :key="index">
           <div class="day">
             <span>{{ item.day }}</span>

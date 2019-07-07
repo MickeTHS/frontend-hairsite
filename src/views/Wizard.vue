@@ -7,7 +7,7 @@
           <div class="step" v-if="currentStep === 1">
             <label for>What is your salon name?</label>
             <div class="input-group">
-              <input type="text" v-model="salon.salon_name" placeholder="e.g Tech Palace Salon" />
+              <input type="text" v-model="salon.name" placeholder="e.g Tech Palace Salon" />
               <button class="btn btn-circle" @click.prevent="nextStep">
                 <span class="icon icon-arrow-right2"></span>
               </button>
@@ -156,7 +156,7 @@ export default {
       totalSteps: 6,
       currentStep: 1,
       salon: {
-        salon_name: null,
+        name: null,
         org_number: null,
         address: null, // test
         street: null,

@@ -374,19 +374,19 @@ export default new Vuex.Store({
       salon.google_maps = state.location.coord
 
       salon.social = [{
-          code: 'facebook-f',
+          name: 'facebook',
           url: 'https://facebook.com/'
         },
         {
-          code: 'twitter',
+          name: 'twitter',
           url: 'https://twitter.com/'
         },
         {
-          code: 'instagram',
+          name: 'instagram',
           url: 'https://instagram.com/'
         },
         {
-          code: 'linkedin-in',
+          name: 'linkedin',
           url: 'https://linkedin.com/'
         }
       ]

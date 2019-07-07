@@ -27,6 +27,7 @@
         </ul>
         <ul class="account">
           <router-link to="/login" tag="li" v-if="!isAuth">Login</router-link>
+          <li v-if="isAuth" @click="$router.push('/landingpage')">View website</li>
           <li v-if="isAuth" @click="logout">Logout</li>
         </ul>
         <div class="collapse" id="collapse" @click="close">
@@ -59,6 +60,7 @@
             <a href="#contact" v-smooth-scroll>Contact</a>
           </li>
           <router-link to="/login" tag="li" v-if="!isAuth">Login</router-link>
+          <li v-if="isAuth" @click="$router.push('/landingpage')">View website</li>
           <li v-if="isAuth" @click="logout">Logout</li>
       </ul>
     </div>
@@ -94,6 +96,13 @@ export default {
 nav.landing {
   .brand {
     color: $theme1;
+  }
+
+  .account {
+    li {
+      display: inline-block;
+      margin: 0 10px;
+    }
   }
 
   ul {

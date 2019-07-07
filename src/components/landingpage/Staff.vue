@@ -49,8 +49,8 @@ export default {
     flex-wrap: wrap;
     .col {
       flex-basis: 20%;
-      min-width: 260px;
-      max-width: 460px;
+      min-width: 250px;
+      max-width: 450px;
       flex-grow: 0;
     }
   }
@@ -107,7 +107,7 @@ export default {
     }
   }
 }
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .staff {
     .grid {
       .col {
@@ -117,7 +117,7 @@ export default {
     }
   }
 }
-@media (max-width: 940px) {
+@media (max-width: 768px) {
   .staff {
     .grid {
       .col {

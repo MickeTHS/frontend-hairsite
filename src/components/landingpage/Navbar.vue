@@ -27,8 +27,8 @@
         </ul>
         <ul class="account">
           <router-link to="/login" tag="li" v-if="!isAuth">Login</router-link>
-          <li v-if="isAuth" @click="$router.push('/landingpage')">View website</li>
-          <li v-if="isAuth" @click="logout">Logout</li>
+          <li v-if="isAuth && ($route.path !== '/landingpage')" @click="$router.push('/landingpage')">View website</li>
+          <li v-if="isAuth && ($route.path !== '/landingpage')" @click="logout">Logout</li>
         </ul>
         <div class="collapse" id="collapse" @click="close">
           <span></span>
@@ -60,8 +60,8 @@
             <a href="#contact" v-smooth-scroll>Contact</a>
           </li>
           <router-link to="/login" tag="li" v-if="!isAuth">Login</router-link>
-          <li v-if="isAuth" @click="$router.push('/landingpage')">View website</li>
-          <li v-if="isAuth" @click="logout">Logout</li>
+          <li v-if="isAuth && ($route.path !== '/landingpage')" @click="$router.push('/landingpage')">View website</li>
+          <li v-if="isAuth && ($route.path !== '/landingpage')" @click="logout">Logout</li>
       </ul>
     </div>
     <div class="overlay" v-if="sidebar"></div>

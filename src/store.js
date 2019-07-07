@@ -277,18 +277,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async signup({
-      commit
-    }, authData) {
+    async signup({commit}, authData) {
       try {
         const res = await axios.post('/user/create', authData)
         const token = res.data.token
         const userId = res.data.id
 
-        commit('authUser', {
-          token,
-          userId
-        })
+        commit('authUser', {token, userId})
 
         localStorage.setItem('token', token)
         localStorage.setItem('userId', userId)
@@ -304,9 +299,7 @@ export default new Vuex.Store({
         }
       }
     },
-    async login({
-      commit
-    }, authData) {
+    async login({commit}, authData) {
       const res = await axios.post('/user/login', authData)
       const token = res.data.token
       const userId = res.data.id
@@ -327,9 +320,7 @@ export default new Vuex.Store({
         router.push('/admin')
       }
     },
-    autoLogin({
-      commit
-    }) {
+    autoLogin({commit}) {
       const token = localStorage.getItem('token')
       const userId = localStorage.getItem('userId')
 
@@ -339,9 +330,7 @@ export default new Vuex.Store({
         userId
       })
     },
-    logout({
-      commit
-    }) {
+    logout({commit}) {
       commit('clearAuth')
 
       localStorage.removeItem('token')
@@ -350,45 +339,22 @@ export default new Vuex.Store({
 
       router.replace('/login')
     },
-    async getUser({
-      commit,
-      state
-    }) {
+    async getUser({commit, state}) {
       const data = {
         user_id: state.userId,
-        headers: {
-          'x-access-token': state.token
-        }
+        headers: {'x-access-token': state.token}
       }
       const res = await axios.get('/user', data)
       console.log(res)
     },
-    async createSalon({
-      commit,
-      dispatch,
-      state
-    }, salon) {
+    async createSalon({ commit, dispatch, state}, salon) {
 
       salon.user_id = state.userId
-      salon.postal_address = state.location.address
-      salon.google_maps = state.location.coord
-
-      salon.social = [{
-          name: 'facebook',
-          url: 'https://facebook.com/'
-        },
-        {
-          name: 'twitter',
-          url: 'https://twitter.com/'
-        },
-        {
-          name: 'instagram',
-          url: 'https://instagram.com/'
-        },
-        {
-          name: 'linkedin',
-          url: 'https://linkedin.com/'
-        }
+      salon.social = [
+        {name: 'facebook', url: 'https://facebook.com/'},
+        {name: 'twitter', url: 'https://twitter.com/'},
+        {name: 'instagram', url: 'https://instagram.com/'},
+        {name: 'linkedin', url: 'https://linkedin.com/'}
       ]
 
       salon.frontend_opts.heading = `Welcome to ${salon.salon_name} Salon`
@@ -396,12 +362,8 @@ export default new Vuex.Store({
       salon.frontend_opts.about = 'Welcome to TechPlalace Salon! We believe in creativity, to see who you are and listen to who you want to be. From that we create your look. We are a strong team in constant development working towards one and the same goal; to give you a personalized overall experience! We take time for our customers, offer careful consultations and tailor-made treatments. Getting to us should at the same time feel relaxing and exclusive. exclusive product line that takes care of the quality of the hair through high quality raw materials and gives expressive style through its exceptional styling ability.'
       salon.frontend_opts.gallery_description = 'When it comes to hair, we work with, among other things, high quality products, a hair series that does not feel in the hair, but shapes and keeps the hair in place, while providing an incredibly nice shine and luster.'
 
-      const config = {
-        headers: {
-          'x-access-token': state.token
-        }
-      }
-      console.log('salon to create: ', salon)
+      const config = {headers: {'x-access-token': state.token}}
+
       const res = await axios.post('/salon', salon, config)
       const createdSalon = res.data.salon
 
@@ -410,97 +372,46 @@ export default new Vuex.Store({
       commit('updateSalon', createdSalon)
       dispatch('getSalon', createdSalon.salon_id)
     },
-    async updateSalon({
-      commit,
-      state
-    }, salon) {
-      const config = {
-        headers: {
-          'x-access-token': state.token
-        }
-      }
+    async updateSalon({commit, state}, salon) {
+      const config = {headers: {'x-access-token': state.token}}
       await axios.put('/salon', salon, config)
     },
-    async getSalonPublic({
-      state,
-      commit
-    }, id) {
+    async getSalonPublic({state, commit}, id) {
       const res = await axios.get(`/salon/public?salon_id=${id}`)
       console.log(res)
     },
-    async getSalon({
-      commit,
-      state
-    }, id) {
-      const config = {
-        headers: {
-          'x-access-token': state.token
-        }
-      }
+    async getSalon({commit, state}, id) {
+      const config = {headers: {'x-access-token': state.token}}
       const res = await axios.get(`/salon?salon_id=${id}`, config)
       const salon = res.data.salon
+
       localStorage.setItem('salon', JSON.stringify(salon))
       commit('updateSalon', salon)
       console.log(res)
       router.push('/admin')
     },
-    autoLoadSalon({
-      commit,
-      state
-    }) {
+    autoLoadSalon({commit, state}) {
       const salon = JSON.parse(localStorage.getItem('salon'))
       if (!salon) return
       commit('updateSalon', salon)
     },
-    showSnackbar({
-      commit
-    }) {
+    showSnackbar({commit}) {
       commit('showSnackbar')
     },
-    hideSnackbar({
-      commit
-    }) {
+    hideSnackbar({commit}) {
       commit('hideSnackbar')
     },
-    updateProducts({
-      commit,
-      state
-    }, id) {
+    updateProducts({commit, state}, id) {
       const products = state.products.filter(product => product.id !== id)
       commit('updateProducts', products)
     },
-    updateStaff({
-      commit,
-      state
-    }, id) {
+    updateStaff({commit, state}, id) {
       const staff = state.staff.filter(member => member.id !== id)
       commit('updateStaff', staff)
     },
-    updatePricingList({
-      commit,
-      state
-    }, id) {
+    updatePricingList({commit, state}, id) {
       const pricingList = state.pricingList.filter(block => block.id !== id)
       commit('updatePricingList', pricingList)
-    },
-    async getLocation({
-      commit
-    }, address) {
-      const URL = 'https://maps.googleapis.com/maps/api/geocode/json'
-      const data = {
-        params: {
-          address: address,
-          key: 'AIzaSyAKgPPQa5-U3QXlCEhJjCRP39Ri0RdKMEo'
-        }
-      }
-      const res = await Axios.get(URL, data)
-
-      const location = {
-        address: res.data.results[0].formatted_address,
-        coord: res.data.results[0].geometry.location // lat & lng
-      }
-
-      commit('updateLocation', location)
     }
   },
   getters: {

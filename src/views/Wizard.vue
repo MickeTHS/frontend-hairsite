@@ -191,7 +191,6 @@ export default {
   methods: {
     nextStep() {
       this.currentStep++;
-      if (this.currentStep === 3) this.getLocation();
     },
     getLocation() {
       this.$store.dispatch("getLocation", this.salon.address);

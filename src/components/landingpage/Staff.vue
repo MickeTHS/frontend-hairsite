@@ -102,6 +102,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, .05);
       }
     }
   }

@@ -52,6 +52,7 @@ nav {
     a {
       font-size: inherit;
       color: inherit;
+      font-weight: inherit;
     }
   }
 

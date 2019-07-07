@@ -26,6 +26,8 @@ export default {
     display: flex;
     justify-content: flex-end;
     position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
     .col {
       &:first-child {
         position: absolute;

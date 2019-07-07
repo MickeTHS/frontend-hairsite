@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="container">
-      <p>© {{ new Date().getFullYear() }} {{ salon.name }} All Rights Reserved</p>
+      <p>&copy; {{ new Date().getFullYear() }} {{ salon.name }} All Rights Reserved</p>
       <p>
         <a :href="network.url" v-for="(network, index) in salon.social" :key="index" target="_blank">
           <i :class="`fab fa-${network.code}`"></i>
@@ -26,6 +26,7 @@ footer {
   .container {
     display: flex;
     justify-content: space-between;
+    max-width: 1440px !important;
     p {
       color: #fff;
       font-size: 14px;
@@ -43,9 +44,6 @@ footer {
     .container {
       display: block;
       text-align: center;
-      p:first-child {
-        margin-bottom: 16px;
-      }
     }
   }
 }

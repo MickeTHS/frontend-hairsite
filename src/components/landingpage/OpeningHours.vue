@@ -43,7 +43,8 @@ export default {
   ul {
     position: relative;
     li {
-      width: 800px;
+      width: 800px;width: 100%;
+      max-width: 1000px !important;
       margin: 0 auto;
       max-width: 100%;
       display: flex;

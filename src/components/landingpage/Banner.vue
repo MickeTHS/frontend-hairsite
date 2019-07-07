@@ -31,6 +31,7 @@ export default {
   }
   .container {
     height: 100vh;
+    max-height: 800px;
     display: flex;
     align-content: center;
     justify-content: center;

@@ -35,8 +35,11 @@ export default {
 .pricing {
   .grid {
     position: relative;
+    flex-wrap: wrap;
     .col {
       position: relative;
+      flex-basis: 25%;
+      flex-grow: 0;
       h3 {
         margin-bottom: 10px;
         color: #444;
@@ -67,11 +70,26 @@ export default {
 @media (max-width: 1200px) {
   .pricing {
     .grid {
-      flex-wrap: wrap;
-      justify-content: center;
       .col {
-        width: 300px;
-        flex-grow: 0;
+        flex-basis: 33.3333%;
+      }
+    }
+  }
+}
+@media (max-width: 968px) {
+  .pricing {
+    .grid {
+      .col {
+        flex-basis: 50%;
+      }
+    }
+  }
+}
+@media (max-width: 600px) {
+  .pricing {
+    .grid {
+      .col {
+        flex-basis: 100%;
       }
     }
   }

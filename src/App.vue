@@ -68,6 +68,9 @@ section {
   background: #fff;
   position: relative;
   z-index: 1;
+  .container {
+    max-width: 1440px !important;
+  }
   h2 {
     text-align: center;
     font-size: 32px;
@@ -169,6 +172,10 @@ input:-internal-autofill-selected {
   background: #8bc34a;
   right: -10px;
 }
+.fa-plus {
+  top: -40px;
+  right: 5px;
+}
 .fa-times {
   color: #f44336;
   background: rgba(244, 67, 54, 0.2);
@@ -177,6 +184,7 @@ input:-internal-autofill-selected {
   line-height: 22px;
   font-size: 12px;
 }
+
 @media (min-width: 960px) {
   .container {
     max-width: unset !important;
@@ -188,6 +196,7 @@ input:-internal-autofill-selected {
     padding: 0 40px !important;
   }
 }
+
 @media (max-width: 450px) {
   .container {
     padding: 0 30px !important;

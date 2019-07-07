@@ -21,7 +21,7 @@
   </nav>
 </template>
 <style lang="scss">
-$primaryColor: #5ec0ea;
+@import "@/assets/scss/_variables.scss";
 nav {
   background-color: #fff;
   position: fixed;
@@ -29,7 +29,7 @@ nav {
   left: 0;
   width: 100vw;
   z-index: 99;
-  box-shadow: 0 5px 16px rgba(101, 101, 101, .04);
+  box-shadow: 0 5px 16px rgba(101, 101, 101, 0.04);
 
   .container {
     display: flex;
@@ -38,6 +38,7 @@ nav {
     min-height: 54px;
     padding-top: 0;
     padding-bottom: 0;
+    max-width: 1440px !important;
   }
 
   .brand {
@@ -104,9 +105,59 @@ nav {
   }
 }
 
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 0;
+  max-width: 100%;
+  z-index: 1001;
+  overflow: hidden;
+  background: #fff ;
+  padding: 30px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: width 0.5s;
+  &.open {
+    width: 320px;
+  }
+  ul {
+    padding-left: 0;
+    li {
+      padding: 14px 28px;
+      transition: all 0.2s ease-in-out;
+      white-space: nowrap;
+      cursor: pointer;
+      &:hover,
+      &:focus,
+      &.active {
+        background: $theme1;
+        color: #fff;
+      }
+      img {
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+      a {
+        color: inherit
+      }
+    }
+  }
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
 @media (max-width: 768px) {
   nav {
     .top-menu,
+    .account,
     .btn {
       display: none;
     }

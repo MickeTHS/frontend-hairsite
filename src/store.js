@@ -253,23 +253,23 @@ export default new Vuex.Store({
     //   },
     //   phone: '+1 8751 2345 000',
     //   email: 'hello@techpalace.com',
-    //   social: [{
-    //       code: 'facebook-f',
-    //       url: 'https://facebook.com/'
-    //     },
-    //     {
-    //       code: 'twitter',
-    //       url: 'https://twitter.com/'
-    //     },
-    //     {
-    //       code: 'instagram',
-    //       url: 'https://instagram.com/'
-    //     },
-    //     {
-    //       code: 'linkedin-in',
-    //       url: 'https://linkedin.com/'
-    //     }
-    //   ]
+      // social: [{
+      //     code: 'facebook-f',
+      //     url: 'https://facebook.com/'
+      //   },
+      //   {
+      //     code: 'twitter',
+      //     url: 'https://twitter.com/'
+      //   },
+      //   {
+      //     code: 'instagram',
+      //     url: 'https://instagram.com/'
+      //   },
+      //   {
+      //     code: 'linkedin-in',
+      //     url: 'https://linkedin.com/'
+      //   }
+      // ]
     // },
     snackbar: false
   },
@@ -371,6 +371,13 @@ export default new Vuex.Store({
       salon.user_id = state.userId
       salon.postal_address = state.location.address
       salon.google_maps = state.location.coord
+
+      salon.social =  [
+        {code: 'facebook-f', url: 'https://facebook.com/'},
+        {code: 'twitter', url: 'https://twitter.com/'},
+        {code: 'instagram', url: 'https://instagram.com/'},
+        {code: 'linkedin-in', url: 'https://linkedin.com/'}
+      ]
 
       salon.frontend_opts.heading = `Welcome to ${salon.salon_name} Salon`
       salon.frontend_opts.sub_heading = 'A unique hairdressing salon & barber Salon. With us, we have the most sought after, experienced hairdressers and barbers. We focus on the latest in color, hair care and beard care. Our vision is to always make you as a customer satisfied after your visit.'

@@ -50,8 +50,8 @@ export default {
       border-radius: 4px;
       background-color: #fff;
       border: 1px solid #ddd;
-      padding: 12px 24px;
-      margin: 5px;
+      padding: 10px 20px;
+      margin: 4px;
       outline: none;
       font-size: 14px;
       &::placeholder {

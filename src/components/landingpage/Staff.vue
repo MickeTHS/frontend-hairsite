@@ -6,22 +6,20 @@
       <div class="container">
         <div class="members">
           <i class="fas fa-plus" v-if="allowEdit"></i>
-          <Carousel>
-            <div class="col" v-for="(member, i) in staff" :key="i">
-              <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
-                <i class="fas fa-times" v-if="allowEdit" @click="deleteStaff(member.id)"></i>
-                <div class="infos">
-                  <h4>{{ member.name }}</h4>
-                  <p>{{ member.title }}</p>
-                </div>
-                <div class="social">
-                  <a :href="network.url" v-for="(network, j) in member.social" :key="j">
-                    <i :class="`fab fa-${network.code}`"></i>
-                  </a>
-                </div>
+          <div class="col" v-for="(member, i) in staff" :key="i">
+            <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
+              <i class="fas fa-times" v-if="allowEdit" @click="deleteStaff(member.id)"></i>
+              <div class="infos">
+                <h4>{{ member.name }}</h4>
+                <p>{{ member.title }}</p>
+              </div>
+              <div class="social">
+                <a :href="network.url" v-for="(network, j) in member.social" :key="j">
+                  <i :class="`fab fa-${network.code}`"></i>
+                </a>
               </div>
             </div>
-          </Carousel>
+          </div>
         </div>
       </div>
     </div>
@@ -30,15 +28,12 @@
 </template>
 
 <script>
-import Carousel from "@/components/Carousel";
+// import Carousel from "@/components/Carousel";
 export default {
   props: ["staff", "allowEdit"],
-  components: {
-    Carousel
-  },
   methods: {
-    deleteStaff(id){
-      this.$store.dispatch('updateStaff', id)
+    deleteStaff(id) {
+      this.$store.dispatch("updateStaff", id);
     }
   }
 };
@@ -49,9 +44,18 @@ export default {
 .staff {
   .members {
     position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    .col {
+      flex-basis: 25%;
+      min-width: 260px;
+      max-width: 460px;
+      flex-grow: 0;
+    }
   }
   .team-member {
-    width: 240px;
+    width: 100%;
     height: 350px;
     background-size: cover !important;
     position: relative;
@@ -98,10 +102,29 @@ export default {
 }
 @media (max-width: 1200px) {
   .staff {
-    flex-wrap: wrap;
-    justify-content: center;
     .grid {
       .col {
+        flex-basis: 33.3333%;
+        flex-grow: 0;
+      }
+    }
+  }
+}
+@media (max-width: 940px) {
+  .staff {
+    .grid {
+      .col {
+        flex-basis: 50%;
+        flex-grow: 0;
+      }
+    }
+  }
+}
+@media (max-width: 600px) {
+  .staff {
+    .grid {
+      .col {
+        flex-basis: 100%;
         flex-grow: 0;
       }
     }

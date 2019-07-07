@@ -50,8 +50,8 @@ export default {
     flex-wrap: wrap;
     .img {
       flex-basis: calc(20% - 10px);
-      min-width: 230px;
-      max-width: 430px;
+      min-width: 220px;
+      max-width: 420px;
       height: 250px;
       margin: 5px;
       background-size: cover !important;

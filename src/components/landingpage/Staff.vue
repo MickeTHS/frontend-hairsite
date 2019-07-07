@@ -48,7 +48,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     .col {
-      flex-basis: 25%;
+      flex-basis: 20%;
       min-width: 260px;
       max-width: 460px;
       flex-grow: 0;

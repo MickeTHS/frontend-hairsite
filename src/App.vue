@@ -99,6 +99,7 @@ label,
 a {
   font-size: 15px;
   color: #777;
+  font-weight: 300;
 }
 ol,
 ul {

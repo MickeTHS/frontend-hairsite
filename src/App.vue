@@ -1,11 +1,11 @@
 <template>
   <v-app>
     <div id="app">
-      <Navbar v-if="this.$route.path !== '/landingpage' && this.$route.path !== '/admin'"/>
+      <Navbar v-if="this.$route.path !== '/landingpage' && this.$route.path !== '/admin'" />
       <LandingPageNavbar
         v-if="this.$route.path === '/landingpage' || this.$route.path === '/admin'"
       />
-      <router-view/>
+      <router-view />
       <v-snackbar v-model="snackbar" color="error" :right="true" :top="true" :timeout="6000">
         Email already registred! Please login!
         <v-btn dark flat @click="hideSnackbar">Close</v-btn>
@@ -99,6 +99,10 @@ label,
 a {
   font-size: 15px;
   color: #777;
+}
+p,
+li,
+a {
   font-weight: 300;
 }
 ol,
@@ -125,8 +129,8 @@ input[type="password"] {
   background-color: rgba(0, 0, 0, 0.08);
   color: #fff;
   font-size: 14px;
-  padding: 14px 28px;
-  border-radius: 25px;
+  padding: 12px 24px;
+  border-radius: 23px;
 }
 input:-internal-autofill-selected {
   background-color: rgba(0, 0, 0, 0.08) !important;
@@ -142,6 +146,15 @@ input:-internal-autofill-selected {
   font-weight: 500;
   cursor: pointer;
   outline: none;
+  &:not(.btn-circle) {
+    .arrow {
+      font-size: 16px;
+      vertical-align: middle;
+      position: relative;
+      bottom: 2px;
+      margin-left: 4px;
+    }
+  }
 }
 .container {
   padding: 0 80px !important;

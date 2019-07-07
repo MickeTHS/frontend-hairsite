@@ -9,24 +9,20 @@
             <div class="input-group">
               <input type="text" v-model="salon.name" placeholder="e.g Tech Palace Salon" />
               <button class="btn btn-circle" @click.prevent="nextStep">
-                <span class="icon icon-arrow-right2"></span>
+                <i class="material-icons arrow">arrow_forward</i>
               </button>
             </div>
           </div>
           <div class="step" v-if="currentStep === 2">
             <label for>Where is your salon located?</label>
             <div class="input-group">
-              <!-- 
-                this need to be updated later 
-                to get all location data 
-              -->
               <input
                 type="text"
                 v-model="salon.address"
                 placeholder="e.g 213, Tree Top Lane Paoli PA"
               />
               <button class="btn btn-circle" @click.prevent="nextStep">
-                <span class="icon icon-arrow-right2"></span>
+                <i class="material-icons arrow">arrow_forward</i>
               </button>
             </div>
           </div>
@@ -47,7 +43,7 @@
             />
             <button class="btn" @click.prevent="nextStep">
               Next
-              <span class="icon icon-arrow-right2"></span>
+              <i class="material-icons arrow">arrow_forward</i>
             </button>
           </div>
           <div class="step" v-if="currentStep === 4">
@@ -82,18 +78,24 @@
             </div>
             <button class="btn" @click.prevent="nextStep">
               Next
-              <span class="icon icon-arrow-right2"></span>
+              <i class="material-icons arrow">arrow_forward</i>
             </button>
           </div>
           <div class="step" v-if="currentStep === 5">
             <label for="theme">Color theme:</label>
             <div class="theme" id="theme">
-              <label 
-                class="theme-item" 
-                :class="salon.frontend_opts.theme === index + 1 ? 'active': ''" 
-                v-for="(theme, index) in 8" 
-                :key="index">
-                  <input type="radio" name="theme" :value="index + 1" v-model="salon.frontend_opts.theme">
+              <label
+                class="theme-item"
+                :class="salon.frontend_opts.theme === index + 1 ? 'active': ''"
+                v-for="(theme, index) in 8"
+                :key="index"
+              >
+                <input
+                  type="radio"
+                  name="theme"
+                  :value="index + 1"
+                  v-model="salon.frontend_opts.theme"
+                />
               </label>
             </div>
             <label for="logo">Business logo:</label>
@@ -104,7 +106,7 @@
             -->
             <button class="btn" @click.prevent="nextStep">
               Submit
-              <span class="icon icon-arrow-right2"></span>
+              <i class="material-icons arrow">arrow_forward</i>
             </button>
           </div>
           <div class="step" v-if="currentStep === 6">
@@ -130,7 +132,10 @@
                 placeholder="e.g https://www.awesomesalon.com/"
               />
             </div>
-            <div class="form-control" v-if="salon.frontend_opts.createDomain && !salon.frontend_opts.hasDomain">
+            <div
+              class="form-control"
+              v-if="salon.frontend_opts.createDomain && !salon.frontend_opts.hasDomain"
+            >
               <label for>Enter desired domain name</label>
               <input
                 type="text"
@@ -140,7 +145,7 @@
             </div>
             <button class="btn" @click.prevent="submit">
               Submit
-              <span class="icon icon-arrow-right2"></span>
+              <i class="material-icons arrow">arrow_forward</i>
             </button>
           </div>
         </form>
@@ -337,10 +342,12 @@ export default {
               top: 7px;
               border-radius: 50%;
               padding: 0;
-              line-height: 32px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
 
-              span {
-                font-size: 14px;
+              .arrow {
+                font-size: 16px;
               }
             }
           }

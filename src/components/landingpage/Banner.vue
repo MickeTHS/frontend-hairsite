@@ -84,7 +84,7 @@ export default {
 @media (max-width: 576px) {
   .hero {
     .container {
-      padding: 0;
+      padding: 0 !important;
       .box {
         padding: 20px;
         height: 100vh;

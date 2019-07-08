@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  props: ["salon", "allowEdit"]
+  props: ['salon', 'allowEdit']
 };
 </script>
 

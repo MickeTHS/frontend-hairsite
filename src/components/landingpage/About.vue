@@ -6,7 +6,7 @@
         <div class="col" style="background: url(/img/img-1.jpg)"></div>
         <div class="col">
           <i class="material-icons edit" v-if="allowEdit">edit</i>
-          <p>{{ salon.frontend_opts.about }}</p>
+          <p>{{ about }}</p>
         </div>
       </div>
     </div>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ['allowEdit', 'salon']
+  props: ['about', 'allowEdit']
 }
 </script>
 
@@ -43,7 +43,7 @@ export default {
         position: relative;
         background: rgba(249, 249, 249, 0.95);
         box-shadow: 0 0 10px rgba(66, 66, 66, 0.1);
-        padding: 24px 32px;
+        padding: 40px;
         width: 60%;
         flex-grow: 0;
         p {

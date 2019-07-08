@@ -19,7 +19,7 @@
             <a href="#staff" v-smooth-scroll>Staff</a>
           </li>
           <li>
-            <a href="#pricing" v-smooth-scroll>Pricing</a>
+            <a href="#products" v-smooth-scroll>Services</a>
           </li>
           <li>
             <a href="#contact" v-smooth-scroll>Contact</a>
@@ -27,8 +27,9 @@
         </ul>
         <ul class="account">
           <router-link to="/login" tag="li" v-if="!isAuth">Login</router-link>
-          <li v-if="isAuth && ($route.path !== '/landingpage')" @click="$router.push('/landingpage')">View website</li>
-          <li v-if="isAuth && ($route.path !== '/landingpage')" @click="logout">Logout</li>
+          <li v-if="isAuth && ($route.path === '/admin')" @click="$router.push('/landingpage')">View website</li>
+          <li v-if="isAuth && ($route.path === '/admin')" @click="$router.push('/wizard')">Create Salon</li>
+          <li v-if="isAuth && ($route.path === '/admin')" @click="logout">Logout</li>
         </ul>
         <div class="collapse" id="collapse" @click="close">
           <span></span>
@@ -54,13 +55,14 @@
             <a href="#staff" v-smooth-scroll>Staff</a>
           </li>
           <li>
-            <a href="#pricing" v-smooth-scroll>Pricing</a>
+            <a href="#products" v-smooth-scroll>Services</a>
           </li>
           <li>
             <a href="#contact" v-smooth-scroll>Contact</a>
           </li>
           <router-link to="/login" tag="li" v-if="!isAuth">Login</router-link>
           <li v-if="isAuth && ($route.path !== '/landingpage')" @click="$router.push('/landingpage')">View website</li>
+           <li v-if="isAuth && ($route.path !== '/landingpage')" @click="$router.push('/wizard')">Create Salon</li>
           <li v-if="isAuth && ($route.path !== '/landingpage')" @click="logout">Logout</li>
       </ul>
     </div>

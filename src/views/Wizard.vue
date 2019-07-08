@@ -14,6 +14,15 @@
             </div>
           </div>
           <div class="step" v-if="currentStep === 2">
+            <label for>What is your Organization Number?</label>
+            <div class="input-group">
+              <input type="text" v-model="salon.org_number" placeholder="Enter the Organization Number" />
+              <button class="btn btn-circle" @click.prevent="nextStep">
+                <i class="material-icons arrow">arrow_forward</i>
+              </button>
+            </div>
+          </div>
+          <div class="step" v-if="currentStep === 3">
             <label>Where is your salon located?</label>
             <div class="grid">
               <div class="col">
@@ -57,7 +66,7 @@
               <i class="material-icons arrow">arrow_forward</i>
             </button>
           </div>
-          <div class="step" v-if="currentStep === 3">
+          <div class="step" v-if="currentStep === 4">
             <label for>Email Address</label>
             <input
               type="email"
@@ -77,7 +86,7 @@
               <i class="material-icons arrow">arrow_forward</i>
             </button>
           </div>
-          <div class="step" v-if="currentStep === 4">
+          <div class="step" v-if="currentStep === 5">
             <label for>Add features</label>
             <div class="input-group">
               <label class="switch">
@@ -112,7 +121,7 @@
               <i class="material-icons arrow">arrow_forward</i>
             </button>
           </div>
-          <div class="step" v-if="currentStep === 5">
+          <div class="step" v-if="currentStep === 6">
             <label for="theme">Color theme:</label>
             <div class="theme" id="theme">
               <label
@@ -140,7 +149,7 @@
               <i class="material-icons arrow">arrow_forward</i>
             </button>
           </div>
-          <div class="step" v-if="currentStep === 6">
+          <div class="step" v-if="currentStep === 7">
             <div class="input-group">
               <label class="switch">
                 <input type="checkbox" v-model="salon.frontend_opts.hasDomain" />
@@ -189,7 +198,7 @@
 export default {
   data() {
     return {
-      totalSteps: 6,
+      totalSteps: 7,
       currentStep: 1,
       salon: {
         name: null,
@@ -211,7 +220,7 @@ export default {
           desiredDomain: null
         },
         opening_hours: [],
-        prices: [],
+        products: [],
         gallery: [],
         staff: [],
         features: {

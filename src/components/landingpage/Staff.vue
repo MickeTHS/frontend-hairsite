@@ -1,6 +1,5 @@
 <template>
   <section class="staff" id="staff">
-    <!-- <div class="container"> -->
     <h2>Our Awesome Staff</h2>
     <div class="grid">
       <div class="container">
@@ -23,14 +22,12 @@
         </div>
       </div>
     </div>
-    <!-- </div> -->
   </section>
 </template>
 
 <script>
-// import Carousel from "@/components/Carousel";
 export default {
-  props: ["staff", "allowEdit"],
+  props: ['staff', 'allowEdit'],
   methods: {
     deleteStaff(id) {
       this.$store.dispatch("updateStaff", id);

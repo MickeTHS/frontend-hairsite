@@ -155,7 +155,7 @@ nav {
   z-index: 1000;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   nav {
     .top-menu,
     .account,

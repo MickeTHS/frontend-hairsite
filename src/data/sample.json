@@ -1,0 +1,158 @@
+[
+  {
+    "opening_hours": [
+      { "day": "Monday", "hours": ["8:00 - 12:00", "14:00 - 18:00"] },
+      { "day": "Thuesday", "hours": ["8:00 - 12:00", "14:00 - 18:00"] },
+      { "day": "Wednesday", "hours": ["8:00 - 12:00", "14:00 - 18:00"] },
+      { "day": "Thursday", "hours": ["8:00 - 12:00", "14:00 - 18:00"] },
+      { "day": "Friday", "hours": ["8:00 - 12:00", "14:00 - 18:00"] },
+      { "day": "Saturday", "hours": ["8:00 - 12:00", "14:00 - 18:00"] }
+    ],
+    "social": [
+      {"name": "facebook", "url": "https://facebook.com/"},
+      {"name": "twitter", "url": "https://twitter.com/"},
+      {"name": "instagram", "url": "https://instagram.com/"},
+      {"name": "linkedin", "url": "https://linkedin.com/"}
+    ],
+    "gallery": [
+      "/img/gallery/img-1.jpg",
+      "/img/gallery/img-2.jpg",
+      "/img/gallery/img-3.jpg",
+      "/img/gallery/img-4.jpg",
+      "/img/gallery/img-5.jpg",
+      "/img/gallery/img-6.jpg",
+      "/img/gallery/img-7.jpg",
+      "/img/gallery/img-8.jpg",
+      "/img/gallery/img-9.jpg"
+    ],
+    "products": [
+      {
+        "id": 1,
+        "title": "Haircuts",
+        "services": [
+          {"title": "Cut long hair", "price": 340},
+          {"title": "Cut short hair", "price": 310},
+          {"title": "Child cutting", "price": 220},
+          {"title": "Fade Cut", "price": 350},
+          {"title": "Fade Cut & Beard","price": 550}
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Makeup",
+        "services": [
+          {"title": "Eye Liner", "price": 340},
+          {"title": "Mascara", "price": 310},
+          {"title": "Facial", "price": 220},
+          {"title": "Lip Liner", "price": 350},
+          {"title": "Face Glow", "price": 550}
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Nails Styling",
+        "services": [
+          {"title": "Gel Nails", "price": 340},
+          {"title": "Glitter", "price": 310},
+          {"title": "Nail Buffing", "price": 220},
+          {"title": "Nail Polish", "price": 350},
+          {"title": "Nail Shape", "price": 550}
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Cosmetics",
+      "services": [
+        {"title": "Foundation", "price": 340},
+        {"title": "CC Cream", "price": 310},
+        {"title": "Cold Cream", "price": 220},
+        {"title": "Body Powder", "price": 350},
+        {"title": "Concealer", "price": 550}
+      ]
+    }
+    ],
+    "staff": [
+      {
+        "id": 1,
+        "name": "Helena",
+        "title": "Hairdresser",
+        "imageUrl": "/img/staff-1.jpg",
+        "social": [{
+            "name": "facebook",
+            "url": "https://facebook.com/"
+          },
+          {
+            "name": "twitter",
+            "url": "https://twitter.com/"
+          },
+          {
+            "name": "linkedin",
+            "url": "https://linkedin.com/"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Micheal",
+        "title": "Makeup Artist",
+        "imageUrl": "/img/staff-2.jpg",
+        "social": [{
+            "name": "facebook",
+            "url": "https://facebook.com/"
+          },
+          {
+            "name": "twitter",
+            "url": "https://twitter.com/"
+          },
+          {
+            "name": "linkedin",
+            "url": "https://linkedin.com/"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Sarah",
+        "title": "Nail Expert",
+        "imageUrl": "/img/staff-3.jpg",
+        "social": [{
+            "name": "facebook",
+            "url": "https://facebook.com/"
+          },
+          {
+            "name": "twitter",
+            "url": "https://twitter.com/"
+          },
+          {
+            "name": "linkedin",
+            "url": "https://linkedin.com/"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Barbara",
+        "title": "Style Expert",
+        "imageUrl": "/img/staff-4.jpg",
+        "social": [{
+            "name": "facebook",
+            "url": "https://facebook.com/"
+          },
+          {
+            "name": "twitter",
+            "url": "https://twitter.com/"
+          },
+          {
+            "name": "linkedin",
+            "url": "https://linkedin.com/"
+          }
+        ]
+      }
+    ],
+    "frontend_opts": {
+      "sub_heading": "A unique hairdressing salon & barber Salon. With us, we have the most sought after, experienced hairdressers and barbers. We focus on the latest in color, hair care and beard care. Our vision is to always make you as a customer satisfied after your visit.",
+      "about": "Welcome to TechPlalace Salon! We believe in creativity, to see who you are and listen to who you want to be. From that we create your look. We are a strong team in constant development working towards one and the same goal; to give you a personalized overall experience! We take time for our customers, offer careful consultations and tailor-made treatments. Getting to us should at the same time feel relaxing and exclusive. exclusive product line that takes care of the quality of the hair through high quality raw materials and gives expressive style through its exceptional styling ability.",
+      "gallery_description": "When it comes to hair, we work with, among other things, high quality products, a hair series that does not feel in the hair, but shapes and keeps the hair in place, while providing an incredibly nice shine and luster."
+    }
+  }
+]

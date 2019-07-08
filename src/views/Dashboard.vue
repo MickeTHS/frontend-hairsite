@@ -2,20 +2,18 @@
   <main>
     <ColorBox/>
     <Banner :salon="salon" :allowEdit="true"/>
-    <About :allowEdit="true" :salon="salon"/>
-    <OpeningHours :allowEdit="true"/>
-    <Book :products="products" :allowEdit="true"/>
-    <Gallery :salon="salon" :gallery="gallery" :allowEdit="true"/>
-    <Staff :staff="staff" :allowEdit="true"/>
-    <PricingList :pricingList="pricingList" :allowEdit="true"/>
+    <About :about="salon.frontend_opts.about" :allowEdit="true"/>
+    <OpeningHours :openingHours="salon.opening_hours" :allowEdit="true"/>
+    <Gallery :gallery="salon.gallery" :description="salon.frontend_opts.gallery_description" :allowEdit="true"/>
+    <Staff :staff="salon.staff" :allowEdit="true"/>
+    <Products :products="salon.products" :allowEdit="true"/>
     <Contact :salon="salon"/>
-    <Map :coord="salon.google_maps"/>
-    <Footer :salon="salon"/>
+    <Footer :name="salon.name" :social="salon.social"/>
   </main>
 </template>
 
 <script>
-import { landingPage } from '@/utils/landingPage.js'
+import {landingPage} from '@/utils/landingPage.js'
 import ColorBox from '@/components/landingpage/ColorBox'
 export default {
   mixins: [landingPage],

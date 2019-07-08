@@ -1,10 +1,10 @@
 <template>
-  <section class="pricing" id="pricing">
+  <section class="products" id="products">
     <div class="container">
       <h2>Our Pricing</h2>
       <div class="grid">
         <i class="material-icons add" v-if="allowEdit">add</i>
-        <div class="col" v-for="(block, i) in pricingList" :key="i">
+        <div class="col" v-for="(block, i) in products" :key="i">
           <i class="material-icons delete" v-if="allowEdit" @click="deleteBlock(block.id)">delete</i>
           <h3>{{ block.title }}</h3>
           <ul>
@@ -21,10 +21,10 @@
 
 <script>
 export default {
-  props: ["pricingList", "allowEdit"],
+  props: ['products', 'allowEdit'],
   methods: {
     deleteBlock(id){
-      this.$store.dispatch('updatePricingList', id)
+      this.$store.dispatch('updateProducts', id)
     }
   }
 }
@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss">
 @import "@/assets/scss/_variables.scss";
-.pricing {
+.products {
   .grid {
     position: relative;
     flex-wrap: wrap;
@@ -68,7 +68,7 @@ export default {
   }
 }
 @media (max-width: 1200px) {
-  .pricing {
+  .products {
     .grid {
       .col {
         flex-basis: 33.3333%;
@@ -77,7 +77,7 @@ export default {
   }
 }
 @media (max-width: 968px) {
-  .pricing {
+  .products {
     .grid {
       .col {
         flex-basis: 50%;
@@ -86,7 +86,7 @@ export default {
   }
 }
 @media (max-width: 600px) {
-  .pricing {
+  .products {
     .grid {
       .col {
         flex-basis: 100%;

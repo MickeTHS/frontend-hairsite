@@ -4,7 +4,7 @@
       <h2>Our Gallery</h2>
       <p>
         <i class="material-icons add" v-if="allowEdit">add</i>
-        {{ salon.frontend_opts.gallery_description }}
+        {{ description }}
       </p>
       <div class="images">
         <i class="fas fa-plus" v-if="allowEdit"></i>
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  props: ["salon", "gallery", "allowEdit"]
+  props: ['gallery', 'description', 'allowEdit']
 };
 </script>
 

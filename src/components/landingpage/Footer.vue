@@ -1,11 +1,11 @@
 <template>
   <footer>
     <div class="container">
-      <p>&copy; {{ new Date().getFullYear() }} {{ salon.name }} All Rights Reserved</p>
+      <p>&copy; {{ new Date().getFullYear() }} {{ name }} All Rights Reserved</p>
       <p class="social">
         <a
           :href="network.url"
-          v-for="(network, index) in salon.social"
+          v-for="(network, index) in social"
           :key="index"
           target="_blank"
         >
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  props: ["salon"]
+  props: ['name', 'social']
 };
 </script>
 
@@ -51,6 +51,9 @@ footer {
     .container {
       display: block;
       text-align: center;
+      p:first-of-type {
+        margin-bottom: 16px;
+      }
     }
   }
 }

@@ -22,19 +22,7 @@
 
 <script>
 export default {
-  data() {
-    return {
-      openingHours: [
-        { day: "Monday", hours: ["8:00 - 12:00", "14:00 - 18:00"] },
-        { day: "Thuesday", hours: ["8:00 - 12:00", "14:00 - 18:00"] },
-        { day: "Wednesday", hours: ["8:00 - 12:00", "14:00 - 18:00"] },
-        { day: "Thursday", hours: ["8:00 - 12:00", "14:00 - 18:00"] },
-        { day: "Friday", hours: ["8:00 - 12:00", "14:00 - 18:00"] },
-        { day: "Saturday", hours: ["8:00 - 12:00", "14:00 - 18:00"] }
-      ]
-    };
-  },
-  props: ["allowEdit"]
+  props: ['openingHours', 'allowEdit']
 };
 </script>
 

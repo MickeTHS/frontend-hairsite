@@ -1,15 +1,13 @@
 <template>
   <main>
     <Banner :salon="salon" :allowEdit="false"/>
-    <About :salon="salon" :allowEdit="false"/>
-    <OpeningHours :allowEdit="false"/>
-    <Book :products="products" :allowEdit="false"/>
-    <Gallery :salon="salon" :gallery="gallery" :allowEdit="false"/>
-    <Staff :staff="staff" :allowEdit="false"/>
-    <PricingList :pricingList="pricingList" :allowEdit="false"/>
+    <About :about="salon.frontend_opts.about" :allowEdit="false"/>
+    <OpeningHours :openingHours="salon.opening_hours" :allowEdit="false"/>
+    <Gallery :gallery="salon.gallery" :description="salon.frontend_opts.gallery_description" :allowEdit="false"/>
+    <Staff :staff="salon.staff" :allowEdit="false"/>
+    <Products :products="salon.products" :allowEdit="false"/>
     <Contact :salon="salon"/>
-    <Map :coord="salon.google_maps"/>
-    <Footer :salon="salon"/>
+    <Footer :name="salon.name" :social="salon.social"/>
   </main>
 </template>
 

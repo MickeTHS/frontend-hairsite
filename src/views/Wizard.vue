@@ -139,7 +139,7 @@
               </label>
             </div>
             <label for="logo">Business logo:</label>
-            <input type="file" id="logo" name="logo" placeholder="Logo" />
+            <input type="file" ref="logo" name="logo" placeholder="Logo" @change="handleLogoFile"/>
             <!-- 
               this need to be adjusted
               to work with formData
@@ -195,12 +195,15 @@
 </template>
 
 <script>
+import sampleData from '@/data/sample.json'
 export default {
   data() {
     return {
       totalSteps: 7,
       currentStep: 1,
+      file: null,
       salon: {
+        user_id: null,
         name: null,
         org_number: null,
         street: null,
@@ -214,6 +217,10 @@ export default {
         frontend_opts: {
           theme: 1,
           logo: null,
+          heading: null,
+          sub_heading: null,
+          about: null,
+          gallery_description: null,
           hasDomain: false,
           createDomain: false,
           existingDomain: null,
@@ -236,11 +243,33 @@ export default {
     nextStep() {
       this.currentStep++;
     },
-    getLocation() {
-      this.$store.dispatch("getLocation", this.salon.address);
+    handleLogoFile(){
+      console.log('changed!')
+      this.file = this.$refs.logo.files[0]
     },
     submit() {
-      this.$store.dispatch("createSalon", this.salon);
+      const sample = sampleData[0]
+      this.salon.user_id = this.userId
+      this.salon.opening_hours = sample.opening_hours
+      this.salon.social = sample.social
+      this.salon.gallery = sample.gallery
+      this.salon.products = sample.products
+      this.salon.staff = sample.staff
+      this.salon.frontend_opts.heading = `Welcome to ${this.salon.name} Salon`
+      this.salon.frontend_opts.sub_heading = sample.frontend_opts.sub_heading
+      this.salon.frontend_opts.about = sample.frontend_opts.about
+      this.salon.frontend_opts.gallery_description = sample.frontend_opts.gallery_description
+      const logo = new FormData()
+      const payload = {
+        salon: this.salon,
+        logo: logo
+      }
+      this.$store.dispatch("createSalon", payload)
+    }
+  },
+  computed: {
+    userId(){
+      return this.$store.getters.userId
     }
   }
 };

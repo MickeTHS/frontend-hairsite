@@ -4,7 +4,6 @@ import Axios from 'axios'
 
 import axios from '@/axios'
 import router from './router'
-import sampleData from './data/sample.json'
 
 Vue.use(Vuex)
 
@@ -111,31 +110,28 @@ export default new Vuex.Store({
       const res = await axios.get('/user', data)
       console.log(res)
     },
-    async createSalon({ commit, dispatch, state}, salon) {
+    async createSalon({ commit, dispatch, state}, payload) {
+      const config = {
+        headers: {
+        'x-access-token': state.token
+        }
+      }
+      const res = await axios.post('/salon', payload.salon, config)
 
-      const sample = sampleData[0]
+      console.log(res)
 
-      salon.user_id = state.userId
-      salon.opening_hours = sample.opening_hours
-      salon.social = sample.social
-      salon.gallery = sample.gallery
-      salon.products = sample.products
-      salon.staff = sample.staff
-      salon.frontend_opts.heading = `Welcome to ${salon.name} Salon`
-      salon.frontend_opts.sub_heading = sample.frontend_opts.sub_heading
-      salon.frontend_opts.about = sample.frontend_opts.about
-      salon.frontend_opts.gallery_description = sample.frontend_opts.gallery_description
-    
-      const config = {headers: {'x-access-token': state.token}}
-
-      console.log('salon to create: ', salon)
-
-      const res = await axios.post('/salon', salon, config)
       const createdSalon = res.data.salon
       const salonId = createdSalon.salon_id
 
       const updatedSalon = await axios.put('/salon', {lookup_latlng: true, salon_id: salonId}, config)
       console.log('salon: ', updatedSalon.data.salon)
+      const logoRes = await axios.put('/salon', payload.logo, {
+        headers: {
+          'x-access-token': state.token,
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      console.log(logoRes)
       localStorage.setItem('salon', JSON.stringify(updatedSalon))
       commit('updateSalon', updatedSalon)
       dispatch('getSalon', salonId)
@@ -181,6 +177,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    userId(state){
+      return state.userId
+    },
     salon(state) {
       return state.salon
     },

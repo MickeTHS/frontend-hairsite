@@ -63,6 +63,7 @@ export default {
           width: 50%;
          .map {
             overflow: hidden;
+            display: flex;
             justify-content: center;
          }
         }

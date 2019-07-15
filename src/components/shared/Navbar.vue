@@ -120,12 +120,12 @@ nav {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   transition: width 0.5s;
   &.open {
-    width: 320px;
+    width: 280px;
   }
   ul {
     padding-left: 0;
     li {
-      padding: 14px 28px;
+      padding: 12px 32px;
       transition: all 0.2s ease-in-out;
       white-space: nowrap;
       cursor: pointer;

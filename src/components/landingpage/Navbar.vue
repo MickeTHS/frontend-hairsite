@@ -3,7 +3,7 @@
     <nav class="landing">
       <div class="container">
         <div class="brand">
-          <router-link to="/" tag="a">TechPalace</router-link>
+          <router-link to="/" tag="a">{{ salon.name }}</router-link>
         </div>
         <ul class="top-menu">
           <li>
@@ -31,7 +31,7 @@
           <li v-if="isAuth && ($route.path === '/admin')" @click="$router.push('/wizard')">Create Salon</li>
           <li v-if="isAuth && ($route.path === '/admin')" @click="logout">Logout</li>
         </ul>
-        <div class="collapse" id="collapse" @click="close">
+        <div class="collapse" id="collapse" @click="sidebar = true">
           <span></span>
           <span></span>
           <span></span>
@@ -39,8 +39,7 @@
         </div>
       </div>
     </nav>
-    <!-- <div class="sidebar" :class="sidebar ? 'open': ''" v-click-outside="this.sidebar = false"> -->
-    <div class="sidebar" :class="sidebar ? 'open': ''">
+    <div class="sidebar" :class="sidebar ? 'open': ''" v-click-outside="closeSidebar">
       <ul class="top-menu">
           <li>
             <a href="#home" v-smooth-scroll>Home</a>
@@ -81,13 +80,16 @@ export default {
     logout() {
       this.$store.dispatch("logout");
     },
-    close(){
-      this.sidebar = !this.sidebar
+    closeSidebar(){
+      this.sidebar = false
     }
   },
   computed: {
     isAuth() {
       return this.$store.getters.isAuth;
+    },
+    salon(){
+      return this.$store.getters.salon
     }
   }
 };
@@ -104,6 +106,8 @@ nav.landing {
     li {
       display: inline-block;
       margin: 0 10px;
+      font-weight: 400;
+      color: #999;
     }
   }
 

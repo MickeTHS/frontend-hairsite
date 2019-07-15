@@ -125,13 +125,13 @@ export default new Vuex.Store({
 
       const updatedSalon = await axios.put('/salon', {lookup_latlng: true, salon_id: salonId}, config)
       console.log('salon: ', updatedSalon.data.salon)
-      const logoRes = await axios.put('/salon', payload.logo, {
-        headers: {
-          'x-access-token': state.token,
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      console.log(logoRes)
+      // const logoRes = await axios.put('/salon', payload.logo, {
+      //   headers: {
+      //     'x-access-token': state.token,
+      //     'Content-Type': 'multipart/form-data'
+      //   }
+      // })
+      // console.log(logoRes)
       localStorage.setItem('salon', JSON.stringify(updatedSalon))
       commit('updateSalon', updatedSalon)
       dispatch('getSalon', salonId)
@@ -149,6 +149,8 @@ export default new Vuex.Store({
       const config = {headers: {'x-access-token': state.token}}
       const res = await axios.get(`/salon?salon_id=${id}`, config)
       const salon = res.data.salon
+
+      console.log('fetchedSalon: ', salon)
 
       localStorage.setItem('salon', JSON.stringify(salon))
       commit('updateSalon', salon)

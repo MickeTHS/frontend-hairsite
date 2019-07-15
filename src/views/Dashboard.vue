@@ -20,6 +20,11 @@ export default {
   components: {
     ColorBox
   },
+  computed: {
+    salon(){
+      return this.$store.getters.salon
+    }
+  },
   mounted(){
     this.$store.dispatch('getUser')
   }

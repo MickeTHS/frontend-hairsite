@@ -3,7 +3,7 @@
     <nav class="landing">
       <div class="container">
         <div class="brand">
-          <router-link to="/" tag="a">{{ salon.name }}</router-link>
+          <router-link to="/" tag="a">{{ salon ? salon.name : 'Logo' }}</router-link>
         </div>
         <ul class="top-menu">
           <li>

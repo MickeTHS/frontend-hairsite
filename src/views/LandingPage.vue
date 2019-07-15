@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main v-if="salon">
     <Banner :salon="salon" :allowEdit="false"/>
     <About :about="salon.frontend_opts.about" :allowEdit="false"/>
     <OpeningHours :openingHours="salon.opening_hours" :allowEdit="false"/>
@@ -14,6 +14,15 @@
 <script>
 import { landingPage } from '@/utils/landingPage.js'
 export default {
-  mixins: [landingPage]
+  mixins: [landingPage],
+  computed: {
+    salon(){
+      return this.$store.getters.publicSalon
+    }
+  },
+  created(){
+    const id = "474d5ed9-a4cb-4aed-8bef-e47ccf1da83b"
+    this.$store.dispatch('getSalonPublic', id)
+  },
 }
 </script>

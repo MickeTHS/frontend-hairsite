@@ -12,6 +12,7 @@ export default new Vuex.Store({
     token: null,
     userId: null,
     salon: null,
+    publicSalon: null,
     snackbar: false
   },
   mutations: {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     updateSalon(state, salon) {
       state.salon = salon
+    },
+    updatePublicSalon(state, salon) {
+      state.publicSalon = salon
     },
     showSnackbar(state) {
       state.snackbar = true
@@ -143,6 +147,9 @@ export default new Vuex.Store({
     async getSalonPublic({state, commit}, id) {
       const res = await axios.get(`/salon/public?salon_id=${id}`)
       console.log(res)
+      const salon = res.data.salon
+      console.log('salon public: ', salon)
+      commit('updatePublicSalon', salon)
     },
     async getSalon({commit, state}, id) {
       console.log('id:: ', id)
@@ -184,6 +191,9 @@ export default new Vuex.Store({
     },
     salon(state) {
       return state.salon
+    },
+    publicSalon(state) {
+      return state.publicSalon
     },
     isAuth(state) {
       return state.token !== null

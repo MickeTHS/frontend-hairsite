@@ -17,10 +17,5 @@ export const landingPage = {
     Staff,
     Contact,
     Footer
-  },
-  computed: {
-    salon(){
-      return this.$store.getters.salon
-    }
   }
 }

@@ -3,7 +3,10 @@
     <ColorBox />
     <Banner :salon="salon" :allowEdit="true" @updateHeading="updateHeading" @updateSubHeading="updateSubHeading"/>
     <About :about="salon.frontend_opts.about" :allowEdit="true" @updateAbout="updateAbout" />
-    <OpeningHours :openingHours="salon.opening_hours" :allowEdit="true" />
+    <OpeningHours 
+      :openingHours="salon.opening_hours" 
+      :allowEdit="true" 
+      @updateOpeningHours="updateOpeningHours"/>
     <Gallery
       :gallery="salon.gallery"
       :description="salon.frontend_opts.gallery_description"
@@ -25,6 +28,15 @@
           <textarea v-if="dialog.target === 'subHeading'" v-model="sub_heading" placeholder="Banner Subheading.."></textarea>
           <textarea v-if="dialog.target === 'about'" v-model="about" placeholder="About us text.."></textarea>
           <textarea v-if="dialog.target === 'galleryDescription'" v-model="gallery_description" placeholder="Gallery section description.."></textarea>
+          <input type="time" v-model="time">
+          {{salon.opening_hours}}
+          <ul v-if="dialog.target === 'openingHours'">
+            <li v-for="(item, index) in salon.opening_hours" :key="index">
+              <div>{{ item.day }}</div>
+              <div>{{item.hours[0]}}</div>
+              <div>{{item.hours[1]}}</div>
+            </li>
+          </ul>
         </div>
         <footer>
           <button class="btn" @click="saveFrontendOpts">Save</button>
@@ -50,7 +62,17 @@ export default {
       heading: null,
       sub_heading: null,
       about: null,
-      gallery_description: null
+      gallery_description: null,
+      activeDay: {
+        am: {
+          from: null,
+          to: null
+        },
+        pm: {
+          from: null,
+          to: null
+        }
+      }
     };
   },
   components: {
@@ -75,6 +97,11 @@ export default {
     updateGalleryDescription() {
       this.dialog.title = "Update Gallery Description";
       this.dialog.target = "galleryDescription";
+      this.dialog.open = true;
+    },
+    updateOpeningHours() {
+      this.dialog.title = "Update Opening Hours";
+      this.dialog.target = "openingHours";
       this.dialog.open = true;
     },
     async saveFrontendOpts() {
@@ -132,9 +159,9 @@ export default {
   }
   .card {
     background-color: #fff;
-    width: 460px;
+    width: 600px;
     max-width: 100%;
-    min-height: 240px;
+    min-height: 220px;
     header {
       padding: 16px 32px;
       background-color: #fafafa;
@@ -152,9 +179,21 @@ export default {
         border-radius: 4px;
         padding: 14px 20px;
         width: 100%;
-        height: 120px;
+        height: 150px;
         resize: none;
         outline: none;
+      }
+      ul {
+        li {
+          display: flex;
+          line-height: 2;
+          div {
+            flex-basis: 33.3333%;
+            &:first-child {
+              font-weight: 400;
+            }
+          }
+        }
       }
     }
     footer {

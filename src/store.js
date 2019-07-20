@@ -70,11 +70,9 @@ export default new Vuex.Store({
       const res = await axios.post('/user/login', authData)
       const token = res.data.token
       const userId = res.data.id
+      const salonId = res.data.currentSalon
 
-      commit('authUser', {
-        token,
-        userId
-      })
+      commit('authUser', {token, userId})
 
       localStorage.setItem('token', token)
       localStorage.setItem('userId', userId)
@@ -82,7 +80,7 @@ export default new Vuex.Store({
       console.log('user:: ', res.data)
 
       if (res.data.currentSalon === 'none')  return router.push('/wizard')
-      await dispatch('getSalon')
+      await dispatch('getSalon', salonId)
       router.push('/admin')
     },
     autoLogin({commit}) {
@@ -136,7 +134,7 @@ export default new Vuex.Store({
       // console.log(logoRes)
       localStorage.setItem('salon', JSON.stringify(updatedSalon.data.salon))
       commit('updateSalon', updatedSalon)
-      dispatch('getSalon')
+      dispatch('getSalon', salonId)
     },
     async updateSalon({commit, state}, salon) {
       const config = {headers: {'x-access-token': state.token}}
@@ -149,8 +147,8 @@ export default new Vuex.Store({
       const salon = res.data.salon
       commit('updatePublicSalon', salon)
     },
-    async getSalon({commit, state}) {
-      const id = state.salon.salon_id
+    async getSalon({commit, state}, id) {
+      if (!id) id = state.salon.salon_id
       const config = {headers: {'x-access-token': state.token}}
       const res = await axios.get(`/salon?salon_id=${id}`, config)
       const salon = res.data.salon

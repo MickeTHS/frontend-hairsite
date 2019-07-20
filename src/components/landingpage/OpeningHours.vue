@@ -9,10 +9,10 @@
             <span>{{ item.day }}</span>
           </div>
           <div class="morning">
-            <span>{{ item.hours[0] }} - {{ item.hours[1] }}</span>
+            <span v-if="item.hours[0]">{{ item.hours[0] }} - {{ item.hours[1] }}</span><span v-else>salon closed</span>
           </div>
           <div class="afternoon">
-            <span>{{ item.hours[2] }} - {{ item.hours[3] }}</span>
+            <span v-if="item.hours[2]">{{ item.hours[2] }} - {{ item.hours[3] }}</span><span v-else>salon closed</span>
           </div>
         </li>
       </ul>

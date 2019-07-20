@@ -1,12 +1,18 @@
 <template>
   <main v-if="salon">
     <ColorBox />
-    <Banner :salon="salon" :allowEdit="true" @updateHeading="updateHeading" @updateSubHeading="updateSubHeading"/>
+    <Banner
+      :salon="salon"
+      :allowEdit="true"
+      @updateHeading="updateHeading"
+      @updateSubHeading="updateSubHeading"
+    />
     <About :about="salon.frontend_opts.about" :allowEdit="true" @updateAbout="updateAbout" />
-    <OpeningHours 
-      :openingHours="salon.opening_hours" 
-      :allowEdit="true" 
-      @updateOpeningHours="updateOpeningHours"/>
+    <OpeningHours
+      :openingHours="salon.opening_hours"
+      :allowEdit="true"
+      @updateOpeningHours="updateOpeningHours"
+    />
     <Gallery
       :gallery="salon.gallery"
       :description="salon.frontend_opts.gallery_description"
@@ -24,22 +30,44 @@
         </header>
         <div class="content">
           {{ salon.target }}
-          <textarea v-if="dialog.target === 'heading'" v-model="heading" placeholder="Banner heading.."></textarea>
-          <textarea v-if="dialog.target === 'subHeading'" v-model="sub_heading" placeholder="Banner Subheading.."></textarea>
+          <textarea
+            v-if="dialog.target === 'heading'"
+            v-model="heading"
+            placeholder="Banner heading.."
+          ></textarea>
+          <textarea
+            v-if="dialog.target === 'subHeading'"
+            v-model="sub_heading"
+            placeholder="Banner Subheading.."
+          ></textarea>
           <textarea v-if="dialog.target === 'about'" v-model="about" placeholder="About us text.."></textarea>
-          <textarea v-if="dialog.target === 'galleryDescription'" v-model="gallery_description" placeholder="Gallery section description.."></textarea>
-          <input type="time" v-model="time">
-          {{salon.opening_hours}}
+          <textarea
+            v-if="dialog.target === 'galleryDescription'"
+            v-model="gallery_description"
+            placeholder="Gallery section description.."
+          ></textarea>
           <ul v-if="dialog.target === 'openingHours'">
+            <li>
+              <div></div>
+              <div>AM</div>
+              <div>PM</div>
+            </li>
             <li v-for="(item, index) in salon.opening_hours" :key="index">
-              <div>{{ item.day }}</div>
-              <div>{{item.hours[0]}}</div>
-              <div>{{item.hours[1]}}</div>
+              <div>{{item.day}}</div>
+              <div>
+                <input type="time" v-model="opening_hours[index].hours[0]" />
+                <input type="time" v-model="opening_hours[index].hours[1]" />
+              </div>
+              <div>
+                <input type="time" v-model="opening_hours[index].hours[2]" />
+                <input type="time" v-model="opening_hours[index].hours[3]" />
+              </div>
             </li>
           </ul>
         </div>
         <footer>
-          <button class="btn" @click="saveFrontendOpts">Save</button>
+          <button v-if="dialog.target !== 'openingHours'" class="btn" @click="saveFrontendOpts">Save</button>
+          <button v-if="dialog.target === 'openingHours'" class="btn" @click="saveOpeningHours">Save</button>
           <button class="btn btn-error" @click="dialog.open = false">Close</button>
         </footer>
       </div>
@@ -63,16 +91,7 @@ export default {
       sub_heading: null,
       about: null,
       gallery_description: null,
-      activeDay: {
-        am: {
-          from: null,
-          to: null
-        },
-        pm: {
-          from: null,
-          to: null
-        }
-      }
+      opening_hours: []
     };
   },
   components: {
@@ -107,16 +126,34 @@ export default {
     async saveFrontendOpts() {
       const salon = {
         frontend_opts: {
-          heading: this.heading ? this.heading : this.salon.frontend_opts.sub_heading,
-          sub_heading: this.sub_heading ? this.sub_heading : this.salon.frontend_opts.sub_heading,
+          heading: this.heading
+            ? this.heading
+            : this.salon.frontend_opts.sub_heading,
+          sub_heading: this.sub_heading
+            ? this.sub_heading
+            : this.salon.frontend_opts.sub_heading,
           about: this.about ? this.about : this.salon.frontend_opts.about,
-          gallery_description: this.gallery_description ? this.gallery_description : this.salon.frontend_opts.gallery_description,
+          gallery_description: this.gallery_description
+            ? this.gallery_description
+            : this.salon.frontend_opts.gallery_description
         }
       };
       try {
         const res = await this.$store.dispatch("updateSalon", salon);
         console.log(res);
-        this.$store.dispatch('getSalon')
+        this.$store.dispatch("getSalon");
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async saveOpeningHours() {
+      const salon = {
+        opening_hours: this.opening_hours
+      };
+      try {
+        const res = await this.$store.dispatch("updateSalon", salon);
+        console.log(res);
+        this.$store.dispatch("getSalon");
       } catch (e) {
         console.log(e);
       }
@@ -128,12 +165,13 @@ export default {
     }
   },
   watch: {
-    salon(){
-      console.log('salon: ', this.salon)
-      this.heading = this.salon.frontend_opts.heading
-      this.sub_heading = this.salon.frontend_opts.sub_heading
-      this.about = this.salon.frontend_opts.about
-      this.gallery_description = this.salon.frontend_opts.gallery_description
+    salon() {
+      console.log("salon: ", this.salon);
+      this.heading = this.salon.frontend_opts.heading;
+      this.sub_heading = this.salon.frontend_opts.sub_heading;
+      this.about = this.salon.frontend_opts.about;
+      this.gallery_description = this.salon.frontend_opts.gallery_description;
+      this.opening_hours = this.salon.opening_hours;
     }
   },
   mounted() {
@@ -186,12 +224,31 @@ export default {
       ul {
         li {
           display: flex;
-          line-height: 2;
-          div {
-            flex-basis: 33.3333%;
-            &:first-child {
-              font-weight: 400;
+          margin: 8px 0;
+          position: relative;
+          cursor: pointer;
+          border-bottom: 1px solid #f5f5f5;
+          cursor: pointer;
+          &:hover {
+            .material-icons.edit {
+              opacity: 1;
             }
+          }
+          div {
+            background-color: #fafafa;
+            padding: 10px;
+            &:first-child {
+              flex-basis: 20%;
+            }
+            &:not(:first-child) {
+              display: flex;
+              justify-content: center;
+              flex-basis: 40%;
+            }
+          }
+          input[type="time"] {
+            width: 92px;
+            font-size: 14px;
           }
         }
       }

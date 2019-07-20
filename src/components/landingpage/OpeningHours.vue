@@ -9,10 +9,10 @@
             <span>{{ item.day }}</span>
           </div>
           <div class="morning">
-            <span>{{ item.hours[0] }}</span>
+            <span>{{ item.hours[0] }} - {{ item.hours[1] }}</span>
           </div>
           <div class="afternoon">
-            <span>{{ item.hours[1] }}</span>
+            <span>{{ item.hours[2] }} - {{ item.hours[3] }}</span>
           </div>
         </li>
       </ul>

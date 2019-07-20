@@ -3,11 +3,11 @@
     <div class="container">
       <h2>Our Gallery</h2>
       <p>
-        <i class="material-icons add" v-if="allowEdit">add</i>
+        <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateGalleryDescription')">edit</i>
         {{ description }}
       </p>
       <div class="images">
-        <i class="fas fa-plus" v-if="allowEdit"></i>
+        <i class="material-icons add" v-if="allowEdit">add</i>
         <div
           class="img"
           v-for="(img, index) in gallery"

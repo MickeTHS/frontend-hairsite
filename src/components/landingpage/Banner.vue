@@ -3,11 +3,11 @@
     <div class="container">
       <div class="box">
         <h1>
-          <i class="material-icons edit" v-if="allowEdit">edit</i>
+          <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateHeading')">edit</i>
           {{ salon.frontend_opts.heading }}
         </h1>
         <p>
-          <i class="material-icons edit" v-if="allowEdit">edit</i>
+          <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateSubHeading')">edit</i>
           {{ salon.frontend_opts.sub_heading }}
         </p>
         <router-link to="/book" tag="a" class="btn">Book Now</router-link>

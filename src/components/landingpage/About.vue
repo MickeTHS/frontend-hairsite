@@ -5,7 +5,7 @@
       <div class="grid">
         <div class="col" style="background: url(/img/img-1.jpg)"></div>
         <div class="col">
-          <i class="material-icons edit" v-if="allowEdit">edit</i>
+          <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateAbout')">edit</i>
           <p>{{ about }}</p>
         </div>
       </div>

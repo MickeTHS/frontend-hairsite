@@ -66,7 +66,7 @@ export default new Vuex.Store({
         }
       }
     },
-    async login({commit}, authData) {
+    async login({commit, dispatch}, authData) {
       const res = await axios.post('/user/login', authData)
       const token = res.data.token
       const userId = res.data.id
@@ -81,11 +81,9 @@ export default new Vuex.Store({
 
       console.log('user:: ', res.data)
 
-      if (res.data.currentSalon === 'none') {
-        router.push('/wizard')
-      } else {
-        router.push('/admin')
-      }
+      if (res.data.currentSalon === 'none')  return router.push('/wizard')
+      await dispatch('getSalon')
+      router.push('/admin')
     },
     autoLogin({commit}) {
       const token = localStorage.getItem('token')
@@ -111,8 +109,8 @@ export default new Vuex.Store({
         user_id: state.userId,
         headers: {'x-access-token': state.token}
       }
-      const res = await axios.get('/user', data)
-      console.log(res)
+      const user = await axios.get('/user', data)
+      console.log(user)
     },
     async createSalon({ commit, dispatch, state}, payload) {
       const config = {
@@ -136,23 +134,23 @@ export default new Vuex.Store({
       //   }
       // })
       // console.log(logoRes)
-      localStorage.setItem('salon', JSON.stringify(updatedSalon))
+      localStorage.setItem('salon', JSON.stringify(updatedSalon.data.salon))
       commit('updateSalon', updatedSalon)
-      dispatch('getSalon', salonId)
+      dispatch('getSalon')
     },
     async updateSalon({commit, state}, salon) {
       const config = {headers: {'x-access-token': state.token}}
-      await axios.post('/salon', salon, config)
+      salon.salon_id = state.salon.salon_id
+      console.log('salon to update: ', salon)
+      return await axios.put('/salon', salon, config)
     },
     async getSalonPublic({state, commit}, id) {
       const res = await axios.get(`/salon/public?salon_id=${id}`)
-      console.log(res)
       const salon = res.data.salon
-      console.log('salon public: ', salon)
       commit('updatePublicSalon', salon)
     },
-    async getSalon({commit, state}, id) {
-      console.log('id:: ', id)
+    async getSalon({commit, state}) {
+      const id = state.salon.salon_id
       const config = {headers: {'x-access-token': state.token}}
       const res = await axios.get(`/salon?salon_id=${id}`, config)
       const salon = res.data.salon
@@ -166,7 +164,6 @@ export default new Vuex.Store({
     },
     autoLoadSalon({commit, state}) {
       const salon = JSON.parse(localStorage.getItem('salon'))
-      console.log('loadedSalon', salon)
       if (!salon) return
       commit('updateSalon', salon)
     },

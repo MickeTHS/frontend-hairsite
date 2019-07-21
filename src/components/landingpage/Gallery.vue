@@ -4,7 +4,7 @@
       <h2>Our Gallery</h2>
       <p>
         <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateGalleryDescription')">edit</i>
-        {{ description }}
+        {{ description || '--'}}
       </p>
       <div class="images">
         <i class="material-icons add" v-if="allowEdit">add</i>

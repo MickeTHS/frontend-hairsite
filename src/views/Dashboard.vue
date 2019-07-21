@@ -1,6 +1,6 @@
 <template>
   <main v-if="salon">
-    <ColorBox />
+    <ColorBox :salon="salon" />
     <Banner
       :salon="salon"
       :allowEdit="true"
@@ -173,14 +173,20 @@ export default {
         frontend_opts: {
           heading: this.heading
             ? this.heading
-            : this.salon.frontend_opts.sub_heading,
+            : this.salon.frontend_opts.heading,
           sub_heading: this.sub_heading
             ? this.sub_heading
             : this.salon.frontend_opts.sub_heading,
           about: this.about ? this.about : this.salon.frontend_opts.about,
           gallery_description: this.gallery_description
             ? this.gallery_description
-            : this.salon.frontend_opts.gallery_description
+            : this.salon.frontend_opts.gallery_description,
+          theme: this.salon.frontend_opts.theme,
+          logo: this.salon.frontend_opts.logo,
+          hasDomain: this.salon.frontend_opts.hasDomain,
+          createDomain: this.salon.frontend_opts.createDomain,
+          existingDomain: this.salon.frontend_opts.existingDomain,
+          desiredDomain: this.salon.frontend_opts.desiredDomain
         }
       };
       try {

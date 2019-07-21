@@ -1,123 +1,158 @@
 <template>
   <div class="colorbox">
-    <div class="colorbox-toggle" @click="dialog = !dialog">
+    <div class="colorbox-toggle" @click="dialog.open = true">
       <i class="material-icons settings">settings</i>
     </div>
-    <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-      <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
-      </template>
-      <v-card>
-        <v-toolbar dark color="primary">
-          <v-btn icon dark @click="dialog = false">
-            <v-icon>close</v-icon>
-          </v-btn>
-          <v-toolbar-title>Settings</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-toolbar-items>
-            <v-btn dark flat @click="updateTheme">Save</v-btn>
-          </v-toolbar-items>
-        </v-toolbar>
-        <v-list three-line subheader>
-          <v-subheader>Choose theme:</v-subheader>
-          <v-list-tile avatar>
-            <v-list-tile-content>
-              <v-list-tile-title>How that works?</v-list-tile-title>
-              <v-list-tile-sub-title>Choose one of the folllowing themes, then click save to apply the new theme!</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-
-          <div class="theme-preview">
-            <ul class="themes">
-              <li
-                v-for="(theme, index) in themes"
-                :key="index"
-                :style="{background: theme.color}"
-                @click="currentTheme = index + 1"
-              ></li>
-            </ul>
-            <img :src="'/img/theme' + currentTheme +'.jpg'" alt>
+    <div class="dialog" :class="dialog.open ? 'open': ''">
+      <header>
+        <div class="container">
+          <h2>Update Theme</h2>
+          <div class="controls">
+            <button class="btn" @click="updateTheme">Save</button>
+            <button class="btn" @click="dialog.open = false">Close</button>
           </div>
-        </v-list>
-      </v-card>
-    </v-dialog>
+        </div>
+      </header>
+      <div class="content">
+        <div class="theme-preview">
+          <p>Choose one of the following themes, then click save.</p>
+          <ul class="themes">
+            <li
+              v-for="(theme, index) in themes"
+              :key="index"
+              :style="{background: theme.color}"
+              @click="currentTheme = index + 1"
+            ></li>
+          </ul>
+          <img :src="'/img/theme' + currentTheme +'.jpg'" alt />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: ['salon'],
   data() {
     return {
       themes: [
-        { id: 1, color: "#bfd354" },
-        { id: 2, color: "#8bc34a" },
-        { id: 3, color: "#4caf50" },
-        { id: 4, color: "#5ec0ea" },
-        { id: 5, color: "#03a9f4" },
-        { id: 6, color: "#3f51b5" },
-        { id: 7, color: "#673ab7" },
-        { id: 8, color: "#9c27b0" },
-        { id: 9, color: "#f44336" }
+        { id: 1, color: "#8bc34a" },
+        { id: 2, color: "#4caf50" },
+        { id: 3, color: "#2196f3" },
+        { id: 4, color: "#673ab7" },
+        { id: 5, color: "#9c27b0" },
+        { id: 6, color: "#f44336" }
       ],
       currentTheme: 1,
-      dialog: false,
+      dialog: {
+        open: false
+      },
       notifications: false,
       sound: true,
       widgets: false
     };
   },
   methods: {
-    updateTheme(){
-      const theme = this.currentTheme
+    async updateTheme() {
+      const theme = this.currentTheme;
       const salon = {
         frontend_opts: {
-          theme
+          theme: this.currentTheme,
+          heading: this.salon.frontend_opts.heading,
+          sub_heading: this.salon.frontend_opts.sub_heading,
+          about: this.salon.frontend_opts.about,
+          gallery_description: this.salon.frontend_opts.gallery_description,
+          logo: this.salon.frontend_opts.logo,
+          hasDomain: this.salon.frontend_opts.hasDomain,
+          createDomain: this.salon.frontend_opts.createDomain,
+          existingDomain: this.salon.frontend_opts.existingDomain,
+          desiredDomain: this.salon.frontend_opts.desiredDomain
         }
-      }
-      this.$store.dispatch('updateSalon', salon)
-      console.log(salon)
-      // dialog = false
+      };
+      await this.$store.dispatch("updateSalon", salon);
+      await this.$store.dispatch("getSalon");
+      this.dialog.open = false
     }
-  },
+  }
 };
 </script>
 
 <style lang="scss">
 @import "@/assets/scss/_variables.scss";
-.colorbox-toggle {
-  position: fixed;
-  top: calc(50% - 44px);
-  left: 0;
-  background-color: #8BC34A;
-  height: 32px;
-  width: 32px;
-  z-index: 3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #607d8b;
-  cursor: pointer;
-  .settings {
-    font-size: 20px;
-  }
-}
-.themes {
-  margin-bottom: 20px;
-  li {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
+.colorbox {
+  .colorbox-toggle {
+    position: fixed;
+    top: calc(50% - 44px);
+    left: 0;
+    background-color: #8bc34a;
+    height: 32px;
+    width: 32px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #607d8b;
     cursor: pointer;
-    &:not(:last-child) {
-      margin-right: 5px;
+    .settings {
+      font-size: 16px;
     }
   }
-}
-.theme-preview {
-  padding: 14px;
-  img {
-    width: 420px;
-    max-width: 100%;
+  .dialog {
+    background-color: #fff;
+    display: none;
+    &.open {
+      display: block;
+    }
+    header {
+      padding: 10px 0;
+      background-color: #8bc34a;
+      .container {
+        padding: 16px 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      h2 {
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 15px;
+        letter-spacing: 1px;
+      }
+      .btn {
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        margin-left: 10px;
+      }
+    }
+  }
+  .themes {
+    margin-bottom: 20px;
+    li {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      cursor: pointer;
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+    }
+  }
+  .theme-preview {
+    padding: 14px;
+    p {
+      font-weight: 400;
+      color: #607d8b;
+      margin: 20px 0;
+    }
+    img {
+      width: 420px;
+      max-width: 100%;
+    }
   }
 }
 </style>

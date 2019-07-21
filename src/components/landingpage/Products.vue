@@ -37,6 +37,7 @@ export default {
   .grid {
     position: relative;
     flex-wrap: wrap;
+    justify-content: flex-start;
     .col {
       position: relative;
       flex-basis: 25%;

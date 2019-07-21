@@ -21,7 +21,7 @@ export default {
     }
   },
   created(){
-    const id = "474d5ed9-a4cb-4aed-8bef-e47ccf1da83b"
+    const id = "f9e63d95-8e84-4ca6-bb3d-b8e8e784b6d5"
     this.$store.dispatch('getSalonPublic', id)
   },
 }

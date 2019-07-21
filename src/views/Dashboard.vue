@@ -116,6 +116,7 @@ export default {
         price: null
       },
       block: {
+        id: null,
         title: null,
         services: []
       }
@@ -157,7 +158,6 @@ export default {
     },
     addProduct(){
       const product = {
-        id: this.salon.products.length? this.salon.products.length + 1 : this.block.services.length + 1,
         title: this.product.title,
         price: this.product.price
       }
@@ -202,6 +202,7 @@ export default {
     async saveProducts() {
       console.log(this.block)
       const products = this.salon.products || []
+      this.block.id = this.salon.products.length + 1, // the backend should later generate unique id
       products.push(this.block)
       console.log(products)
       const salon = {products}

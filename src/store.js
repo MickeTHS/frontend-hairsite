@@ -36,9 +36,6 @@ export default new Vuex.Store({
     hideSnackbar(state) {
       state.snackbar = false
     },
-    updateProducts(state, products) {
-      state.products = products
-    },
     updateStaff(state, staff) {
       state.staff = staff
     },
@@ -170,10 +167,6 @@ export default new Vuex.Store({
     },
     hideSnackbar({commit}) {
       commit('hideSnackbar')
-    },
-    updateProducts({commit, state}, id) {
-      const products = state.salon.products.filter(product => product.id !== id)
-      commit('updateProducts', products)
     },
     updateStaff({commit, state}, id) {
       const staff = state.salon.staff.filter(member => member.id !== id)

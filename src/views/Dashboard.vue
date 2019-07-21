@@ -20,7 +20,11 @@
       @updateGalleryDescription="updateGalleryDescription"
     />
     <Staff :staff="salon.staff" :allowEdit="true" />
-    <Products :products="salon.products" :allowEdit="true" @addProducts="addProducts" />
+    <Products 
+      :products="salon.products" 
+      :allowEdit="true" 
+      @addProducts="addProducts"
+      @deleteBlock="deleteProductsBlock"/>
     <Contact :salon="salon" />
     <Footer :name="salon.name" :social="salon.social" />
     <div class="dialog" :class="dialog.open ? 'open': ''">
@@ -207,13 +211,28 @@ export default {
       console.log(products)
       const salon = {products}
       try {
-        const res = await this.$store.dispatch("updateSalon", salon);
-        console.log(res);
-        this.$store.dispatch("getSalon");
+        await this.$store.dispatch("updateSalon", salon)
+        await this.$store.dispatch("getSalon");
+        this.product.title = null
+        this.product.price = null
+        this.block.id = null
+        this.block.title = null
+        this.block.services = []
+        this.dialog.open = false
       } catch (e) {
         console.log(e);
       }
-    }
+    },
+    async deleteProductsBlock(id) { // ###
+      const products = this.salon.products.filter(product => product.id !== id)
+      const salon = {products}
+      try {
+        await this.$store.dispatch("updateSalon", salon)
+        await this.$store.dispatch("getSalon");
+      } catch (e) {
+        console.log(e);
+      }
+    },
   },
   computed: {
     salon() {

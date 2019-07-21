@@ -3,7 +3,7 @@
     <div class="container">
       <h2>Our Pricing</h2>
       <div class="grid">
-        <i class="material-icons add" v-if="allowEdit">add</i>
+        <i class="material-icons add" v-if="allowEdit" @click="$emit('addProducts')">add</i>
         <div class="col" v-for="(block, i) in products" :key="i">
           <i class="material-icons delete" v-if="allowEdit" @click="deleteBlock(block.id)">delete</i>
           <h3>{{ block.title }}</h3>

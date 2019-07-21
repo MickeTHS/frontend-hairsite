@@ -20,7 +20,7 @@
       @updateGalleryDescription="updateGalleryDescription"
     />
     <Staff :staff="salon.staff" :allowEdit="true" />
-    <Products :products="salon.products" :allowEdit="true" />
+    <Products :products="salon.products" :allowEdit="true" @addProducts="addProducts" />
     <Contact :salon="salon" />
     <Footer :name="salon.name" :social="salon.social" />
     <div class="dialog" :class="dialog.open ? 'open': ''">
@@ -64,10 +64,29 @@
               </div>
             </li>
           </ul>
+          <div v-if="dialog.target === 'addProducts'">
+            <input type="text" placeholder="Block Title" v-model="block.title" />
+            <div class="product">
+              <input type="text" id="productTitle" placeholder="Product Name" v-model="product.title" />
+              <input type="number" id="productPrice" placeholder="Product Price" v-model="product.price"/>
+              <button class="btn" @click="addProduct">Add</button>
+            </div>
+            <ul>
+              <li
+                v-for="(product, index) in block.services"
+                :key="index"
+              >{{ product.title }} - {{ product.price }}</li>
+            </ul>
+          </div>
         </div>
         <footer>
-          <button v-if="dialog.target !== 'openingHours'" class="btn" @click="saveFrontendOpts">Save</button>
+          <button
+            v-if="dialog.target !== 'openingHours' && dialog.target !== 'addProducts'"
+            class="btn"
+            @click="saveFrontendOpts"
+          >Save</button>
           <button v-if="dialog.target === 'openingHours'" class="btn" @click="saveOpeningHours">Save</button>
+          <button v-if="dialog.target === 'addProducts'" class="btn" @click="saveProducts">Save</button>
           <button class="btn btn-error" @click="dialog.open = false">Close</button>
         </footer>
       </div>
@@ -91,7 +110,15 @@ export default {
       sub_heading: null,
       about: null,
       gallery_description: null,
-      opening_hours: []
+      opening_hours: [],
+      product: {
+        title: null,
+        price: null
+      },
+      block: {
+        title: null,
+        services: []
+      }
     };
   },
   components: {
@@ -123,6 +150,20 @@ export default {
       this.dialog.target = "openingHours";
       this.dialog.open = true;
     },
+    addProducts() {
+      this.dialog.title = "Add Products Block";
+      this.dialog.target = "addProducts";
+      this.dialog.open = true;
+    },
+    addProduct(){
+      const product = {
+        id: this.salon.products.length? this.salon.products.length + 1 : this.block.services.length + 1,
+        title: this.product.title,
+        price: this.product.price
+      }
+      if(!this.product.title.length || !this.product.title.length) return
+      this.block.services.push(product)
+    },
     async saveFrontendOpts() {
       const salon = {
         frontend_opts: {
@@ -150,6 +191,20 @@ export default {
       const salon = {
         opening_hours: this.opening_hours
       };
+      try {
+        const res = await this.$store.dispatch("updateSalon", salon);
+        console.log(res);
+        this.$store.dispatch("getSalon");
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async saveProducts() {
+      console.log(this.block)
+      const products = this.salon.products || []
+      products.push(this.block)
+      console.log(products)
+      const salon = {products}
       try {
         const res = await this.$store.dispatch("updateSalon", salon);
         console.log(res);
@@ -221,6 +276,20 @@ export default {
         resize: none;
         outline: none;
       }
+      input[type="text"],
+      input[type="number"] {
+        border: 1px solid #e6e6e6;
+        background-color: #fff;
+        color: #666;
+        padding: 10px 20px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        &::placeholder {
+          color: #aaa;
+          font-weight: 300;
+        }
+      }
       ul {
         li {
           display: flex;
@@ -256,17 +325,17 @@ export default {
     footer {
       padding: 0 32px 24px 32px;
       background-color: #fff;
-      button {
-        padding: 10px 20px;
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        background-color: #8bc34a;
-        border-radius: 4px;
-        margin-right: 10px;
-        &.btn-error {
-          background-color: #f44336;
-        }
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background-color: #8bc34a;
+      border-radius: 4px;
+      margin-right: 10px;
+      &.btn-error {
+        background-color: #f44336;
       }
     }
   }

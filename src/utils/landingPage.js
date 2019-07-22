@@ -8,6 +8,11 @@ import Contact from "@/components/landingpage/Contact"
 import Footer from "@/components/landingpage/Footer"
 
 export const landingPage = {
+  data(){
+    return {
+      themes: ["#8bc34a", "#4caf50", "#2196f3", "#673ab7", "#9c27b0", "#f44336"]
+    }
+  },
   components: {
     Banner,
     About,

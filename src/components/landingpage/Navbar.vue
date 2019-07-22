@@ -3,7 +3,11 @@
     <nav class="landing">
       <div class="container">
         <div class="brand">
-          <router-link to="/" tag="a">{{ salon ? salon.name : 'Logo' }}</router-link>
+          <router-link
+            to="/"
+            tag="a"
+            :style="{color: themes[salon.frontend_opts.theme - 1]}"
+          >{{ salon ? salon.name : 'Logo' }}</router-link>
         </div>
         <ul class="top-menu">
           <li>
@@ -27,42 +31,57 @@
         </ul>
         <ul class="account">
           <router-link to="/login" tag="li" v-if="!isAuth">Login</router-link>
-          <li v-if="isAuth && ($route.path === '/admin')" @click="$router.push('/landingpage')">View website</li>
-          <li v-if="isAuth && ($route.path === '/admin')" @click="$router.push('/wizard')">Create Salon</li>
+          <li
+            v-if="isAuth && ($route.path === '/admin')"
+            @click="$router.push('/landingpage')"
+          >View website</li>
+          <li
+            v-if="isAuth && ($route.path === '/admin')"
+            @click="$router.push('/wizard')"
+          >Create Salon</li>
           <li v-if="isAuth && ($route.path === '/admin')" @click="logout">Logout</li>
         </ul>
         <div class="collapse" id="collapse" @click="sidebar = true">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+          <span
+            v-for="(item, index) in 4"
+            :key="index"
+            :style="{background: themes[salon.frontend_opts.theme - 1]}"
+          ></span>
         </div>
       </div>
     </nav>
     <div class="sidebar" :class="sidebar ? 'open': ''" v-click-outside="closeSidebar">
-      <ul class="top-menu">
-          <li>
-            <a href="#home" v-smooth-scroll>Home</a>
-          </li>
-          <li>
-            <a href="#about" v-smooth-scroll>About</a>
-          </li>
-          <li>
-            <a href="#gallery" v-smooth-scroll>Gallery</a>
-          </li>
-          <li>
-            <a href="#staff" v-smooth-scroll>Staff</a>
-          </li>
-          <li>
-            <a href="#products" v-smooth-scroll>Services</a>
-          </li>
-          <li>
-            <a href="#contact" v-smooth-scroll>Contact</a>
-          </li>
-          <router-link to="/login" tag="li" v-if="!isAuth">Login</router-link>
-          <li v-if="isAuth && ($route.path !== '/landingpage')" @click="$router.push('/landingpage')">View website</li>
-           <li v-if="isAuth && ($route.path !== '/landingpage')" @click="$router.push('/wizard')">Create Salon</li>
-          <li v-if="isAuth && ($route.path !== '/landingpage')" @click="logout">Logout</li>
+      <ul class="top-menu" v-if="salon">
+        <li :class="`theme${salon.frontend_opts.theme}`">
+          <a href="#home" v-smooth-scroll>Home</a>
+        </li>
+        <li :class="`theme${salon.frontend_opts.theme}`">
+          <a href="#about" v-smooth-scroll>About</a>
+        </li>
+        <li :class="`theme${salon.frontend_opts.theme}`">
+          <a href="#gallery" v-smooth-scroll>Gallery</a>
+        </li>
+        <li :class="`theme${salon.frontend_opts.theme}`">
+          <a href="#staff" v-smooth-scroll>Staff</a>
+        </li>
+        <li :class="`theme${salon.frontend_opts.theme}`">
+          <a href="#products" v-smooth-scroll>Services</a>
+        </li>
+        <li :class="`theme${salon.frontend_opts.theme}`">
+          <a href="#contact" v-smooth-scroll>Contact</a>
+        </li>
+        <router-link to="/login" tag="li" v-if="!isAuth">Login</router-link>
+        <li
+          v-if="isAuth && ($route.path !== '/landingpage')"
+          :class="`theme${salon.frontend_opts.theme}`"
+          @click="$router.push('/landingpage')"
+        >View website</li>
+        <li
+          v-if="isAuth && ($route.path !== '/landingpage')"
+          :class="`theme${salon.frontend_opts.theme}`"
+          @click="$router.push('/wizard')"
+        >Create Salon</li>
+        <li v-if="isAuth && ($route.path !== '/landingpage')" :class="`theme${salon.frontend_opts.theme}`" @click="logout">Logout</li>
       </ul>
     </div>
     <div class="overlay" v-if="sidebar"></div>
@@ -71,25 +90,26 @@
 
 <script>
 export default {
-  data(){
+  data() {
     return {
       sidebar: false,
-    }
+      themes: ["#8bc34a", "#4caf50", "#2196f3", "#673ab7", "#9c27b0", "#f44336"]
+    };
   },
   methods: {
     logout() {
       this.$store.dispatch("logout");
     },
-    closeSidebar(){
-      this.sidebar = false
+    closeSidebar() {
+      this.sidebar = false;
     }
   },
   computed: {
     isAuth() {
       return this.$store.getters.isAuth;
     },
-    salon(){
-      return this.$store.getters.salon
+    salon() {
+      return this.$store.getters.salon;
     }
   }
 };
@@ -126,6 +146,30 @@ nav.landing {
   .collapse {
     span {
       background-color: $theme1;
+    }
+  }
+}
+.sidebar {
+  .top-menu {
+    li {
+      &.theme1:hover {
+        background-color: #8bc34a;
+      }
+      &.theme2:hover {
+        background-color: #4caf50;
+      }
+      &.theme3:hover {
+        background-color: #2196f3;
+      }
+      &.theme4:hover {
+        background-color: #673ab7;
+      }
+      &.theme5:hover {
+        background-color: #9c27b0;
+      }
+      &.theme6:hover {
+        background-color: #f44336;
+      }
     }
   }
 }

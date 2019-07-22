@@ -1,10 +1,10 @@
 <template>
   <div class="colorbox">
-    <div class="colorbox-toggle" @click="dialog.open = true">
+    <div class="colorbox-toggle" @click="dialog.open = true" :style="{background: theme}">
       <i class="material-icons settings">settings</i>
     </div>
     <div class="dialog" :class="dialog.open ? 'open': ''">
-      <header>
+      <header :style="{background: theme}">
         <div class="container">
           <h2>Update Theme</h2>
           <div class="controls">
@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  props: ['salon'],
+  props: ['salon', 'theme'],
   data() {
     return {
       themes: [
@@ -92,7 +92,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #607d8b;
+    color: #fff;
     cursor: pointer;
     .settings {
       font-size: 16px;

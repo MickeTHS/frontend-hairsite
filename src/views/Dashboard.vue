@@ -1,31 +1,39 @@
 <template>
   <main v-if="salon">
-    <ColorBox :salon="salon" />
+    <ColorBox :salon="salon" :theme="themes[salon.frontend_opts.theme - 1]"/>
     <Banner
       :salon="salon"
       :allowEdit="true"
+      :theme="themes[salon.frontend_opts.theme - 1]"
       @updateHeading="updateHeading"
       @updateSubHeading="updateSubHeading"
     />
-    <About :about="salon.frontend_opts.about" :allowEdit="true" @updateAbout="updateAbout" />
+    <About 
+      :about="salon.frontend_opts.about" 
+      :allowEdit="true" 
+      :theme="themes[salon.frontend_opts.theme - 1]"
+      @updateAbout="updateAbout" />
     <OpeningHours
       :openingHours="salon.opening_hours"
       :allowEdit="true"
+      :theme="themes[salon.frontend_opts.theme - 1]"
       @updateOpeningHours="updateOpeningHours"
     />
     <Gallery
       :gallery="salon.gallery"
       :description="salon.frontend_opts.gallery_description"
       :allowEdit="true"
+      :theme="themes[salon.frontend_opts.theme - 1]"
       @updateGalleryDescription="updateGalleryDescription"
     />
-    <Staff :staff="salon.staff" :allowEdit="true" />
+    <Staff :staff="salon.staff" :allowEdit="true" :theme="themes[salon.frontend_opts.theme - 1]" />
     <Products 
       :products="salon.products" 
       :allowEdit="true" 
+      :theme="themes[salon.frontend_opts.theme - 1]"
       @addProducts="addProducts"
       @deleteBlock="deleteProductsBlock"/>
-    <Contact :salon="salon" />
+    <Contact :salon="salon" :theme="themes[salon.frontend_opts.theme - 1]" />
     <Footer :name="salon.name" :social="salon.social" />
     <div class="dialog" :class="dialog.open ? 'open': ''">
       <div class="card">

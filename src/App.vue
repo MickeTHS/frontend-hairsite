@@ -74,7 +74,7 @@ section {
   h2 {
     text-align: center;
     font-size: 32px;
-    color: $theme1;
+    color: #777;
     margin-bottom: 40px;
     font-weight: 500;
   }

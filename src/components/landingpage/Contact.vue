@@ -12,15 +12,15 @@
           <p>Send us a message using this form! Or contact us directly using the following:</p>
           <ul class="contact-info">
             <li>
-              <i class="material-icons">location_on</i>
+              <i class="material-icons" :style="{color: theme}">location_on</i>
               {{ salon.postal_address }}
             </li>
             <li>
-              <i class="material-icons">phone_in_talk</i>
+              <i class="material-icons" :style="{color: theme}">phone_in_talk</i>
               {{ salon.phone_numbers }}
             </li>
             <li>
-              <i class="material-icons">message</i>
+              <i class="material-icons" :style="{color: theme}">message</i>
               {{ salon.emails }}
             </li>
           </ul>
@@ -32,7 +32,7 @@
             <input type="tel" placeholder="Enter Your Phone" />
             <input type="text" placeholder="Title" />
             <textarea name="message" placeholder="Message"></textarea>
-            <button class="btn">Submit</button>
+            <button class="btn" :style="{background: theme}">Submit</button>
           </form>
         </div>
       </div>
@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  props: ['salon']
+  props: ['salon', 'theme']
 };
 </script>
 

@@ -3,14 +3,14 @@
     <div class="container">
       <h2>Our Pricing</h2>
       <div class="grid">
-        <i class="material-icons add" v-if="allowEdit" @click="$emit('addProducts')">add</i>
+        <i class="material-icons add" v-if="allowEdit" :style="{background: theme}" @click="$emit('addProducts')">add</i>
         <div class="col" v-for="(block, i) in products" :key="i">
           <i class="material-icons delete" v-if="allowEdit" @click="$emit('deleteBlock', block.id)">delete</i>
           <h3>{{ block.title }}</h3>
           <ul>
             <li v-for="(service, j) in block.services" :key="j">
               <span>{{ service.title }}</span>
-              <span>{{ service.price }} SEK</span>
+              <span :style="{color: theme}">{{ service.price }} SEK</span>
             </li>
           </ul>
         </div>
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  props: ['products', 'allowEdit'],
+  props: ['products', 'allowEdit', 'theme'],
   methods: {
     deleteBlock(id){
       console.log('Delete block!')

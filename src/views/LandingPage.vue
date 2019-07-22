@@ -1,12 +1,12 @@
 <template>
   <main v-if="salon">
-    <Banner :salon="salon" :allowEdit="false"/>
-    <About :about="salon.frontend_opts.about" :allowEdit="false"/>
-    <OpeningHours :openingHours="salon.opening_hours" :allowEdit="false"/>
-    <Gallery :gallery="salon.gallery" :description="salon.frontend_opts.gallery_description" :allowEdit="false"/>
-    <Staff :staff="salon.staff" :allowEdit="false"/>
-    <Products :products="salon.products" :allowEdit="false"/>
-    <Contact :salon="salon"/>
+    <Banner :salon="salon" :allowEdit="false" :theme="themes[salon.frontend_opts.theme - 1]"/>
+    <About :about="salon.frontend_opts.about" :allowEdit="false" :theme="themes[salon.frontend_opts.theme - 1]"/>
+    <OpeningHours :openingHours="salon.opening_hours" :allowEdit="false" :theme="themes[salon.frontend_opts.theme - 1]"/>
+    <Gallery :gallery="salon.gallery" :description="salon.frontend_opts.gallery_description" :allowEdit="false" :theme="themes[salon.frontend_opts.theme - 1]"/>
+    <Staff :staff="salon.staff" :allowEdit="false" :theme="themes[salon.frontend_opts.theme - 1]"/>
+    <Products :products="salon.products" :allowEdit="false" :theme="themes[salon.frontend_opts.theme - 1]"/>
+    <Contact :salon="salon" :theme="themes[salon.frontend_opts.theme - 1]"/>
     <Footer :name="salon.name" :social="salon.social"/>
   </main>
 </template>

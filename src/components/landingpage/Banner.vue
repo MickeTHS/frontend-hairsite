@@ -3,14 +3,14 @@
     <div class="container">
       <div class="box">
         <h1>
-          <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateHeading')">edit</i>
+          <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateHeading')" :style="{background: theme}">edit</i>
           {{ salon.frontend_opts.heading }}
         </h1>
         <p>
-          <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateSubHeading')">edit</i>
+          <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateSubHeading')" :style="{background: theme}">edit</i>
           {{ salon.frontend_opts.sub_heading }}
         </p>
-        <router-link to="/book" tag="a" class="btn">Book Now</router-link>
+        <router-link to="/book" tag="a" class="btn" :style="{background: theme}">Book Now</router-link>
       </div>
     </div>
     <div class="parallax"></div>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  props: ['salon', 'allowEdit']
+  props: ['salon', 'allowEdit', 'theme'],
 };
 </script>
 

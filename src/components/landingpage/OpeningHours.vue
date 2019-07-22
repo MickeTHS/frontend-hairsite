@@ -3,7 +3,7 @@
     <div class="container">
       <h2>Opening Hours</h2>
       <ul>
-        <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateOpeningHours')">edit</i>
+        <i class="material-icons edit" v-if="allowEdit" :style="{background: theme}" @click="$emit('updateOpeningHours')">edit</i>
         <li v-for="(item, index) in openingHours" :key="index">
           <div class="day">
             <span>{{ item.day }}</span>
@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  props: ['openingHours', 'allowEdit']
+  props: ['openingHours', 'allowEdit', 'theme']
 };
 </script>
 

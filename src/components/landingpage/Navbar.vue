@@ -8,6 +8,12 @@
             tag="a"
             :style="{color: themes[salon.frontend_opts.theme - 1]}"
           >{{ salon ? salon.name : 'Logo' }}</router-link>
+          <i
+            class="material-icons edit"
+            v-if="$route.path === '/admin'"
+            @click="dialog.open = true"
+            :style="{background: salon.frontend_opts.theme}"
+          >edit</i>
         </div>
         <ul class="top-menu">
           <li>
@@ -81,10 +87,27 @@
           :class="`theme${salon.frontend_opts.theme}`"
           @click="$router.push('/wizard')"
         >Create Salon</li>
-        <li v-if="isAuth && ($route.path !== '/landingpage')" :class="`theme${salon.frontend_opts.theme}`" @click="logout">Logout</li>
+        <li
+          v-if="isAuth && ($route.path !== '/landingpage')"
+          :class="`theme${salon.frontend_opts.theme}`"
+          @click="logout"
+        >Logout</li>
       </ul>
     </div>
     <div class="overlay" v-if="sidebar"></div>
+    <div class="dialog" :class="dialog.open ? 'open' : ''">
+      <div class="card">
+        <header>
+          <h2>Update Logo</h2>
+        </header>
+        <div class="content">
+          <label for="logo">Choose your Logo</label>
+          <input type="file" id="logo" @change="onFileSelected" />
+          <button class="btn" @click="updateLogo">Save</button>
+          <button class="btn" @click="dialog.open = false">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -93,7 +116,18 @@ export default {
   data() {
     return {
       sidebar: false,
-      themes: ["#8bc34a", "#4caf50", "#2196f3", "#673ab7", "#9c27b0", "#f44336"]
+      themes: [
+        "#8bc34a",
+        "#4caf50",
+        "#2196f3",
+        "#673ab7",
+        "#9c27b0",
+        "#f44336"
+      ],
+      dialog: {
+        open: false
+      },
+      selectedFile: null
     };
   },
   methods: {
@@ -102,6 +136,15 @@ export default {
     },
     closeSidebar() {
       this.sidebar = false;
+    },
+    onFileSelected(event) {
+      this.selectedFile = event.target.files[0]
+    },
+    async updateLogo() {
+      const fd = new FormData()
+      fd.append('logo', this.selectedFile)
+      fd.append('salon_id', this.salon.salon_id)
+      this.$store.dispatch('updateLogo', fd)
     }
   },
   computed: {
@@ -120,6 +163,11 @@ export default {
 nav.landing {
   .brand {
     color: $theme1;
+    position: relative;
+    .material-icons.edit {
+      right: -32px;
+      top: 0;
+    }
   }
 
   .account {
@@ -170,6 +218,14 @@ nav.landing {
       &.theme6:hover {
         background-color: #f44336;
       }
+    }
+  }
+}
+.dialog {
+  .content {
+    input[type="file"] {
+      display: block;
+      margin: 20px 0;
     }
   }
 }

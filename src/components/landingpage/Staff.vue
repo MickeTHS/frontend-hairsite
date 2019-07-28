@@ -4,7 +4,7 @@
     <div class="grid">
       <div class="container">
         <div class="members">
-          <i class="material-icons add" v-if="allowEdit" :style="{background: theme}">add</i>
+          <i class="material-icons add" v-if="allowEdit" @click="$emit('addStaff')" :style="{background: theme}">add</i>
           <div class="col" v-for="(member, i) in staff" :key="i">
             <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
               <i class="material-icons delete" v-if="allowEdit" @click="deleteStaff(member.id)">delete</i>

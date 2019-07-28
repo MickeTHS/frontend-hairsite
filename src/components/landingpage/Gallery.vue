@@ -3,14 +3,19 @@
     <div class="container">
       <h2>Our Gallery</h2>
       <p>
-        <i class="material-icons edit" v-if="allowEdit" :style="{background: theme}" @click="$emit('updateGalleryDescription')">edit</i>
+        <i
+          class="material-icons edit"
+          v-if="allowEdit"
+          :style="{background: theme}"
+          @click="$emit('updateGalleryDescription')"
+        >edit</i>
         {{ description || '--'}}
       </p>
       <div class="images">
         <i class="material-icons add" v-if="allowEdit" :style="{background: theme}">add</i>
         <div
           class="img"
-          v-for="(img, index) in gallery"
+          v-for="(img, index) in gallery.imagesGallery"
           :style="{background: 'url(' + img + ')'}"
           :key="index"
         ></div>
@@ -21,7 +26,7 @@
 
 <script>
 export default {
-  props: ['gallery', 'description', 'allowEdit', 'theme']
+  props: ["gallery", "description", "allowEdit", "theme"]
 };
 </script>
 

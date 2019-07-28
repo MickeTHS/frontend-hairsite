@@ -14,17 +14,19 @@
       {"name": "instagram", "url": "https://instagram.com/"},
       {"name": "linkedin", "url": "https://linkedin.com/"}
     ],
-    "gallery": [
-      "/img/gallery/img-1.jpg",
-      "/img/gallery/img-2.jpg",
-      "/img/gallery/img-3.jpg",
-      "/img/gallery/img-4.jpg",
-      "/img/gallery/img-5.jpg",
-      "/img/gallery/img-6.jpg",
-      "/img/gallery/img-7.jpg",
-      "/img/gallery/img-8.jpg",
-      "/img/gallery/img-9.jpg"
-    ],
+    "gallery": {
+      "imagesGallery": [
+        "/img/gallery/img-1.jpg",
+        "/img/gallery/img-2.jpg",
+        "/img/gallery/img-3.jpg",
+        "/img/gallery/img-4.jpg",
+        "/img/gallery/img-5.jpg",
+        "/img/gallery/img-6.jpg",
+        "/img/gallery/img-7.jpg",
+        "/img/gallery/img-8.jpg",
+        "/img/gallery/img-9.jpg"
+      ]
+    },
     "products": [
       {
         "id": 1,

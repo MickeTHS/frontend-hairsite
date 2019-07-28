@@ -122,16 +122,26 @@ export default new Vuex.Store({
 
       const updatedSalon = await axios.put('/salon', {lookup_latlng: true, salon_id: salonId}, config)
       console.log('salon: ', updatedSalon.data.salon)
-      // const logoRes = await axios.put('/salon', payload.logo, {
-      //   headers: {
-      //     'x-access-token': state.token,
-      //     'Content-Type': 'multipart/form-data'
-      //   }
-      // })
-      // console.log(logoRes)
       localStorage.setItem('salon', JSON.stringify(updatedSalon.data.salon))
       commit('updateSalon', updatedSalon)
       dispatch('getSalon', salonId)
+    },
+    async updateLogo({ commit, dispatch, state}, payload) {
+      const config = {
+        headers: {
+          'x-access-token': state.token,
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+      try {
+        const res = await axios.put('/salon', payload, config)
+        console.log(res)
+      } catch(e){
+        console.log('ERROR!!')
+        console.log(e.reason)
+      }
+      // commit('updateSalon', updatedSalon)
+      // dispatch('getSalon', salonId)
     },
     async updateSalon({commit, state}, salon) {
       const config = {headers: {'x-access-token': state.token}}
@@ -161,6 +171,21 @@ export default new Vuex.Store({
       const salon = JSON.parse(localStorage.getItem('salon'))
       if (!salon) return
       commit('updateSalon', salon)
+    },
+    async addStaff({commit, state}, payload){
+      const config = {
+        headers: {
+          'x-access-token': state.token,
+          // 'Content-Type': 'multipart/form-data'
+        }
+      }
+      try {
+        const res = await axios.post('/salon/staff', payload, config)
+        console.log(res)
+      } catch(e){
+        console.log('ERROR!!')
+        console.log(e)
+      }
     },
     showSnackbar({commit}) {
       commit('showSnackbar')

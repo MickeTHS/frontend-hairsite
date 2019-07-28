@@ -127,7 +127,7 @@
               <label
                 class="theme-item"
                 :class="salon.frontend_opts.theme === index + 1 ? 'active': ''"
-                v-for="(theme, index) in 8"
+                v-for="(theme, index) in 6"
                 :key="index"
               >
                 <input
@@ -244,7 +244,6 @@ export default {
       this.currentStep++;
     },
     handleLogoFile(){
-      console.log('changed!')
       this.file = this.$refs.logo.files[0]
     },
     submit() {
@@ -252,17 +251,17 @@ export default {
       this.salon.user_id = this.userId
       this.salon.opening_hours = sample.opening_hours
       this.salon.social = sample.social
-      this.salon.gallery = sample.gallery
+      // this.salon.gallery = sample.gallery
       this.salon.products = sample.products
       this.salon.staff = sample.staff
       this.salon.frontend_opts.heading = `Welcome to ${this.salon.name} Salon`
       this.salon.frontend_opts.sub_heading = sample.frontend_opts.sub_heading
       this.salon.frontend_opts.about = sample.frontend_opts.about
       this.salon.frontend_opts.gallery_description = sample.frontend_opts.gallery_description
-      const logo = new FormData()
+      // const logo = new FormData()
       const payload = {
-        salon: this.salon,
-        logo: logo
+        salon: this.salon
+        // logo: logo
       }
       this.$store.dispatch("createSalon", payload)
     }
@@ -361,28 +360,22 @@ export default {
                 margin-right: 10px;
               }
               &:first-child {
-                background-color: #f44336;
-              }
-              &:nth-child(2) {
                 background-color: #8bc34a;
               }
-              &:nth-child(3) {
+              &:nth-child(2) {
                 background-color: #4caf50;
               }
+              &:nth-child(3) {
+                background-color: #2196f3;
+              }
               &:nth-child(4) {
-                background-color: $primaryColor;
-              }
-              &:nth-child(5) {
-                background-color: #03a9f4;
-              }
-              &:nth-child(6) {
-                background-color: #3f51b5;
-              }
-              &:nth-child(7) {
                 background-color: #673ab7;
               }
-              &:last-child {
+              &:nth-child(5) {
                 background-color: #9c27b0;
+              }
+              &:last-child {
+                background-color: #f44336;
               }
             }
           }

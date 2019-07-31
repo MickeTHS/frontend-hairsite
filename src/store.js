@@ -167,10 +167,14 @@ export default new Vuex.Store({
       console.log(res)
       router.push('/admin')
     },
-    autoLoadSalon({commit, state}) {
-      const salon = JSON.parse(localStorage.getItem('salon'))
-      if (!salon) return
-      commit('updateSalon', salon)
+    async autoLoadSalon({commit, state}) {
+      try {
+        const salon = JSON.parse(localStorage.getItem('salon'))
+        if (!salon) return
+        commit('updateSalon', salon)
+      } catch(e){
+        localStorage.clear()
+      }
     },
     async addStaff({commit, state}, payload){
       const config = {

@@ -176,7 +176,7 @@ export default new Vuex.Store({
       const config = {
         headers: {
           'x-access-token': state.token,
-          // 'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data'
         }
       }
       try {

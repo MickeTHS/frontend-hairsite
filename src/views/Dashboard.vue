@@ -370,6 +370,7 @@ export default {
     width: 600px;
     max-width: 100%;
     min-height: 220px;
+    margin: 20px;
     header {
       padding: 16px 32px;
       background-color: #fafafa;

@@ -126,6 +126,23 @@ export default new Vuex.Store({
       commit('updateSalon', updatedSalon)
       dispatch('getSalon', salonId)
     },
+    async addLogo({ commit, dispatch, state}, payload) {
+      const config = {
+        headers: {
+          'x-access-token': state.token,
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+      try {
+        const res = await Axios.post('http://localhost:8081/fileupload', payload, config)
+        console.log(res)
+      } catch(e){
+        console.log('ERROR!!')
+        console.log(e.reason)
+      }
+      // commit('updateSalon', updatedSalon)
+      // dispatch('getSalon', salonId)
+    },
     async updateLogo({ commit, dispatch, state}, payload) {
       const config = {
         headers: {

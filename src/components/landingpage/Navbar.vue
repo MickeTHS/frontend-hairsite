@@ -143,8 +143,8 @@ export default {
     async updateLogo() {
       const fd = new FormData()
       fd.append('logo', this.selectedFile)
-      fd.append('salon_id', this.salon.salon_id)
-      this.$store.dispatch('updateLogo', fd)
+      fd.append('gallery_id', this.salon.gallery.gallery_id)
+      this.$store.dispatch('addLogo', fd)
     }
   },
   computed: {

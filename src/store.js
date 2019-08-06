@@ -53,7 +53,7 @@ export default new Vuex.Store({
         localStorage.setItem('userId', userId)
         router.push('/wizard')
       } catch (e) {
-        if (e.response && err.response.status === 400) {
+        if (e.response && e.response.status === 400) {
           commit('showSnackbar')
           setTimeout(() => {
             commit('hideSnackbar')

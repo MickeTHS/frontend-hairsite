@@ -228,7 +228,7 @@ export default {
         },
         opening_hours: [],
         products: [],
-        gallery: [],
+        // gallery: [],
         staff: [],
         features: {
           online_booking: false,

@@ -8,7 +8,7 @@
           <div class="col" v-for="(member, i) in salon.staff" :key="i">
             <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
               <i class="material-icons delete" v-if="allowEdit" @click="deleteStaff(member.id)">delete</i>
-              <div class="infos">
+              <div class="infos" :style="{background: salon.frontend_opts.theme.primary}">
                 <h4>{{ member.name }}</h4>
                 <p>{{ member.title }}</p>
               </div>

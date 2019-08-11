@@ -137,7 +137,13 @@
             </div>
             <div class="form-control">
               <label for="logo">Staff Photo</label>
-              <input type="file" id="logo" @change="onFileSelected" />
+              <input type="file" id="logo" @change="onFilesSelected" />
+            </div>
+          </div>
+          <div v-if="dialog.target='addToGallery'">
+            <div class="form-control">
+              <label for="gallery">Select Images</label>
+              <input type="file" id="gallery" @change="onFilesSelected" multiple>
             </div>
           </div>
         </div>
@@ -145,13 +151,15 @@
           <button
             v-if="dialog.target !== 'openingHours' 
               && dialog.target !== 'addProducts'
-              && dialog.target !== 'addStaff'"
+              && dialog.target !== 'addStaff'
+              && dialog.target !== 'addToGallery'"
             class="btn"
             @click="saveFrontendOpts"
           >Save</button>
           <button v-if="dialog.target === 'openingHours'" class="btn" @click="saveOpeningHours">Save</button>
           <button v-if="dialog.target === 'addProducts'" class="btn" @click="saveProducts">Save</button>
           <button v-if="dialog.target === 'addStaff'" class="btn" @click="saveStaff">Save</button>
+          <button v-if="dialog.target === 'addToGallery'" class="btn" @click="saveToGallery">Save</button>
           <button class="btn btn-error" @click="dialog.open = false">Close</button>
         </footer>
       </div>
@@ -185,7 +193,7 @@ export default {
         title: null,
         services: []
       },
-      selectedFile: null,
+      selectedFiles: null,
       staff: {
         firstname: null,
         lastname: null,
@@ -199,8 +207,8 @@ export default {
     ColorBox
   },
   methods: {
-    onFileSelected(event) {
-      this.selectedFile = event.target.files[0]
+    onFilesSelected(event) {
+      this.selectedFiles = event.target.files
     },
     updateHeading() {
       this.dialog.title = "Update Heading";
@@ -252,7 +260,7 @@ export default {
         lastname: this.staff.lastname,
         email: this.staff.email,
         phone: this.staff.phone,
-        image: this.selectedFile
+        image: this.selectedFiles
       }
       const fd = new FormData()
       fd.append('gallery_id', this.salon.gallery.gallery_id)
@@ -269,20 +277,14 @@ export default {
       this.dialog.open = true;
     },
     saveToGallery() {
-      const staff = {
-        salon_id: this.salon.salon_id,
-        firstname: this.staff.firstname,
-        lastname: this.staff.lastname,
-        email: this.staff.email,
-        phone: this.staff.phone
-      }
+      if(!this.selectedFiles) return
+      const filesSelectedCount = this.selectedFiles.length
       const fd = new FormData()
       fd.append('salon_id', this.salon.salon_id)
-      fd.append('firstname', this.staff.firstname)
-      fd.append('lastname', this.staff.lastname)
-      fd.append('email', this.staff.email)
-      fd.append('phone', this.staff.phone)
-      this.$store.dispatch('addStaff', fd)
+      for(let i = 0; i < filesSelectedCount; i++){
+        fd.append('gallery[]', this.selectedFiles[i])
+      }
+      this.$store.dispatch('addToGallery', fd)
     },
     async saveFrontendOpts() {
       const salon = {

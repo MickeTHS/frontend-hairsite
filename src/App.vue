@@ -8,7 +8,7 @@
       <router-view />
       <v-snackbar
         v-model="snackbar.open"
-        color="error"
+        :color="snackbar.success ? 'success' : 'error'"
         :right="true"
         :top="true"
         :timeout="5000"

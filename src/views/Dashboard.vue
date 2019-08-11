@@ -307,9 +307,13 @@ export default {
         }
       };
       try {
-        const res = await this.$store.dispatch("updateSalon", salon);
-        console.log(res);
-        this.$store.dispatch("getSalon");
+        const res = await this.$store.dispatch("updateSalon", salon)
+        const snackbar = {
+          message: 'Informations Updated Successfully!',
+          success: true
+        }
+        this.$store.dispatch('showSnackbar', snackbar)
+        this.$store.dispatch("getSalon")
       } catch (e) {
         console.log(e);
       }
@@ -364,7 +368,6 @@ export default {
   },
   watch: {
     salon() {
-      console.log("salon: ", this.salon);
       this.heading = this.salon.frontend_opts.heading;
       this.sub_heading = this.salon.frontend_opts.sub_heading;
       this.about = this.salon.frontend_opts.about;

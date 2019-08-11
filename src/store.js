@@ -15,7 +15,8 @@ export default new Vuex.Store({
     publicSalon: null,
     snackbar: {
       open: false,
-      message: null
+      message: null,
+      success: false,
     }
   },
   mutations: {
@@ -33,12 +34,8 @@ export default new Vuex.Store({
     updatePublicSalon(state, salon) {
       state.publicSalon = salon
     },
-    showSnackbar(state, message) {
-      state.snackbar.open = true
-      state.snackbar.message = message
-    },
-    hideSnackbar(state) {
-      state.snackbar.open = false
+    showSnackbar(state, snackbar) {
+      state.snackbar = snackbar
     },
     updateStaff(state, staff) {
       state.staff = staff
@@ -59,7 +56,11 @@ export default new Vuex.Store({
       } catch (e) {
         console.log(e.response)
         const message = e.response.data.message || e.response.data.reason || 'ERROR!'
-        commit('showSnackbar', message)
+        const snackbar = {
+          message: message,
+          success: false
+        }
+        commit('showSnackbar', snackbar)
       }
     },
     async login({commit, dispatch}, authData) {
@@ -79,7 +80,11 @@ export default new Vuex.Store({
       } catch (e) {
         console.log(e.response)
         const message = e.response.data.message || 'ERROR!'
-        commit('showSnackbar', message)
+        const snackbar = {
+          message: message,
+          success: false
+        }
+        commit('showSnackbar', snackbar)
       }
     },
     autoLogin({commit}) {
@@ -104,7 +109,6 @@ export default new Vuex.Store({
         headers: {'x-access-token': state.token}
       }
       const user = await axios.get('/user', data)
-      console.log(user)
     },
     async createSalon({commit, dispatch, state}, payload) {
       const config = { headers: {'x-access-token': state.token} }
@@ -186,11 +190,10 @@ export default new Vuex.Store({
       const res = await axios.get(`/salon?salon_id=${id}`, config)
       const salon = res.data.salon
 
-      console.log('fetchedSalon: ', salon)
+      console.log({salon})
 
       localStorage.setItem('salon', JSON.stringify(salon))
       commit('updateSalon', salon)
-      console.log(res)
       router.push('/admin')
     },
     async autoLoadSalon({commit, state}) {
@@ -217,8 +220,8 @@ export default new Vuex.Store({
         console.log(e)
       }
     },
-    showSnackbar({commit}, message) {
-      commit('showSnackbar', message)
+    showSnackbar({commit}, snackbar) {
+      commit('showSnackbar', snackbar)
     },
     updateStaff({commit, state}, id) {
       const staff = state.salon.staff.filter(member => member.id !== id)

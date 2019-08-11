@@ -1,5 +1,5 @@
 <template>
-  <section class="contact" id="contact">
+  <section class="contact" id="contact" :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[5]}">
     <div class="container">
       <h2>Contact Us</h2>
       <div class="grid">
@@ -12,15 +12,15 @@
           <p>Send us a message using this form! Or contact us directly using the following:</p>
           <ul class="contact-info">
             <li>
-              <i class="material-icons" :style="{color: theme}">location_on</i>
+              <i class="material-icons" :style="{color: salon.frontend_opts.theme.primary}">location_on</i>
               {{ salon.postal_address }}
             </li>
             <li>
-              <i class="material-icons" :style="{color: theme}">phone_in_talk</i>
+              <i class="material-icons" :style="{color: salon.frontend_opts.theme.primary}">phone_in_talk</i>
               {{ salon.phone_numbers }}
             </li>
             <li>
-              <i class="material-icons" :style="{color: theme}">message</i>
+              <i class="material-icons" :style="{color: salon.frontend_opts.theme.primary}">message</i>
               {{ salon.emails }}
             </li>
           </ul>
@@ -32,7 +32,7 @@
             <input type="tel" placeholder="Enter Your Phone" />
             <input type="text" placeholder="Title" />
             <textarea name="message" placeholder="Message"></textarea>
-            <button class="btn" :style="{background: theme}">Submit</button>
+            <button class="btn" :style="{background: salon.frontend_opts.theme.primary}">Submit</button>
           </form>
         </div>
       </div>

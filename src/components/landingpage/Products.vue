@@ -1,16 +1,16 @@
 <template>
-  <section class="products" id="products">
+  <section class="products" id="products" :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[4]}">
     <div class="container">
       <h2>Our Pricing</h2>
       <div class="grid">
-        <i class="material-icons add" v-if="allowEdit" :style="{background: theme}" @click="$emit('addProducts')">add</i>
-        <div class="col" v-for="(block, i) in products" :key="i">
+        <i class="material-icons add" v-if="allowEdit" :style="{background: salon.frontend_opts.theme.primary}" @click="$emit('addProducts')">add</i>
+        <div class="col" v-for="(block, i) in salon.products" :key="i">
           <i class="material-icons delete" v-if="allowEdit" @click="$emit('deleteBlock', block.id)">delete</i>
           <h3>{{ block.title }}</h3>
           <ul>
             <li v-for="(service, j) in block.services" :key="j">
               <span>{{ service.title }}</span>
-              <span :style="{color: theme}">{{ service.price }} SEK</span>
+              <span :style="{color: salon.frontend_opts.theme.primary}">{{ service.price }} SEK</span>
             </li>
           </ul>
         </div>
@@ -21,10 +21,9 @@
 
 <script>
 export default {
-  props: ['products', 'allowEdit', 'theme'],
+  props: ['salon', 'allowEdit'],
   methods: {
     deleteBlock(id){
-      console.log('Delete block!')
       this.$store.dispatch('updateProducts', id)
     }
   }

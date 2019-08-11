@@ -1,11 +1,11 @@
 <template>
-  <section class="staff" id="staff">
+  <section class="staff" id="staff" :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[3]}">
     <h2>Our Awesome Staff</h2>
     <div class="grid">
       <div class="container">
         <div class="members">
-          <i class="material-icons add" v-if="allowEdit" @click="$emit('addStaff')" :style="{background: theme}">add</i>
-          <div class="col" v-for="(member, i) in staff" :key="i">
+          <i class="material-icons add" v-if="allowEdit" @click="$emit('addStaff')" :style="{background: salon.frontend_opts.theme.primary}">add</i>
+          <div class="col" v-for="(member, i) in salon.staff" :key="i">
             <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
               <i class="material-icons delete" v-if="allowEdit" @click="deleteStaff(member.id)">delete</i>
               <div class="infos">
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  props: ['staff', 'allowEdit', 'theme'],
+  props: ['salon', 'allowEdit'],
   methods: {
     deleteStaff(id) {
       this.$store.dispatch("updateStaff", id);

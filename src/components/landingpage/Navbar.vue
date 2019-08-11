@@ -6,13 +6,13 @@
           <router-link
             to="/"
             tag="a"
-            :style="{color: themes[salon.frontend_opts.theme - 1]}"
+            :style="{color: salon.frontend_opts.theme.primary}"
           >{{ salon ? salon.name : 'Logo' }}</router-link>
           <i
             class="material-icons edit"
             v-if="$route.path === '/admin'"
             @click="dialog.open = true"
-            :style="{background: salon.frontend_opts.theme}"
+            :style="{background: salon.frontend_opts.theme.primary}"
           >edit</i>
         </div>
         <ul class="top-menu">
@@ -51,7 +51,7 @@
           <span
             v-for="(item, index) in 4"
             :key="index"
-            :style="{background: themes[salon.frontend_opts.theme - 1]}"
+            :style="{background: salon.frontend_opts.theme.primary}"
           ></span>
         </div>
       </div>

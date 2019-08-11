@@ -134,7 +134,7 @@
                   type="radio"
                   name="theme"
                   :value="index + 1"
-                  v-model="salon.frontend_opts.theme"
+                  v-model="salon.frontend_opts.theme.primary"
                 />
               </label>
             </div>
@@ -215,7 +215,10 @@ export default {
         phone_numbers: null,
         emails: null,
         frontend_opts: {
-          theme: 1,
+          theme: {
+            primary: 1,
+            sectionsBackgrounds: ['#fff', '#fff', '#fff', '#fff', '#fff', '#fff']
+          },
           logo: null,
           heading: null,
           sub_heading: null,

@@ -1,21 +1,21 @@
 <template>
-  <section class="gallery" id="gallery">
+  <section class="gallery" id="gallery" :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[2]}">
     <div class="container">
       <h2>Our Gallery</h2>
       <p>
         <i
           class="material-icons edit"
           v-if="allowEdit"
-          :style="{background: theme}"
+          :style="{background: salon.frontend_opts.theme.primary}"
           @click="$emit('updateGalleryDescription')"
         >edit</i>
-        {{ description || '--'}}
+        {{ salon.frontend_opts.gallery_description || '--'}}
       </p>
       <div class="images">
-        <i class="material-icons add" v-if="allowEdit" @click="$emit('addToGallery')" :style="{background: theme}">add</i>
+        <i class="material-icons add" v-if="allowEdit" @click="$emit('addToGallery')" :style="{background: salon.frontend_opts.theme.primary}">add</i>
         <div
           class="img"
-          v-for="(img, index) in gallery.imagesGallery"
+          v-for="(img, index) in salon.gallery.imagesGallery"
           :style="{background: 'url(' + img + ')'}"
           :key="index"
         ></div>
@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  props: ["gallery", "description", "allowEdit", "theme"]
+  props: ["salon", "allowEdit"]
 };
 </script>
 

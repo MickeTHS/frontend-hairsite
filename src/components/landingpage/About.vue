@@ -1,12 +1,12 @@
 <template>
-  <section class="about" id="about">
+  <section class="about" id="about" :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[0]}">
     <div class="container">
       <h2>Who We Are</h2>
       <div class="grid">
         <div class="col" style="background: url(/img/img-1.jpg)"></div>
         <div class="col">
-          <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateAbout')" :style="{background: theme}">edit</i>
-          <p>{{ about }}</p>
+          <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateAbout')" :style="{background: salon.frontend_opts.theme.primary}">edit</i>
+          <p>{{ salon.frontend_opts.about }}</p>
         </div>
       </div>
     </div>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ['about', 'allowEdit', 'theme']
+  props: ['allowEdit', 'salon']
 }
 </script>
 

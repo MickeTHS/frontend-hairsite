@@ -1,10 +1,10 @@
 <template>
   <div class="colorbox">
-    <div class="colorbox-toggle" @click="dialog.open = true" :style="{background: theme}">
+    <div class="colorbox-toggle" @click="dialog.open = true" :style="{background: salon.frontend_opts.theme.primary}">
       <i class="material-icons settings">settings</i>
     </div>
     <div class="dialog" :class="dialog.open ? 'open': ''">
-      <header :style="{background: theme}">
+      <header :style="{background: salon.frontend_opts.theme.primary}">
         <div class="container">
           <h2>Update Theme</h2>
           <div class="controls">
@@ -15,7 +15,34 @@
       </header>
       <div class="content">
         <div class="theme-preview">
-          <p>Choose one of the following themes, then click save.</p>
+          <h3>Sections Backgrounds:</h3>
+          <ul>
+            <li>
+              About:
+              <input type="color" v-model="sectionsBackgrounds[0]" />
+            </li>
+            <li>
+              Opening Hours:
+              <input type="color" v-model="sectionsBackgrounds[1]" />
+            </li>
+            <li>
+              Our Gallery:
+              <input type="color" v-model="sectionsBackgrounds[2]" />
+            </li>
+            <li>
+              Staff:
+              <input type="color" v-model="sectionsBackgrounds[3]" />
+            </li>
+            <li>
+              Pricing:
+              <input type="color" v-model="sectionsBackgrounds[4]" />
+            </li>
+            <li>
+              Contact:
+              <input type="color" v-model="sectionsBackgrounds[5]" />
+            </li>
+          </ul>
+          <h3>Themes:</h3>
           <ul class="themes">
             <li
               v-for="(theme, index) in themes"
@@ -45,6 +72,7 @@ export default {
         { id: 6, color: "#f44336" }
       ],
       currentTheme: 1,
+      sectionsBackgrounds: [],
       dialog: {
         open: false
       },
@@ -55,10 +83,13 @@ export default {
   },
   methods: {
     async updateTheme() {
-      const theme = this.currentTheme;
+      const theme = this.themes[this.currentTheme - 1].color
       const salon = {
         frontend_opts: {
-          theme: this.currentTheme,
+          theme: {
+            primary: theme,
+            sectionsBackgrounds: this.sectionsBackgrounds,
+          },
           heading: this.salon.frontend_opts.heading,
           sub_heading: this.salon.frontend_opts.sub_heading,
           about: this.salon.frontend_opts.about,
@@ -74,6 +105,9 @@ export default {
       await this.$store.dispatch("getSalon");
       this.dialog.open = false
     }
+  },
+  mounted() {
+    this.sectionsBackgrounds = this.salon.frontend_opts.theme.sectionsBackgrounds
   }
 };
 </script>
@@ -143,7 +177,14 @@ export default {
     }
   }
   .theme-preview {
-    padding: 14px;
+    padding: 20px 60px;
+    h3 {
+      text-transform: uppercase;
+      font-size: 14px;
+      margin-bottom: 8px;
+      margin-top: 20px;
+      color: #777;
+    }
     p {
       font-weight: 400;
       color: #607d8b;
@@ -152,6 +193,9 @@ export default {
     img {
       width: 420px;
       max-width: 100%;
+    }
+    li {
+      line-height: 1.8;
     }
   }
 }

@@ -191,6 +191,20 @@ input:-internal-autofill-selected {
   background: rgba(244, 67, 54, 0.3);
 }
 
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 20px;
+	height: 20px;
+  vertical-align: middle;
+  &::-webkit-color-swatch-wrapper {
+	  padding: 0;
+  }
+  &::-webkit-color-swatch {
+	  border: none;
+  }
+}
+
 @media (min-width: 960px) {
   .container {
     max-width: unset !important;

@@ -1,10 +1,10 @@
 <template>
-  <section class="opening-hours">
+  <section class="opening-hours" :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[1]}">
     <div class="container">
       <h2>Opening Hours</h2>
       <ul>
-        <i class="material-icons edit" v-if="allowEdit" :style="{background: theme}" @click="$emit('updateOpeningHours')">edit</i>
-        <li v-for="(item, index) in openingHours" :key="index">
+        <i class="material-icons edit" v-if="allowEdit" :style="{background: salon.frontend_opts.theme.primary}" @click="$emit('updateOpeningHours')">edit</i>
+        <li v-for="(item, index) in salon.opening_hours" :key="index">
           <div class="day">
             <span>{{ item.day }}</span>
           </div>
@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  props: ['openingHours', 'allowEdit', 'theme']
+  props: ['allowEdit', 'salon']
 };
 </script>
 

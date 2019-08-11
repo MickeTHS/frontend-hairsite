@@ -6,13 +6,13 @@
         <i class="material-icons edit" v-if="allowEdit" :style="{background: salon.frontend_opts.theme.primary}" @click="$emit('updateOpeningHours')">edit</i>
         <li v-for="(item, index) in salon.opening_hours" :key="index">
           <div class="day">
-            <span>{{ item.day }}</span>
+            <span :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[1]}">{{ item.day }}</span>
           </div>
           <div class="morning">
-            <span v-if="item.hours[0]">{{ item.hours[0] }} - {{ item.hours[1] }}</span><span v-else>salon closed</span>
+            <span :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[1]}" v-if="item.hours[0]">{{ item.hours[0] }} - {{ item.hours[1] }}</span><span v-else>salon closed</span>
           </div>
           <div class="afternoon">
-            <span v-if="item.hours[2]">{{ item.hours[2] }} - {{ item.hours[3] }}</span><span v-else>salon closed</span>
+            <span :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[1]}" v-if="item.hours[2]">{{ item.hours[2] }} - {{ item.hours[3] }}</span><span v-else>salon closed</span>
           </div>
         </li>
       </ul>

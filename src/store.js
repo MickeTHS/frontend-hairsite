@@ -54,9 +54,9 @@ export default new Vuex.Store({
         localStorage.setItem('userId', userId)
         router.push('/wizard')
       } catch (e) {
-        console.log(e.response)
         const message = e.response.data.message || e.response.data.reason || 'ERROR!'
         const snackbar = {
+          open: true,
           message: message,
           success: false
         }
@@ -78,9 +78,9 @@ export default new Vuex.Store({
         await dispatch('getSalon', salonId)
         router.push('/admin')
       } catch (e) {
-        console.log(e.response)
         const message = e.response.data.message || 'ERROR!'
         const snackbar = {
+          open: true,
           message: message,
           success: false
         }

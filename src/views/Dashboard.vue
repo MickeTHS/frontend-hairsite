@@ -198,7 +198,7 @@ export default {
         phone: null,
         image: null
       }
-    };
+    }
   },
   components: {
     ColorBox
@@ -208,19 +208,19 @@ export default {
       this.selectedFiles = event.target.files
     },
     updateHeading() {
-      this.dialog.title = "Update Heading";
-      this.dialog.target = "heading";
-      this.dialog.open = true;
+      this.dialog.title = "Update Heading"
+      this.dialog.target = "heading"
+      this.dialog.open = true
     },
     updateSubHeading() {
-      this.dialog.title = "Update Sub Heading";
-      this.dialog.target = "subHeading";
-      this.dialog.open = true;
+      this.dialog.title = "Update Sub Heading"
+      this.dialog.target = "subHeading"
+      this.dialog.open = true
     },
     updateAbout() {
-      this.dialog.title = "Update About Us";
-      this.dialog.target = "about";
-      this.dialog.open = true;
+      this.dialog.title = "Update About Us"
+      this.dialog.target = "about"
+      this.dialog.open = true
     },
     updateGalleryDescription() {
       this.dialog.title = "Update Gallery Description";
@@ -233,9 +233,9 @@ export default {
       this.dialog.open = true;
     },
     addProducts() {
-      this.dialog.title = "Add Products Block";
-      this.dialog.target = "addProducts";
-      this.dialog.open = true;
+      this.dialog.title = "Add Products Block"
+      this.dialog.target = "addProducts"
+      this.dialog.open = true
     },
     addProduct() {
       const product = {
@@ -243,14 +243,19 @@ export default {
         price: this.product.price
       }
       if (!this.product.title || !this.product.title) {
-        return this.$store.dispatch('showSnackbar', 'Please provide product name and price!')
+        const snackbar = {
+          open: true,
+          success: false,
+          message: 'Please provide product name and price!'
+        }
+        return this.$store.dispatch('showSnackbar', snackbar)
       }
       this.block.services.push(product)
     },
     addStaff() {
-      this.dialog.title = "Add Staff";
-      this.dialog.target = "addStaff";
-      this.dialog.open = true;
+      this.dialog.title = "Add Staff"
+      this.dialog.target = "addStaff"
+      this.dialog.open = true
     },
     saveStaff() {
       const staff = {
@@ -271,9 +276,9 @@ export default {
       this.$store.dispatch('addStaff', fd)
     },
     addToGallery() {
-      this.dialog.title = "Add Gallery Images";
-      this.dialog.target = "addToGallery";
-      this.dialog.open = true;
+      this.dialog.title = "Add Gallery Images"
+      this.dialog.target = "addToGallery"
+      this.dialog.open = true
     },
     saveToGallery() {
       if(!this.selectedFiles) return
@@ -305,29 +310,31 @@ export default {
           existingDomain: this.salon.frontend_opts.existingDomain,
           desiredDomain: this.salon.frontend_opts.desiredDomain
         }
-      };
+      }
       try {
         const res = await this.$store.dispatch("updateSalon", salon)
         const snackbar = {
+          open: true,
           message: 'Informations Updated Successfully!',
           success: true
         }
         this.$store.dispatch('showSnackbar', snackbar)
-        this.$store.dispatch("getSalon")
+        await this.$store.dispatch("getSalon")
+        this.dialog.open = false
       } catch (e) {
-        console.log(e);
+        console.log(e)
       }
     },
     async saveOpeningHours() {
       const salon = {
         opening_hours: this.opening_hours
-      };
+      }
       try {
-        const res = await this.$store.dispatch("updateSalon", salon);
-        console.log(res);
-        this.$store.dispatch("getSalon");
+        const res = await this.$store.dispatch("updateSalon", salon)
+        console.log(res)
+        this.$store.dispatch("getSalon") 
       } catch (e) {
-        console.log(e);
+        console.log(e) 
       }
     },
     async saveProducts() {
@@ -339,7 +346,7 @@ export default {
       const salon = { products }
       try {
         await this.$store.dispatch("updateSalon", salon)
-        await this.$store.dispatch("getSalon");
+        await this.$store.dispatch("getSalon") 
         this.product.title = null
         this.product.price = null
         this.block.id = null
@@ -347,37 +354,37 @@ export default {
         this.block.services = []
         this.dialog.open = false
       } catch (e) {
-        console.log(e);
+        console.log(e) 
       }
     },
-    async deleteProductsBlock(id) { // ###
+    async deleteProductsBlock(id) {
       const products = this.salon.products.filter(product => product.id !== id)
       const salon = { products }
       try {
         await this.$store.dispatch("updateSalon", salon)
-        await this.$store.dispatch("getSalon");
+        await this.$store.dispatch("getSalon") 
       } catch (e) {
-        console.log(e);
+        console.log(e) 
       }
     },
   },
   computed: {
     salon() {
-      return this.$store.getters.salon;
+      return this.$store.getters.salon 
     }
   },
   watch: {
     salon() {
-      this.heading = this.salon.frontend_opts.heading;
-      this.sub_heading = this.salon.frontend_opts.sub_heading;
-      this.about = this.salon.frontend_opts.about;
-      this.gallery_description = this.salon.frontend_opts.gallery_description;
-      this.opening_hours = this.salon.opening_hours;
+      this.heading = this.salon.frontend_opts.heading 
+      this.sub_heading = this.salon.frontend_opts.sub_heading 
+      this.about = this.salon.frontend_opts.about 
+      this.gallery_description = this.salon.frontend_opts.gallery_description 
+      this.opening_hours = this.salon.opening_hours 
     }
   },
   mounted() {
-    this.$store.dispatch("getUser");
-    this.$store.dispatch("getSalon");
+    this.$store.dispatch("getUser") 
+    this.$store.dispatch("getSalon") 
   }
 };
 </script>

@@ -192,16 +192,19 @@ input:-internal-autofill-selected {
 }
 
 input[type="color"] {
-	-webkit-appearance: none;
-	border: none;
-	width: 20px;
-	height: 20px;
+  -webkit-appearance: none;
+  border: none;
+  width: 20px;
+  height: 20px;
   vertical-align: middle;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  border: 1px solid #eee;
   &::-webkit-color-swatch-wrapper {
-	  padding: 0;
+    padding: 0;
   }
   &::-webkit-color-swatch {
-	  border: none;
+    border: none;
   }
 }
 

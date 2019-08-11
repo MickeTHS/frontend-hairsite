@@ -6,9 +6,8 @@
         v-if="this.$route.path === '/landingpage' || this.$route.path === '/admin'"
       />
       <router-view />
-      <v-snackbar v-model="snackbar" color="error" :right="true" :top="true" :timeout="6000">
-        Email already registred! Please login!
-        <v-btn dark flat @click="hideSnackbar">Close</v-btn>
+      <v-snackbar v-model="snackbar.open" color="error" :right="true" :top="true" :timeout="5000">
+        {{ snackbar.message }}
       </v-snackbar>
     </div>
   </v-app>
@@ -28,22 +27,11 @@ export default {
         email: this.email,
         password: this.password
       });
-    },
-    showSnackbar() {
-      this.$store.dispatch("showSnackbar");
-    },
-    hideSnackbar() {
-      this.$store.dispatch("hideSnackbar");
     }
   },
   computed: {
-    snackbar: {
-      get() {
-        return this.$store.getters.snackbar;
-      },
-      set(value) {
-        this.$store.dispatch("showSnackbar");
-      }
+    snackbar(){
+      return this.$store.getters.snackbar
     }
   }
 };

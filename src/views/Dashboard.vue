@@ -402,7 +402,7 @@ export default {
     margin: 20px;
     header {
       padding: 16px 32px;
-      background-color: #fafafa;
+      border-bottom: 1px solid #f1f2f3;
       h2 {
         color: #8bc34a;
         font-size: 15px;

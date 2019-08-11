@@ -13,7 +13,10 @@ export default new Vuex.Store({
     userId: null,
     salon: null,
     publicSalon: null,
-    snackbar: false
+    snackbar: {
+      open: false,
+      message: null
+    }
   },
   mutations: {
     authUser(state, userData) {
@@ -30,11 +33,12 @@ export default new Vuex.Store({
     updatePublicSalon(state, salon) {
       state.publicSalon = salon
     },
-    showSnackbar(state) {
-      state.snackbar = true
+    showSnackbar(state, message) {
+      state.snackbar.open = true
+      state.snackbar.message = message
     },
     hideSnackbar(state) {
-      state.snackbar = false
+      state.snackbar.open = false
     },
     updateStaff(state, staff) {
       state.staff = staff
@@ -53,42 +57,37 @@ export default new Vuex.Store({
         localStorage.setItem('userId', userId)
         router.push('/wizard')
       } catch (e) {
-        if (e.response && e.response.status === 400) {
-          commit('showSnackbar')
-          setTimeout(() => {
-            commit('hideSnackbar')
-          }, 6000)
-        } else {
-          console.log(e)
-        }
+        console.log(e.response)
+        const message = e.response.data.message || e.response.data.reason || 'ERROR!'
+        commit('showSnackbar', message)
       }
     },
     async login({commit, dispatch}, authData) {
-      const res = await axios.post('/user/login', authData)
-      const token = res.data.token
-      const userId = res.data.id
-      const salonId = res.data.currentSalon
+      try {
+        const res = await axios.post('/user/login', authData)
+        const token = res.data.token
+        const userId = res.data.id
+        const salonId = res.data.currentSalon
 
-      commit('authUser', {token, userId})
+        commit('authUser', {token, userId})
 
-      localStorage.setItem('token', token)
-      localStorage.setItem('userId', userId)
-
-      console.log('user:: ', res.data)
-
-      if (res.data.currentSalon === 'none')  return router.push('/wizard')
-      await dispatch('getSalon', salonId)
-      router.push('/admin')
+        localStorage.setItem('token', token)
+        localStorage.setItem('userId', userId)
+        if (res.data.currentSalon === 'none') return router.push('/wizard')
+        await dispatch('getSalon', salonId)
+        router.push('/admin')
+      } catch (e) {
+        console.log(e.response)
+        const message = e.response.data.message || 'ERROR!'
+        commit('showSnackbar', message)
+      }
     },
     autoLogin({commit}) {
       const token = localStorage.getItem('token')
       const userId = localStorage.getItem('userId')
 
       if (!token) return
-      commit('authUser', {
-        token,
-        userId
-      })
+      commit('authUser', {token, userId})
     },
     logout({commit}) {
       commit('clearAuth')
@@ -107,12 +106,8 @@ export default new Vuex.Store({
       const user = await axios.get('/user', data)
       console.log(user)
     },
-    async createSalon({ commit, dispatch, state}, payload) {
-      const config = {
-        headers: {
-        'x-access-token': state.token
-        }
-      }
+    async createSalon({commit, dispatch, state}, payload) {
+      const config = { headers: {'x-access-token': state.token} }
       const res = await axios.post('/salon', payload.salon, config)
 
       console.log(res)
@@ -120,13 +115,16 @@ export default new Vuex.Store({
       const createdSalon = res.data.salon
       const salonId = createdSalon.salon_id
 
-      const updatedSalon = await axios.put('/salon', {lookup_latlng: true, salon_id: salonId}, config)
+      const updatedSalon = await axios.put('/salon', {
+        lookup_latlng: true,
+        salon_id: salonId
+      }, config)
       console.log('salon: ', updatedSalon.data.salon)
       localStorage.setItem('salon', JSON.stringify(updatedSalon.data.salon))
       commit('updateSalon', updatedSalon)
       dispatch('getSalon', salonId)
     },
-    async addLogo({ commit, dispatch, state}, payload) {
+    async addLogo({commit, dispatch, state}, payload) {
       const config = {
         headers: {
           'x-access-token': state.token,
@@ -136,14 +134,12 @@ export default new Vuex.Store({
       try {
         const res = await Axios.post('http://localhost:8081/fileupload', payload, config)
         console.log(res)
-      } catch(e){
+      } catch (e) {
         console.log('ERROR!!')
         console.log(e.reason)
       }
-      // commit('updateSalon', updatedSalon)
-      // dispatch('getSalon', salonId)
     },
-    async updateLogo({ commit, dispatch, state}, payload) {
+    async updateLogo({commit, dispatch, state}, payload) {
       const config = {
         headers: {
           'x-access-token': state.token,
@@ -153,12 +149,12 @@ export default new Vuex.Store({
       try {
         const res = await axios.put('/salon', payload, config)
         console.log(res)
-      } catch(e){
+      } catch (e) {
         console.log('ERROR!!')
         console.log(e.reason)
       }
     },
-    async addToGallery({ commit, dispatch, state}, fd) {
+    async addToGallery({commit, dispatch, state}, fd) {
       const config = {
         headers: {
           'x-access-token': state.token,
@@ -168,13 +164,13 @@ export default new Vuex.Store({
       try {
         const res = await Axios.post('http://localhost:8081/fileupload', fd, config)
         console.log(res)
-      } catch(e){
+      } catch (e) {
         console.log('ERROR!!')
         console.log(e.reason)
       }
     },
     async updateSalon({commit, state}, salon) {
-      const config = {headers: {'x-access-token': state.token}}
+      const config = { headers: {'x-access-token': state.token} }
       salon.salon_id = state.salon.salon_id
       console.log('salon to update: ', salon)
       return await axios.put('/salon', salon, config)
@@ -186,7 +182,7 @@ export default new Vuex.Store({
     },
     async getSalon({commit, state}, id) {
       if (!id) id = state.salon.salon_id
-      const config = {headers: {'x-access-token': state.token}}
+      const config = { headers: {'x-access-token': state.token} }
       const res = await axios.get(`/salon?salon_id=${id}`, config)
       const salon = res.data.salon
 
@@ -202,11 +198,11 @@ export default new Vuex.Store({
         const salon = JSON.parse(localStorage.getItem('salon'))
         if (!salon) return
         commit('updateSalon', salon)
-      } catch(e){
+      } catch (e) {
         localStorage.clear()
       }
     },
-    async addStaff({commit, state}, payload){
+    async addStaff({commit, state}, payload) {
       const config = {
         headers: {
           'x-access-token': state.token,
@@ -216,16 +212,13 @@ export default new Vuex.Store({
       try {
         const res = await axios.post('/salon/staff', payload, config)
         console.log(res)
-      } catch(e){
+      } catch (e) {
         console.log('ERROR!!')
         console.log(e)
       }
     },
-    showSnackbar({commit}) {
-      commit('showSnackbar')
-    },
-    hideSnackbar({commit}) {
-      commit('hideSnackbar')
+    showSnackbar({commit}, message) {
+      commit('showSnackbar', message)
     },
     updateStaff({commit, state}, id) {
       const staff = state.salon.staff.filter(member => member.id !== id)
@@ -233,7 +226,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    userId(state){
+    userId(state) {
       return state.userId
     },
     salon(state) {

@@ -85,22 +85,19 @@
             </li>
           </ul>
           <div v-if="dialog.target === 'addProducts'">
-            <input type="text" placeholder="Block Title" v-model="block.title" />
-            <div class="product">
-              <input
-                type="text"
-                id="productTitle"
-                placeholder="Product Name"
-                v-model="product.title"
-              />
-              <input
-                type="number"
-                id="productPrice"
-                placeholder="Product Price"
-                v-model="product.price"
-              />
-              <button class="btn" @click="addProduct">Add</button>
+            <div class="form-control">
+              <label for="block-title">Block Title</label>
+              <input type="text" id="block-title" placeholder="Enter Block Title" v-model="block.title" required />
             </div>
+            <div class="form-control">
+              <label for="product-title">Product Title</label>
+              <input type="text" id="product-title" placeholder="Enter Product Title" v-model="product.title" required />
+            </div>
+            <div class="form-control">
+              <label for="product-price">Product Price</label>
+              <input type="number" id="product-price" placeholder="Product Price" v-model="product.price" required />
+            </div>
+            <button class="btn" @click="addProduct">Add</button>
             <ul>
               <li
                 v-for="(product, index) in block.services"
@@ -245,7 +242,9 @@ export default {
         title: this.product.title,
         price: this.product.price
       }
-      if (!this.product.title.length || !this.product.title.length) return
+      if (!this.product.title || !this.product.title) {
+        return this.$store.dispatch('showSnackbar', 'Please provide product name and price!')
+      }
       this.block.services.push(product)
     },
     addStaff() {

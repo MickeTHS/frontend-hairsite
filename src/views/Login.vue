@@ -9,10 +9,10 @@
       <div class="login-area">
         <div class="email-login">
           <form action>
-            <input type="email" placeholder="Enter Your Email" v-model="email">
-            <input type="password" placeholder="Enter Your Password" v-model="password">
+            <input type="email" placeholder="Enter Your Email" v-model="email" />
+            <input type="password" placeholder="Enter Your Password" v-model="password" />
             <div class="controls">
-              <Checkbox :label="'Remember me'" v-model="remember"/>
+              <Checkbox :label="'Remember me'" v-model="remember" />
               <a href>Forgot Password?</a>
             </div>
             <button class="btn" @click.prevent="login">Login</button>
@@ -21,13 +21,13 @@
         <div class="social-media-login">
           <div class="social-button facebook">
             <div class="icon">
-              <img src="/img/facebook.svg" alt>
+              <img src="/img/facebook.svg" alt />
             </div>
             <span>Login with Facebook</span>
           </div>
           <div class="social-button google">
             <div class="icon">
-              <img src="/img/google.svg" alt>
+              <img src="/img/google.svg" alt />
             </div>
             <span>Login with Google</span>
           </div>
@@ -142,8 +142,8 @@ export default {
       .btn {
         background-color: rgba(0, 0, 0, 0.24);
         display: block;
-        width: 130px;
-        padding: 13px 20px;
+        min-width: 108px;
+        padding: 12px 24px;
       }
 
       .social-button {

@@ -9,11 +9,11 @@
       <div class="signup-area">
         <div class="email-signup">
           <form>
-            <input type="email" placeholder="Enter Your Email" v-model="email">
-            <input type="password" placeholder="Choose a Password" v-model="password">
-            <input type="password" placeholder="Confirm Your Password">
+            <input type="email" placeholder="Enter Your Email" v-model="email" />
+            <input type="password" placeholder="Choose a Password" v-model="password" />
+            <input type="password" placeholder="Confirm Your Password" />
             <div class="controls">
-              <Checkbox :label="'I accept terms of use.'" v-model="acceptTermsOfUse"/>
+              <Checkbox :label="'I accept terms of use.'" v-model="acceptTermsOfUse" />
             </div>
             <button class="btn" @click.prevent="signup">Sign Up</button>
           </form>
@@ -21,13 +21,13 @@
         <div class="social-media-signup">
           <div class="social-button facebook">
             <div class="icon">
-              <img src="img/facebook.svg" alt>
+              <img src="img/facebook.svg" alt />
             </div>
             <span>signup with Facebook</span>
           </div>
           <div class="social-button google">
             <div class="icon">
-              <img src="img/google.svg" alt>
+              <img src="img/google.svg" alt />
             </div>
             <span>signup with Google</span>
           </div>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import Checkbox from "@/components/Checkbox";
+import Checkbox from "@/components/Checkbox"
 export default {
   data() {
     return {
@@ -142,8 +142,8 @@ export default {
       .btn {
         background-color: rgba(0, 0, 0, 0.24);
         display: block;
-        width: 130px;
-        padding: 13px 20px;
+        min-width: 108px;
+        padding: 12px 24px;
       }
 
       .social-button {

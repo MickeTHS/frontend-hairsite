@@ -6,16 +6,20 @@
         v-if="this.$route.path === '/landingpage' || this.$route.path === '/admin'"
       />
       <router-view />
-      <v-snackbar v-model="snackbar.open" color="error" :right="true" :top="true" :timeout="5000">
-        {{ snackbar.message }}
-      </v-snackbar>
+      <v-snackbar
+        v-model="snackbar.open"
+        color="error"
+        :right="true"
+        :top="true"
+        :timeout="5000"
+      >{{ snackbar.message }}</v-snackbar>
     </div>
   </v-app>
 </template>
 
 <script>
-import Navbar from "@/components/shared/Navbar";
-import LandingPageNavbar from "@/components/landingpage/Navbar";
+import Navbar from "@/components/shared/Navbar"
+import LandingPageNavbar from "@/components/landingpage/Navbar"
 export default {
   components: {
     Navbar,
@@ -30,7 +34,7 @@ export default {
     }
   },
   computed: {
-    snackbar(){
+    snackbar() {
       return this.$store.getters.snackbar
     }
   }
@@ -129,11 +133,13 @@ input:-internal-autofill-selected {
 .btn {
   border: none;
   border-radius: 30px;
-  background-color: $primaryColor;
+  background-color: #5ec0ea;
   color: #fff;
   padding: 10px 20px;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
   cursor: pointer;
   outline: none;
   &:not(.btn-circle) {

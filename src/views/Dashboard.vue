@@ -168,8 +168,8 @@
 </template>
 
 <script>
-import { landingPage } from "@/utils/landingPage.js";
-import ColorBox from "@/components/landingpage/ColorBox";
+import { landingPage } from "@/utils/landingPage.js"
+import ColorBox from "@/components/landingpage/ColorBox"
 export default {
   mixins: [landingPage],
   data() {

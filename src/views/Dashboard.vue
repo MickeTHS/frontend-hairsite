@@ -26,6 +26,7 @@
       :allowEdit="true"
       :theme="themes[salon.frontend_opts.theme - 1]"
       @updateGalleryDescription="updateGalleryDescription"
+      @addToGallery="addToGallery"
     />
     <Staff
       :staff="salon.staff"
@@ -108,8 +109,6 @@
             </ul>
           </div>
           <div v-if="dialog.target === 'addStaff'">
-            <!-- <label for="logo"></label> -->
-            <!-- <input type="file" id="logo" @change="onFileSelected" /> -->
             <div class="form-control">
               <label for="firstname">First Name:</label>
               <input
@@ -135,6 +134,10 @@
             <div class="form-control">
               <label for="phone">Phone</label>
               <input type="text" id="phone" v-model="staff.phone" placeholder="Staff Phone" />
+            </div>
+            <div class="form-control">
+              <label for="logo">Staff Photo</label>
+              <input type="file" id="logo" @change="onFileSelected" />
             </div>
           </div>
         </div>
@@ -187,7 +190,8 @@ export default {
         firstname: null,
         lastname: null,
         email: null,
-        phone: null
+        phone: null,
+        image: null
       }
     };
   },
@@ -242,6 +246,29 @@ export default {
       this.dialog.open = true;
     },
     saveStaff() {
+      const staff = {
+        salon_id: this.salon.salon_id,
+        firstname: this.staff.firstname,
+        lastname: this.staff.lastname,
+        email: this.staff.email,
+        phone: this.staff.phone,
+        image: this.selectedFile
+      }
+      const fd = new FormData()
+      fd.append('gallery_id', this.salon.gallery.gallery_id)
+      fd.append('firstname', this.staff.firstname)
+      fd.append('lastname', this.staff.lastname)
+      fd.append('email', this.staff.email)
+      fd.append('phone', this.staff.phone)
+      fd.append('image', this.staff.image)
+      this.$store.dispatch('addStaff', fd)
+    },
+    addToGallery() {
+      this.dialog.title = "Add Gallery Images";
+      this.dialog.target = "addToGallery";
+      this.dialog.open = true;
+    },
+    saveToGallery() {
       const staff = {
         salon_id: this.salon.salon_id,
         firstname: this.staff.firstname,

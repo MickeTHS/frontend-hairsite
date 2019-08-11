@@ -12,7 +12,7 @@
         {{ description || '--'}}
       </p>
       <div class="images">
-        <i class="material-icons add" v-if="allowEdit" :style="{background: theme}">add</i>
+        <i class="material-icons add" v-if="allowEdit" @click="$emit('addToGallery')" :style="{background: theme}">add</i>
         <div
           class="img"
           v-for="(img, index) in gallery.imagesGallery"

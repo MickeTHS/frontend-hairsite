@@ -395,7 +395,7 @@ export default {
   }
   .card {
     background-color: #fff;
-    width: 520px;
+    width: 570px;
     max-width: 100%;
     min-height: 220px;
     margin: 20px;

@@ -60,7 +60,7 @@ export default {
       }
 
       .btn {
-        font-size: 17px;
+        font-size: 14px;
         font-weight: 700;
         display: block;
         width: 140px;

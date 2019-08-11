@@ -140,7 +140,7 @@
               <input type="file" id="logo" @change="onFilesSelected" />
             </div>
           </div>
-          <div v-if="dialog.target='addToGallery'">
+          <div v-if="dialog.target === 'addToGallery'">
             <div class="form-control">
               <label for="gallery">Select Images</label>
               <input type="file" id="gallery" @change="onFilesSelected" multiple>

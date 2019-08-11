@@ -9,8 +9,8 @@
           <h3>{{ block.title }}</h3>
           <ul>
             <li v-for="(service, j) in block.services" :key="j">
-              <span>{{ service.title }}</span>
-              <span :style="{color: salon.frontend_opts.theme.primary}">{{ service.price }} SEK</span>
+              <span :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[4]}">{{ service.title }}</span>
+              <span :style="{color: salon.frontend_opts.theme.primary, background: salon.frontend_opts.theme.sectionsBackgrounds[4]}">{{ service.price }} SEK</span>
             </li>
           </ul>
         </div>

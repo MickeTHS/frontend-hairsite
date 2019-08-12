@@ -277,7 +277,7 @@ export default {
       if(!this.selectedFiles) return
       const filesSelectedCount = this.selectedFiles.length
       const fd = new FormData()
-      fd.append('salon_id', this.salon.salon_id)
+      fd.append('gallery_id', this.salon.gallery.gallery_id)
       for(let i = 0; i < filesSelectedCount; i++){
         fd.append('gallery[]', this.selectedFiles[i])
       }

@@ -184,11 +184,13 @@ export default new Vuex.Store({
       const salon = res.data.salon
       commit('updatePublicSalon', salon)
     },
-    async getSalon({commit, state}, id) {
+    async getSalon({commit, dispatch, state}, id) {
       if (!id) id = state.salon.salon_id
       const config = { headers: {'x-access-token': state.token} }
       const res = await axios.get(`/salon?salon_id=${id}`, config)
       const salon = res.data.salon
+
+      dispatch('getGallery', salon.salon_id)
 
       console.log({salon})
 
@@ -204,6 +206,10 @@ export default new Vuex.Store({
       } catch (e) {
         localStorage.clear()
       }
+    },
+    async getGallery({commit}, salonId){
+      const res = await axios.get(`/salon/gallery?salon_id=${salonId}`)
+      console.log('gallery: ', res)
     },
     async addStaff({commit, state}, payload) {
       const config = {

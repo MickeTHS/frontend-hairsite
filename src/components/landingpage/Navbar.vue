@@ -3,11 +3,10 @@
     <nav class="landing">
       <div class="container">
         <div class="brand">
-          <router-link
-            to="/"
-            tag="a"
-            :style="{color: salon.frontend_opts.theme.primary}"
-          >{{ salon ? salon.name : 'Logo' }}</router-link>
+          <router-link to="/" tag="a" :style="{color: salon.frontend_opts.theme.primary}">
+            <img v-if="salon.frontend_opts.logo" :src="salon.frontend_opts.logo"/>
+            <span v-else>{{ salon ? salon.name : 'Logo' }}</span>
+          </router-link>
           <i
             class="material-icons edit"
             v-if="$route.path === '/admin'"

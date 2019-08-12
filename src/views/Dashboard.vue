@@ -35,7 +35,7 @@
       @deleteBlock="deleteProductsBlock"
     />
     <Contact :salon="salon" />
-    <Footer :name="salon.name" :social="salon.social" />
+    <Footer :salon="salon" />
     <div class="dialog" :class="dialog.open ? 'open': ''">
       <div class="card">
         <header>

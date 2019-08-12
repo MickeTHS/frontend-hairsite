@@ -1,13 +1,13 @@
 <template>
   <main v-if="salon">
-    <Banner :salon="salon" :allowEdit="false" :theme="themes[salon.frontend_opts.theme - 1]"/>
-    <About :about="salon.frontend_opts.about" :allowEdit="false" :theme="themes[salon.frontend_opts.theme - 1]"/>
-    <OpeningHours :openingHours="salon.opening_hours" :allowEdit="false" :theme="themes[salon.frontend_opts.theme - 1]"/>
-    <Gallery :gallery="salon.gallery" :description="salon.frontend_opts.gallery_description" :allowEdit="false" :theme="themes[salon.frontend_opts.theme - 1]"/>
-    <Staff :staff="salon.staff" :allowEdit="false" :theme="themes[salon.frontend_opts.theme - 1]"/>
-    <Products :products="salon.products" :allowEdit="false" :theme="themes[salon.frontend_opts.theme - 1]"/>
-    <Contact :salon="salon" :theme="themes[salon.frontend_opts.theme - 1]"/>
-    <Footer :name="salon.name" :social="salon.social"/>
+    <Banner :salon="salon" :allowEdit="false"/>
+    <About :salon="salon" :allowEdit="false" />
+    <OpeningHours :salon="salon" :allowEdit="false" />
+    <Gallery :salon="salon" :allowEdit="false" />
+    <Staff :salon="salon"/>
+    <Products :salon="salon" :allowEdit="false"/>
+    <Contact :salon="salon"/>
+    <Footer :salon="salon" />
   </main>
 </template>
 
@@ -21,7 +21,7 @@ export default {
     }
   },
   created(){
-    const id = "f9e63d95-8e84-4ca6-bb3d-b8e8e784b6d5"
+    const id = "063a07ad-f76e-47f9-b422-c8d3e1c965ff"
     this.$store.dispatch('getSalonPublic', id)
   },
 }

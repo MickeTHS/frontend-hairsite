@@ -1,3 +1,4 @@
+
 <template>
   <div class="hero">
     <div class="container">
@@ -29,11 +30,13 @@
       margin: 0 auto;
 
       .btn {
-        font-size: 17px;
+        font-size: 14px;
         font-weight: 700;
-        display: block;
-        width: 140px;
+        display: inline-block;
+        min-width: 140px;
         margin: 20px auto 0;
+        background-color: #bfd354;
+        white-space: nowrap;
       }
     }
   }

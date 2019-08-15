@@ -4,7 +4,7 @@
       <div class="container">
         <div class="brand">
           <router-link to="/" tag="a" :style="{color: salon.frontend_opts.theme.primary}">
-            <img v-if="salon.frontend_opts.logo" :src="salon.frontend_opts.logo"/>
+            <img v-if="salon.frontend_opts.logo" :src="`http://localhost:8081/${salon.frontend_opts.logo}`"/>
             <span v-else>{{ salon ? salon.name : 'Logo' }}</span>
           </router-link>
           <i
@@ -166,6 +166,10 @@ nav.landing {
     .material-icons.edit {
       right: -32px;
       top: 0;
+    }
+    img {
+      max-height: 40px;
+      display: block;
     }
   }
 

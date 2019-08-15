@@ -19,6 +19,7 @@
     />
     <Gallery
       :salon="salon"
+      :gallery="gallery"
       :allowEdit="true"
       @updateGalleryDescription="updateGalleryDescription"
       @addToGallery="addToGallery"
@@ -363,7 +364,10 @@ export default {
   },
   computed: {
     salon() {
-      return this.$store.getters.salon 
+      return this.$store.getters.salon  
+    },
+    gallery(){
+      return this.$store.getters.gallery
     }
   },
   watch: {

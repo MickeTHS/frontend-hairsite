@@ -13,6 +13,7 @@ export default new Vuex.Store({
     userId: null,
     salon: null,
     publicSalon: null,
+    gallery: null,
     snackbar: {
       open: false,
       message: null,
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     },
     updateStaff(state, staff) {
       state.staff = staff
+    },
+    updateGallery(state, gallery) {
+      state.gallery = gallery
     },
   },
   actions: {
@@ -138,6 +142,13 @@ export default new Vuex.Store({
       try {
         const res = await Axios.post('http://localhost:8081/fileupload', payload, config)
         console.log(res)
+        const logo = res.data.files[0]
+        const frontendOpts = state.salon.frontend_opts
+        frontendOpts.logo = logo
+        console.log('fopts', frontendOpts)
+        await dispatch('updateSalon', {frontend_opts: frontendOpts})
+        dispatch('getSalon', state.salon.salon_id)
+
       } catch (e) {
         console.log('ERROR!!')
         console.log(e.reason)
@@ -167,7 +178,14 @@ export default new Vuex.Store({
       }
       try {
         const res = await Axios.post('http://localhost:8081/fileupload', fd, config)
-        console.log(res)
+        const message = 'Images uploaded successfully'
+        const snackbar = {
+          open: true,
+          message: message,
+          success: true
+        }
+        commit('showSnackbar', snackbar)
+        dispatch('getSalon', state.salon.salon_id)
       } catch (e) {
         console.log('ERROR!!')
         console.log(e.reason)
@@ -190,7 +208,7 @@ export default new Vuex.Store({
       const res = await axios.get(`/salon?salon_id=${id}`, config)
       const salon = res.data.salon
 
-      dispatch('getGallery', salon.salon_id)
+      dispatch('getGallery', salon.gallery.gallery_id)
 
       console.log({salon})
 
@@ -207,9 +225,10 @@ export default new Vuex.Store({
         localStorage.clear()
       }
     },
-    async getGallery({commit}, salonId){
-      const res = await axios.get(`/salon/gallery?salon_id=${salonId}`)
-      console.log('gallery: ', res)
+    async getGallery({commit}, galleryId){
+      const res = await axios.get(`/salon/gallery?gallery_id=${galleryId}`)
+      const gallery = res.data.gallery_images
+      commit('updateGallery', gallery)
     },
     async addStaff({commit, state}, payload) {
       const config = {
@@ -246,6 +265,9 @@ export default new Vuex.Store({
     },
     isAuth(state) {
       return state.token !== null
+    },
+    gallery(state) {
+      return state.gallery
     },
     snackbar(state) {
       return state.snackbar

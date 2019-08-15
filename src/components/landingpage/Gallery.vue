@@ -15,8 +15,8 @@
         <i class="material-icons add" v-if="allowEdit" @click="$emit('addToGallery')" :style="{background: salon.frontend_opts.theme.primary}">add</i>
         <div
           class="img"
-          v-for="(img, index) in salon.gallery.imagesGallery"
-          :style="{background: 'url(' + img + ')'}"
+          v-for="(img, index) in gallery"
+          :style="{background: 'url(' + baseURL + img.filepath + img.filename + ')'}"
           :key="index"
         ></div>
       </div>
@@ -26,7 +26,12 @@
 
 <script>
 export default {
-  props: ["salon", "allowEdit"]
+  props: ['salon', 'gallery', 'allowEdit'],
+  data(){
+    return {
+      baseURL: 'http://localhost:8081/'
+    }
+  }
 };
 </script>
 
@@ -51,6 +56,7 @@ export default {
       height: 250px;
       margin: 5px;
       background-size: cover !important;
+      background-position: center !important;
     }
   }
 }

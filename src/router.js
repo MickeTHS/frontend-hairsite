@@ -53,8 +53,8 @@ export default new Router({
       }
     },
     {
-      path: '/landingpage',
-      name: 'landingpage',
+      path: '/site/:salonId',
+      name: 'site',
       component: LandingPage
     },
     {

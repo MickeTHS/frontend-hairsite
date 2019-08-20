@@ -3,7 +3,7 @@
     <Banner :salon="salon" :allowEdit="false"/>
     <About :salon="salon" :allowEdit="false" />
     <OpeningHours :salon="salon" :allowEdit="false" />
-    <Gallery :salon="salon" :gallery="gallery" :allowEdit="false" />
+    <Gallery :salon="salon" :allowEdit="false" />
     <Staff :salon="salon"/>
     <Products :salon="salon" :allowEdit="false"/>
     <Contact :salon="salon"/>
@@ -18,14 +18,11 @@ export default {
   computed: {
     salon(){
       return this.$store.getters.publicSalon
-    },
-    gallery(){
-      return this.$store.getters.gallery
     }
   },
   created(){
-    const id = "063a07ad-f76e-47f9-b422-c8d3e1c965ff"
-    this.$store.dispatch('getSalonPublic', id)
+    const salonId = this.$route.params.salonId
+    this.$store.dispatch('getSalonPublic', salonId)
   },
 }
 </script>

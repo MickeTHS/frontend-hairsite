@@ -19,7 +19,6 @@
     />
     <Gallery
       :salon="salon"
-      :gallery="gallery"
       :allowEdit="true"
       @updateGalleryDescription="updateGalleryDescription"
       @addToGallery="addToGallery"

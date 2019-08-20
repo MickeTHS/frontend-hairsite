@@ -13,7 +13,6 @@ export default new Vuex.Store({
     userId: null,
     salon: null,
     publicSalon: null,
-    gallery: null,
     snackbar: {
       open: false,
       message: null,
@@ -40,10 +39,7 @@ export default new Vuex.Store({
     },
     updateStaff(state, staff) {
       state.staff = staff
-    },
-    updateGallery(state, gallery) {
-      state.gallery = gallery
-    },
+    }
   },
   actions: {
     async signup({commit}, authData) {
@@ -198,17 +194,14 @@ export default new Vuex.Store({
       return await axios.put('/salon', salon, config)
     },
     async getSalonPublic({state, commit}, id) {
-      const res = await axios.get(`/salon/public?salon_id=${id}`)
+      const res = await axios.get(`/salon/extended?salon_id=${id}`)
       const salon = res.data.salon
       commit('updatePublicSalon', salon)
     },
     async getSalon({commit, dispatch, state}, id) {
       if (!id) id = state.salon.salon_id
-      const config = { headers: {'x-access-token': state.token} }
-      const res = await axios.get(`/salon?salon_id=${id}`, config)
+      const res = await axios.get(`/salon/extended?salon_id=${id}`)
       const salon = res.data.salon
-
-      dispatch('getGallery', salon.gallery.gallery_id)
 
       console.log({salon})
 
@@ -224,11 +217,6 @@ export default new Vuex.Store({
       } catch (e) {
         localStorage.clear()
       }
-    },
-    async getGallery({commit}, galleryId){
-      const res = await axios.get(`/salon/gallery?gallery_id=${galleryId}`)
-      const gallery = res.data.gallery_images
-      commit('updateGallery', gallery)
     },
     async addStaff({commit, state}, payload) {
       const config = {
@@ -265,9 +253,6 @@ export default new Vuex.Store({
     },
     isAuth(state) {
       return state.token !== null
-    },
-    gallery(state) {
-      return state.gallery
     },
     snackbar(state) {
       return state.snackbar

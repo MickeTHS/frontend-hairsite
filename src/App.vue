@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <div id="app">
-      <Navbar v-if="this.$route.path !== '/landingpage' && this.$route.path !== '/admin'" />
+      <Navbar v-if="this.$route.path.split('/')[1] !== 'site' && this.$route.path !== '/admin'" />
       <LandingPageNavbar
-        v-if="this.$route.path === '/landingpage' || this.$route.path === '/admin'"
+        v-if="this.$route.path.split('/')[1] === 'site' || this.$route.path === '/admin'"
       />
       <router-view />
       <v-snackbar
@@ -37,6 +37,9 @@ export default {
     snackbar() {
       return this.$store.getters.snackbar
     }
+  },
+  created(){
+    console.log(this.$route.path.split('/')[1])
   }
 };
 </script>

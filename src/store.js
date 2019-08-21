@@ -226,14 +226,16 @@ export default new Vuex.Store({
       try {
         const res = await axios.post('/salon/staff', payload.staff, config)
         console.log(res)
-        const galleryId = res.data.user.gallery_id
+        // const galleryId = res.data.user.gallery_id
+        const staffId = res.data.user.user_id
         const filesUploadConfig = {
           headers: {
             'x-access-token': state.token,
             'Content-Type': 'multipart/form-data'
           }
         }
-        payload.fd.append('gallery_id', galleryId)
+        // payload.fd.append('gallery_id', galleryId)
+        payload.fd.append('staff_id', staffId)
         const uploadRes = await Axios.post('http://localhost:8081/fileupload', payload.fd, filesUploadConfig)
         console.log(uploadRes)
       } catch (e) {

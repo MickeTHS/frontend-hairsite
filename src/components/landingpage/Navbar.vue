@@ -38,7 +38,7 @@
           <router-link to="/login" tag="li" v-if="!isAuth">Login</router-link>
           <li
             v-if="isAuth && ($route.path === '/admin')"
-            @click="$router.push('/landingpage')"
+            @click="$router.push(`/site/${salon.salon_id}`)"
           >View website</li>
           <li
             v-if="isAuth && ($route.path === '/admin')"
@@ -77,17 +77,17 @@
         </li>
         <router-link to="/login" tag="li" v-if="!isAuth">Login</router-link>
         <li
-          v-if="isAuth && ($route.path !== '/landingpage')"
+          v-if="isAuth && ($route.path !== '/site')"
           :class="`theme${salon.frontend_opts.theme}`"
-          @click="$router.push('/landingpage')"
+          @click="$router.push(`/site/${salon.salon_id}`)"
         >View website</li>
         <li
-          v-if="isAuth && ($route.path !== '/landingpage')"
+          v-if="isAuth && ($route.path.split('/')[1] !== 'site')"
           :class="`theme${salon.frontend_opts.theme}`"
           @click="$router.push('/wizard')"
         >Create Salon</li>
         <li
-          v-if="isAuth && ($route.path !== '/landingpage')"
+          v-if="isAuth && ($route.path.split('/')[1] !== 'site')"
           :class="`theme${salon.frontend_opts.theme}`"
           @click="logout"
         >Logout</li>

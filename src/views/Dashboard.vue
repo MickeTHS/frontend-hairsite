@@ -118,6 +118,15 @@
               />
             </div>
             <div class="form-control">
+              <label for="staffTitle">Title:</label>
+              <input
+                type="text"
+                id="staffTitle"
+                v-model="staff.title"
+                placeholder="e.g Hairdresser"
+              />
+            </div>
+            <div class="form-control">
               <label for="email">Email</label>
               <input type="text" id="email" v-model="staff.email" placeholder="Staff Email" />
             </div>
@@ -187,6 +196,7 @@ export default {
       staff: {
         firstname: null,
         lastname: null,
+        title: null,
         email: null,
         phone: null,
         image: null
@@ -255,6 +265,7 @@ export default {
         salon_id: this.salon.salon_id,
         firstname: this.staff.firstname,
         lastname: this.staff.lastname,
+        title: this.staff.title,
         email: this.staff.email,
         phone: this.staff.phone,
       }

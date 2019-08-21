@@ -6,10 +6,10 @@
         <div class="members">
           <i class="material-icons add" v-if="allowEdit" @click="$emit('addStaff')" :style="{background: salon.frontend_opts.theme.primary}">add</i>
           <div class="col" v-for="(member, i) in salon.staff" :key="i">
-            <div class="team-member" :style="{background: 'url(' + member.imageURL + ')'}">
+            <div class="team-member" :style="{background: 'url(' + member.image_url + ')'}">
               <i class="material-icons delete" v-if="allowEdit" @click="deleteStaff(member.id)">delete</i>
               <div class="infos" :style="{background: salon.frontend_opts.theme.primary}">
-                <h4>{{ member.name }}</h4>
+                <h4>{{ `${member.firstname} ${member.lastname}` }}</h4>
                 <p>{{ member.title }}</p>
               </div>
               <div class="social">

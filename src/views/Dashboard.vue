@@ -259,12 +259,7 @@ export default {
         phone: this.staff.phone,
       }
       const fd = new FormData()
-      // fd.append('gallery_id', this.salon.gallery.gallery_id)
-      // fd.append('firstname', this.staff.firstname)
-      // fd.append('lastname', this.staff.lastname)
-      // fd.append('email', this.staff.email)
-      // fd.append('phone', this.staff.phone)
-      fd.append('image', this.selectedFiles)
+      fd.append('image', this.selectedFiles[0])
       const payload = {staff, fd}
       this.$store.dispatch('addStaff', payload)
     },

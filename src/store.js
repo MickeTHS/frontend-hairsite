@@ -36,9 +36,6 @@ export default new Vuex.Store({
     },
     showSnackbar(state, snackbar) {
       state.snackbar = snackbar
-    },
-    updateStaff(state, staff) {
-      state.staff = staff
     }
   },
   actions: {
@@ -203,6 +200,7 @@ export default new Vuex.Store({
       if (!id) id = state.salon.salon_id
       const res = await axios.get(`/salon/extended?salon_id=${id}`)
       const salon = res.data.salon
+      salon.staff = res.data.staff
 
       console.log({salon})
 
@@ -235,6 +233,7 @@ export default new Vuex.Store({
             'Content-Type': 'multipart/form-data'
           }
         }
+        payload.fd.append('gallery_id', galleryId)
         const uploadRes = await Axios.post('http://localhost:8081/fileupload', payload.fd, filesUploadConfig)
         console.log(uploadRes)
       } catch (e) {

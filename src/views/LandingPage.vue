@@ -4,7 +4,7 @@
     <About :salon="salon" :allowEdit="false" />
     <OpeningHours :salon="salon" :allowEdit="false" />
     <Gallery :salon="salon" :allowEdit="false" />
-    <Staff :salon="salon"/>
+    <Staff :salon="salon" />
     <Products :salon="salon" :allowEdit="false"/>
     <Contact :salon="salon"/>
     <Footer :salon="salon" />

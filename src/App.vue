@@ -37,9 +37,6 @@ export default {
     snackbar() {
       return this.$store.getters.snackbar
     }
-  },
-  created(){
-    console.log(this.$route.path.split('/')[1])
   }
 };
 </script>

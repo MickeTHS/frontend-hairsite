@@ -66,6 +66,7 @@ export default new Vuex.Store({
     async login({commit, dispatch}, authData) {
       try {
         const res = await axios.post('/user/login', authData)
+        console.log('user: ', res.data)
         const token = res.data.token
         const userId = res.data.id
         const salonId = res.data.currentSalon
@@ -221,13 +222,21 @@ export default new Vuex.Store({
     async addStaff({commit, state}, payload) {
       const config = {
         headers: {
-          'x-access-token': state.token,
-          'Content-Type': 'multipart/form-data'
+          'x-access-token': state.token
         }
       }
       try {
-        const res = await axios.post('/salon/staff', payload, config)
+        const res = await axios.post('/salon/staff', payload.staff, config)
         console.log(res)
+        const galleryId = res.data.user.gallery_id
+        const filesUploadConfig = {
+          headers: {
+            'x-access-token': state.token,
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+        const uploadRes = await Axios.post('http://localhost:8081/fileupload', payload.fd, filesUploadConfig)
+        console.log(uploadRes)
       } catch (e) {
         console.log('ERROR!!')
         console.log(e)

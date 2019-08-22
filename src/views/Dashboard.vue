@@ -35,7 +35,7 @@
       @deleteBlock="deleteProductsBlock"
     />
     <Contact :salon="salon" />
-    <Footer :salon="salon" />
+    <Footer :salon="salon" :allowEdit="true" @updateSocialLinks="updateSocialLinks" />
     <div class="dialog" :class="dialog.open ? 'open': ''">
       <div class="card">
         <header>
@@ -145,13 +145,32 @@
               <input type="file" id="gallery" @change="onFilesSelected" multiple>
             </div>
           </div>
+          <div v-if="dialog.target === 'updateSocialLinks'">
+            <div class="form-control">
+              <label for="facebook">Facebook</label>
+              <input type="text" id="facebook" v-model="social[0].url">
+            </div>
+            <div class="form-control">
+              <label for="twitter">Twitter</label>
+              <input type="text" id="twitter" v-model="social[1].url">
+            </div>
+            <div class="form-control">
+              <label for="instagram">Instagram</label>
+              <input type="text" id="instaram" v-model="social[2].url">
+            </div>
+            <div class="form-control">
+              <label for="linkedin">LinkedIn</label>
+              <input type="text" id="linkedin" v-model="social[3].url">
+            </div>
+          </div>
         </div>
         <footer>
           <button
             v-if="dialog.target !== 'openingHours' 
               && dialog.target !== 'addProducts'
               && dialog.target !== 'addStaff'
-              && dialog.target !== 'addToGallery'"
+              && dialog.target !== 'addToGallery'
+              && dialog.target !== 'updateSocialLinks'"
             class="btn"
             @click="saveFrontendOpts"
           >Save</button>
@@ -159,6 +178,7 @@
           <button v-if="dialog.target === 'addProducts'" class="btn" @click="saveProducts">Save</button>
           <button v-if="dialog.target === 'addStaff'" class="btn" @click="saveStaff">Save</button>
           <button v-if="dialog.target === 'addToGallery'" class="btn" @click="saveToGallery">Save</button>
+          <button v-if="dialog.target === 'updateSocialLinks'" class="btn" @click="saveSocialLinks">Save</button>
           <button class="btn btn-error" @click="dialog.open = false">Close</button>
         </footer>
       </div>
@@ -200,7 +220,13 @@ export default {
         email: null,
         phone: null,
         image: null
-      }
+      },
+      social: [
+        { name: "facebook", url: "https://facebook.com/"},
+        { name: "twitter",  url: "https://twitter.com/"},
+        { name: "instagram", url: "https://instagram.com/"},
+        { name: "linkedin", url: "https://linkedin.com/"}
+      ]
     }
   },
   components: {
@@ -288,6 +314,29 @@ export default {
         fd.append('gallery[]', this.selectedFiles[i])
       }
       this.$store.dispatch('addToGallery', fd)
+    },
+    updateSocialLinks() {
+      this.dialog.title = "Update Social Links"
+      this.dialog.target = "updateSocialLinks"
+      this.dialog.open = true
+    },
+    async saveSocialLinks(){
+      const salon = {
+        social: this.social
+      }
+      try {
+        const res = await this.$store.dispatch("updateSalon", salon)
+        const snackbar = {
+          open: true,
+          message: 'Informations Updated Successfully!',
+          success: true
+        }
+        this.$store.dispatch('showSnackbar', snackbar)
+        await this.$store.dispatch("getSalon")
+        this.dialog.open = false
+      } catch (e) {
+        console.log(e)
+      }
     },
     async saveFrontendOpts() {
       const salon = {
@@ -382,6 +431,7 @@ export default {
       this.about = this.salon.frontend_opts.about 
       this.gallery_description = this.salon.frontend_opts.gallery_description 
       this.opening_hours = this.salon.opening_hours 
+      this.social = this.salon.social
     }
   },
   mounted() {

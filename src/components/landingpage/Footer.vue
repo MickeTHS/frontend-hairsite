@@ -11,6 +11,7 @@
         >
           <img :src="`/img/social/${network.name}.svg`" :alt="network.name" />
         </a>
+        <i class="material-icons edit" v-if="allowEdit" :style="{background: salon.frontend_opts.theme.primary}" @click="$emit('updateSocialLinks')">edit</i>
       </p>
     </div>
   </footer>
@@ -18,7 +19,7 @@
 
 <script>
 export default {
-  props: ['salon']
+  props: ['salon', 'allowEdit']
 };
 </script>
 
@@ -39,9 +40,14 @@ footer {
       font-weight: 300;
     }
     .social {
+      position: relative;
       img {
         width: 20px;
         margin: 0 6px;
+      }
+      .edit {
+        top: -6px;
+        right: -30px;
       }
     }
   }

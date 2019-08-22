@@ -7,7 +7,7 @@
     <Staff :salon="salon" />
     <Products :salon="salon" :allowEdit="false"/>
     <Contact :salon="salon"/>
-    <Footer :salon="salon" />
+    <Footer :salon="salon" :allowEdit="false"/>
   </main>
 </template>
 

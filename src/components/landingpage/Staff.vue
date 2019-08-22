@@ -7,7 +7,7 @@
           <i class="material-icons add" v-if="allowEdit" @click="$emit('addStaff')" :style="{background: salon.frontend_opts.theme.primary}">add</i>
           <div class="col" v-for="(member, i) in salon.staff" :key="i">
             <div class="team-member" :style="{background: 'url(' + baseURL + member.image_url + ')'}">
-              <i class="material-icons delete" v-if="allowEdit" @click="deleteStaff(member.id)">delete</i>
+              <i class="material-icons delete" v-if="allowEdit" @click="deleteStaff(member.user_id)">delete</i>
               <div class="infos" :style="{background: salon.frontend_opts.theme.primary}">
                 <h4>{{ `${member.firstname} ${member.lastname}` }}</h4>
                 <p>{{ member.title }}</p>
@@ -35,7 +35,8 @@ export default {
   },
   methods: {
     deleteStaff(id) {
-      this.$store.dispatch("updateStaff", id);
+      console.log('deleting staff with id: ', id)
+      this.$store.dispatch("deleteStaff", id)
     }
   }
 };

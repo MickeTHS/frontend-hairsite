@@ -243,6 +243,17 @@ export default new Vuex.Store({
         console.log(e)
       }
     },
+    async deleteStaff({commit, state}, userId){
+      const config = { headers: {'x-access-token': state.token} }
+      const res = await axios.delete(`/user?user_id=${userId}`, config)
+      console.log('Delete Res: ', res)
+      // try {
+      //   const res = await axios.delete(`/user?user_id=${userId}`, config)
+      //   console.log('Delete Res: ', res)
+      // } catch(e){
+      //   console.log(e)
+      // }
+    },
     showSnackbar({commit}, snackbar) {
       commit('showSnackbar', snackbar)
     },

@@ -13,7 +13,12 @@
           <ul class="contact-info">
             <li>
               <i class="material-icons" :style="{color: salon.frontend_opts.theme.primary}">location_on</i>
-              {{ salon.postal_address }}
+              {{ salon.street }}
+              {{ salon.street_no }},
+              {{ salon.postal_code }}
+              {{ salon.postal_area }}
+              {{ salon.postal_code || salon.postal_area ? ', ' : ''}}
+              {{ salon.city }}
             </li>
             <li>
               <i class="material-icons" :style="{color: salon.frontend_opts.theme.primary}">phone_in_talk</i>

@@ -252,14 +252,14 @@ export default {
       this.dialog.open = true
     },
     updateGalleryDescription() {
-      this.dialog.title = "Update Gallery Description";
-      this.dialog.target = "galleryDescription";
-      this.dialog.open = true;
+      this.dialog.title = "Update Gallery Description"
+      this.dialog.target = "galleryDescription"
+      this.dialog.open = true
     },
     updateOpeningHours() {
-      this.dialog.title = "Update Opening Hours";
-      this.dialog.target = "openingHours";
-      this.dialog.open = true;
+      this.dialog.title = "Update Opening Hours"
+      this.dialog.target = "openingHours"
+      this.dialog.open = true
     },
     addProducts() {
       this.dialog.title = "Add Products Block"
@@ -472,7 +472,7 @@ export default {
       }
     }
     .content {
-      padding: 24px 32px;
+      padding: 24px 32px 10px 32px;
       textarea {
         border: 1px solid #eee;
         border-radius: 4px;
@@ -490,7 +490,8 @@ export default {
         padding: 10px 20px;
         margin-right: 10px;
         margin-bottom: 10px;
-        border-radius: 4px;
+        border-radius: 25px;
+        width: calc(100% - 12px);
         &::placeholder {
           color: #aaa;
           font-weight: 300;
@@ -538,7 +539,7 @@ export default {
       text-transform: uppercase;
       letter-spacing: 1px;
       background-color: #8bc34a;
-      border-radius: 4px;
+      border-radius: 25px;
       margin-right: 10px;
       &.btn-error {
         background-color: #f44336;
@@ -547,6 +548,8 @@ export default {
   }
   .form-control {
     display: inline-block;
+    min-width: 250px;
+    max-width: 100%;
     &:not(:last-child) {
       margin-bottom: 10px;
     }

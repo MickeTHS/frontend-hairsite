@@ -1,6 +1,6 @@
 <template>
-  <section class="staff" id="staff" :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[3]}">
-    <h2>Our Awesome Staff</h2>
+  <section class="staff" id="staff" :style="{background: salon.frontend_opts.theme.sections[3].background}">
+    <h2 :style="{color: salon.frontend_opts.theme.sections[3].text.heading}">Our Awesome Staff</h2>
     <div class="grid">
       <div class="container">
         <div class="members">

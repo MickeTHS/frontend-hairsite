@@ -1,7 +1,7 @@
 <template>
-  <section class="contact" id="contact" :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[5]}">
+  <section class="contact" id="contact" :style="{background: salon.frontend_opts.theme.sections[5].background}">
     <div class="container">
-      <h2>Contact Us</h2>
+      <h2 :style="{color: salon.frontend_opts.theme.sections[5].text.heading}">Contact Us</h2>
       <div class="grid">
         <div class="col col-6 map-wrapper">
           <div class="map">
@@ -9,9 +9,9 @@
           </div>
         </div>
         <div class="col col-6 contact-info">
-          <p>Send us a message using this form! Or contact us directly using the following:</p>
+          <p :style="{color: salon.frontend_opts.theme.sections[5].text.body}">Send us a message using this form! Or contact us directly using the following:</p>
           <ul class="contact-info">
-            <li>
+            <li :style="{color: salon.frontend_opts.theme.sections[5].text.body}">
               <i class="material-icons" :style="{color: salon.frontend_opts.theme.primary}">location_on</i>
               {{ salon.street }}
               {{ salon.street_no }},
@@ -20,11 +20,11 @@
               {{ salon.postal_code || salon.postal_area ? ', ' : ''}}
               {{ salon.city }}
             </li>
-            <li>
+            <li :style="{color: salon.frontend_opts.theme.sections[5].text.body}">
               <i class="material-icons" :style="{color: salon.frontend_opts.theme.primary}">phone_in_talk</i>
               {{ salon.phone_numbers }}
             </li>
-            <li>
+            <li :style="{color: salon.frontend_opts.theme.sections[5].text.body}">
               <i class="material-icons" :style="{color: salon.frontend_opts.theme.primary}">message</i>
               {{ salon.emails }}
             </li>

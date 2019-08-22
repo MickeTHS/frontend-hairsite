@@ -1,18 +1,18 @@
 <template>
-  <section class="opening-hours" :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[1]}">
+  <section class="opening-hours" :style="{background: salon.frontend_opts.theme.sections[1].background}">
     <div class="container">
-      <h2>Opening Hours</h2>
+      <h2 :style="{color: salon.frontend_opts.theme.sections[1].text.heading}">Opening Hours</h2>
       <ul>
         <i class="material-icons edit" v-if="allowEdit" :style="{background: salon.frontend_opts.theme.primary}" @click="$emit('updateOpeningHours')">edit</i>
         <li v-for="(item, index) in salon.opening_hours" :key="index">
           <div class="day">
-            <span :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[1]}">{{ item.day }}</span>
+            <span :style="{background: salon.frontend_opts.theme.sections[1].background, color: salon.frontend_opts.theme.sections[1].text.body}">{{ item.day }}</span>
           </div>
           <div class="morning">
-            <span :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[1]}" v-if="item.hours[0]">{{ item.hours[0] }} - {{ item.hours[1] }}</span><span v-else>salon closed</span>
+            <span :style="{background: salon.frontend_opts.theme.sections[1].background, color: salon.frontend_opts.theme.sections[1].text.body}" v-if="item.hours[0]">{{ item.hours[0] }} - {{ item.hours[1] }}</span><span v-else>salon closed</span>
           </div>
           <div class="afternoon">
-            <span :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[1]}" v-if="item.hours[2]">{{ item.hours[2] }} - {{ item.hours[3] }}</span><span v-else>salon closed</span>
+            <span :style="{background: salon.frontend_opts.theme.sections[1].background, color: salon.frontend_opts.theme.sections[1].text.body}" v-if="item.hours[2]">{{ item.hours[2] }} - {{ item.hours[3] }}</span><span v-else>salon closed</span>
           </div>
         </li>
       </ul>

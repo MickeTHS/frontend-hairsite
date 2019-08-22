@@ -1,16 +1,16 @@
 <template>
-  <section class="products" id="products" :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[4]}">
+  <section class="products" id="products" :style="{background: salon.frontend_opts.theme.sections[4].background}">
     <div class="container">
-      <h2>Our Pricing</h2>
+      <h2 :style="{color: salon.frontend_opts.theme.sections[4].text.heading}">Our Pricing</h2>
       <div class="grid">
         <i class="material-icons add" v-if="allowEdit" :style="{background: salon.frontend_opts.theme.primary}" @click="$emit('addProducts')">add</i>
         <div class="col" v-for="(block, i) in salon.products" :key="i">
           <i class="material-icons delete" v-if="allowEdit" @click="$emit('deleteBlock', block.id)">delete</i>
-          <h3>{{ block.title }}</h3>
+          <h3 :style="{color: salon.frontend_opts.theme.sections[4].text.heading}">{{ block.title }}</h3>
           <ul>
             <li v-for="(service, j) in block.services" :key="j">
-              <span :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[4]}">{{ service.title }}</span>
-              <span :style="{color: salon.frontend_opts.theme.primary, background: salon.frontend_opts.theme.sectionsBackgrounds[4]}">{{ service.price }} SEK</span>
+              <span :style="{background: salon.frontend_opts.theme.sections[4].background, color: salon.frontend_opts.theme.sections[4].text.body}">{{ service.title }}</span>
+              <span :style="{color: salon.frontend_opts.theme.primary, background: salon.frontend_opts.theme.sections[4].background}">{{ service.price }} SEK</span>
             </li>
           </ul>
         </div>

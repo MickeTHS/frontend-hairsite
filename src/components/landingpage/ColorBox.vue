@@ -15,31 +15,60 @@
       </header>
       <div class="content">
         <div class="theme-preview">
-          <h3>Sections Backgrounds:</h3>
-          <ul>
+          <ul class="custom">
             <li>
-              About:
-              <input type="color" v-model="sectionsBackgrounds[0]" />
+              <h3>About Section</h3>
+              Background:
+              <input type="color" v-model="sections[0].background" />
+              Heading:
+              <input type="color" v-model="sections[0].text.heading" />
+              Body:
+              <input type="color" v-model="sections[0].text.body" />
             </li>
             <li>
-              Opening Hours:
-              <input type="color" v-model="sectionsBackgrounds[1]" />
+              <h3>Opening Hours Section</h3>
+              Background:
+              <input type="color" v-model="sections[1].background" />
+              Heading:
+              <input type="color" v-model="sections[1].text.heading" />
+              Body:
+              <input type="color" v-model="sections[1].text.body" />
             </li>
             <li>
-              Our Gallery:
-              <input type="color" v-model="sectionsBackgrounds[2]" />
+              <h3>Our Gallery Section</h3>
+              Background:
+              <input type="color" v-model="sections[2].background" />
+              Heading:
+              <input type="color" v-model="sections[2].text.heading" />
+              Body:
+              <input type="color" v-model="sections[2].text.body" />
             </li>
             <li>
-              Staff:
-              <input type="color" v-model="sectionsBackgrounds[3]" />
+              <h3>Staff Section</h3>
+              Background:
+              <input type="color" v-model="sections[3].background" />
+              Heading:
+              <input type="color" v-model="sections[3].text.heading" />
+              Body:
+              <input type="color" v-model="sections[3].text.body" />
             </li>
             <li>
-              Pricing:
-              <input type="color" v-model="sectionsBackgrounds[4]" />
+              <h3>Pricing Section</h3>
+              Background:
+              <input type="color" v-model="sections[4].background" />
+              Heading:
+              <input type="color" v-model="sections[4].text.heading" />
+              Body:
+              <input type="color" v-model="sections[4].text.body" />
             </li>
             <li>
-              Contact:
-              <input type="color" v-model="sectionsBackgrounds[5]" />
+              <h3>Contact Section</h3>
+              Background:
+              <input type="color" v-model="sections[5].background" />
+              Heading:
+              <input type="color" v-model="sections[5].text.heading" />
+              Body:
+              <input type="color" v-model="sections[5].text.body" />
             </li>
           </ul>
           <h3>Themes:</h3>
@@ -72,7 +101,50 @@ export default {
         { id: 6, color: "#f44336" }
       ],
       currentTheme: 1,
-      sectionsBackgrounds: [],
+      sections: [
+        {
+          background: '#ffffff', 
+          text: {
+            heading: '#777777',
+            body: '#777777'
+          }
+        },
+        {
+          background: '#ffffff', 
+          text: {
+            heading: '#777777',
+            body: '#777777'
+          }
+        },
+        {
+          background: '#ffffff', 
+          text: {
+            heading: '#777777',
+            body: '#777777'
+          }
+        },
+        {
+          background: '#ffffff', 
+          text: {
+            heading: '#777777',
+            body: '#777777'
+          }
+        },
+        {
+          background: '#ffffff', 
+          text: {
+            heading: '#777777',
+            body: '#777777'
+          }
+        },
+        {
+          background: '#ffffff', 
+          text: {
+            heading: '#777777',
+            body: '#777777'
+          }
+        },
+      ],
       dialog: {
         open: false
       },
@@ -88,7 +160,7 @@ export default {
         frontend_opts: {
           theme: {
             primary: theme,
-            sectionsBackgrounds: this.sectionsBackgrounds,
+            sections: this.sections
           },
           heading: this.salon.frontend_opts.heading,
           sub_heading: this.salon.frontend_opts.sub_heading,
@@ -107,7 +179,7 @@ export default {
     }
   },
   mounted() {
-    this.sectionsBackgrounds = this.salon.frontend_opts.theme.sectionsBackgrounds
+    this.sections = this.salon.frontend_opts.theme.sections
   }
 };
 </script>
@@ -178,6 +250,15 @@ export default {
   }
   .theme-preview {
     padding: 20px 60px;
+    .custom {
+      li {
+        display: inline-block;
+        width: 50%;
+      }
+    }
+    input[type="color"]{
+      margin-right: 24px;
+    }
     h3 {
       text-transform: uppercase;
       font-size: 14px;

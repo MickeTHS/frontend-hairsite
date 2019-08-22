@@ -1,8 +1,8 @@
 <template>
-  <section class="gallery" id="gallery" :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[2]}">
+  <section class="gallery" id="gallery" :style="{background: salon.frontend_opts.theme.sections[2].background}">
     <div class="container">
-      <h2>Our Gallery</h2>
-      <p>
+      <h2 :style="{color: salon.frontend_opts.theme.sections[2].text.heading}">Our Gallery</h2>
+      <p :style="{color: salon.frontend_opts.theme.sections[2].text.body}">
         <i
           class="material-icons edit"
           v-if="allowEdit"

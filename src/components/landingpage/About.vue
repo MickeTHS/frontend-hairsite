@@ -1,12 +1,12 @@
 <template>
-  <section class="about" id="about" :style="{background: salon.frontend_opts.theme.sectionsBackgrounds[0]}">
+  <section class="about" id="about" :style="{background: salon.frontend_opts.theme.sections[0].background}">
     <div class="container">
-      <h2>Who We Are</h2>
+      <h2 :style="{color: salon.frontend_opts.theme.sections[0].text.heading}">Who We Are</h2>
       <div class="grid">
         <div class="col" style="background: url(/img/img-1.jpg)"></div>
         <div class="col">
           <i class="material-icons edit" v-if="allowEdit" @click="$emit('updateAbout')" :style="{background: salon.frontend_opts.theme.primary}">edit</i>
-          <p>{{ salon.frontend_opts.about }}</p>
+          <p :style="{color: salon.frontend_opts.theme.sections[0].text.body}">{{ salon.frontend_opts.about }}</p>
         </div>
       </div>
     </div>

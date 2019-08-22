@@ -32,6 +32,7 @@
       :salon="salon"
       :allowEdit="true"
       @addProducts="addProducts"
+      @editBlock="editProducts"
       @deleteBlock="deleteProductsBlock"
     />
     <Contact :salon="salon" />
@@ -97,6 +98,13 @@
                 :key="index"
               >{{ product.title }} - {{ product.price }}</li>
             </ul>
+          </div>
+          <div v-if="dialog.target === 'editProducts'">
+            <h3>{{ block.title }} Services</h3>
+            <div class="form-control products-form-control" v-for="(servce, index) in block.services" :key="index">
+              <input type="text" placeholder="Enter Block Title" v-model="block.services[index].title" required />
+              <input type="Number" placeholder="Enter Block Title" v-model="block.services[index].price" required />
+            </div>
           </div>
           <div v-if="dialog.target === 'addStaff'">
             <div class="form-control">
@@ -168,6 +176,7 @@
           <button
             v-if="dialog.target !== 'openingHours' 
               && dialog.target !== 'addProducts'
+              && dialog.target !== 'editProducts'
               && dialog.target !== 'addStaff'
               && dialog.target !== 'addToGallery'
               && dialog.target !== 'updateSocialLinks'"
@@ -175,7 +184,7 @@
             @click="saveFrontendOpts"
           >Save</button>
           <button v-if="dialog.target === 'openingHours'" class="btn" @click="saveOpeningHours">Save</button>
-          <button v-if="dialog.target === 'addProducts'" class="btn" @click="saveProducts">Save</button>
+          <button v-if="dialog.target === 'addProducts' || dialog.target === 'editProducts'" class="btn" @click="saveProducts">Save</button>
           <button v-if="dialog.target === 'addStaff'" class="btn" @click="saveStaff">Save</button>
           <button v-if="dialog.target === 'addToGallery'" class="btn" @click="saveToGallery">Save</button>
           <button v-if="dialog.target === 'updateSocialLinks'" class="btn" @click="saveSocialLinks">Save</button>
@@ -264,6 +273,13 @@ export default {
     addProducts() {
       this.dialog.title = "Add Products Block"
       this.dialog.target = "addProducts"
+      this.dialog.open = true
+    },
+    editProducts(id) {
+      this.dialog.title = "Edit Products Block"
+      this.dialog.target = "editProducts"
+      this.block = this.salon.products.filter(block => block.id === id)[0]
+      console.log('block: ', this.block)
       this.dialog.open = true
     },
     addProduct() {
@@ -386,10 +402,21 @@ export default {
       }
     },
     async saveProducts() {
-      console.log(this.block)
-      const products = this.salon.products || []
-      this.block.id = this.salon.products.length + 1, // the backend should later generate unique id
+
+      let products = this.salon.products || []
+      const blockId = this.block.id
+
+      if(this.dialog.target === 'addProducts'){
+        console.log('ADD >>')
+        this.block.id = this.salon.products.length + 1, // the backend should later generate unique id
         products.push(this.block)
+      } else if (this.dialog.target === 'editProducts'){
+        console.log('EDIT >>')
+        const blockIndex = products.findIndex(block => block.id === blockId)
+        products[blockIndex] = this.block
+      } else {
+        console.log('ERROR >>')
+      }
       console.log(products)
       const salon = { products }
       try {
@@ -473,6 +500,13 @@ export default {
     }
     .content {
       padding: 24px 32px 10px 32px;
+      h3 {
+        color: #777;
+        text-transform: uppercase;
+        font-size: 14px;
+        letter-spacing: .5px;
+        margin-bottom: 16px;
+      }
       textarea {
         border: 1px solid #eee;
         border-radius: 4px;
@@ -550,6 +584,12 @@ export default {
     display: inline-block;
     min-width: 250px;
     max-width: 100%;
+    &.products-form-control {
+      input {
+        width: calc(50% - 10px) !important;
+        margin-right: 10px !important;
+      }
+    }
     &:not(:last-child) {
       margin-bottom: 10px;
     }

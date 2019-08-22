@@ -6,6 +6,7 @@
         <i class="material-icons add" v-if="allowEdit" :style="{background: salon.frontend_opts.theme.primary}" @click="$emit('addProducts')">add</i>
         <div class="col" v-for="(block, i) in salon.products" :key="i">
           <i class="material-icons delete" v-if="allowEdit" @click="$emit('deleteBlock', block.id)">delete</i>
+          <i class="material-icons edit" v-if="allowEdit" @click="$emit('editBlock', block.id)">edit</i>
           <h3 :style="{color: salon.frontend_opts.theme.sections[4].text.heading}">{{ block.title }}</h3>
           <ul>
             <li v-for="(service, j) in block.services" :key="j">
@@ -41,6 +42,9 @@ export default {
       position: relative;
       flex-basis: 25%;
       flex-grow: 0;
+      .material-icons.edit {
+        right: 45px;
+      }
       h3 {
         margin-bottom: 10px;
         color: #444;

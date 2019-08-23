@@ -217,7 +217,50 @@ export default {
         frontend_opts: {
           theme: {
             primary: 1,
-            sectionsBackgrounds: ['#fff', '#fff', '#fff', '#fff', '#fff', '#fff']
+            sections: [
+            {
+              background: '#ffffff', 
+              text: {
+                heading: '#777777',
+                body: '#777777'
+              }
+            },
+            {
+              background: '#ffffff', 
+              text: {
+                heading: '#777777',
+                body: '#777777'
+              }
+            },
+            {
+              background: '#ffffff', 
+              text: {
+                heading: '#777777',
+                body: '#777777'
+              }
+            },
+            {
+              background: '#ffffff', 
+              text: {
+                heading: '#777777',
+                body: '#777777'
+              }
+            },
+            {
+              background: '#ffffff', 
+              text: {
+                heading: '#777777',
+                body: '#777777'
+              }
+            },
+            {
+              background: '#ffffff', 
+              text: {
+                heading: '#777777',
+                body: '#777777'
+              }
+            },
+          ]
           },
           logo: null,
           heading: null,
